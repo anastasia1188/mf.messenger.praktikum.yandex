@@ -2,7 +2,7 @@ const express = require("express");
  
 const app = express();
  
-app.use("/static", express.static(__dirname + "/static"));
+app.use(express.static("static"));
  
 app.use("/", function(request, response){
      
