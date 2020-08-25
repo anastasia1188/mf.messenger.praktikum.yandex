@@ -253,3 +253,8 @@
 	flex-direction:row;
 }
 
+input {
+    text-security: '♪';
+    -webkit-text-security: '♪';
+    -moz-text-security: '♪';
+}
