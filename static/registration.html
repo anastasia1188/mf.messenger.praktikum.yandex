@@ -6,31 +6,59 @@
 </head>
 
 <body>
+	<div id="template-registration" type="text/x-handlebars-template">
 	<div class="wrapper">
 
 		<div class="test">
-			<p> Регистрация </p>
+			<p> {{mesReg}} </p>
 		</div>
 
 		<div class="test">
 			<p>
-				<input class="test" name="email" type="email" placeholder="Почта"></input>
+				<input class="test" id="email" name="email" type="email" placeholder={{mesEmail}}></input>
+			</p>
+		</div>
+		<p class="errmes hiddenerr" id="err-email">
+			Не верно введены данные
+		</p>
+		<div class="test">
+			<input class="test" id="login" name="login" type="text" placeholder={{mesLogin}}></input></p>
+			<p class="errmes hiddenerr" id="err-login">
+				Не верно введены данные
 			</p>
 		</div>
 		<div class="test">
-			<input class="test" name="login" type="text" placeholder="Логин"></input></p>
+			<input class="test" id="password" name="password" type="password" placeholder={{mesPassword}}></input></p>
+			<p class="errmes hiddenerr" id="err-password">
+				Не верно введены данные
+			</p>
 		</div>
 		<div class="test">
-			<input class="test" name="password" type="password" placeholder="Пароль"></input></p>
-		</div>
-		<div class="test">
-			<input class="test" name="password" type="password" placeholder="Пароль (еще раз)"></input></p>
+			<input class="test" id="passwordr" name="passwordr" type="password" placeholder={{mesPasswordR}}></input></p>
+			<p class="errmes hiddenerr" id="err-passwordr">
+				Не верно введены данные
+			</p>
 		</div>
 
 		<div>
-			<p><button class="testbutton"> Зарегистрироваться </button></p>
+			<p><button class="testbutton"> {{btnReg}} </button></p>
 		</div>
+	
 	</div>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
+	<script src="data-registration.js"></script>
+	<script src="validation.js"></script> 
+	<script>
+		let arrInputs = ["email", "login", "password", "passwordr"];
+		for (let i = 0; i < arrInputs.length; i++)
+		{			
+			let id = arrInputs[i];
+			finput = document.getElementById(id);
+			finput.addEventListener('blur', validate(id));
+		}	
+	</script>
+
 </body>
 
 </html>
