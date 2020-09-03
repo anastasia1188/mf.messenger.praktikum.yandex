@@ -65,3 +65,4 @@ function setValidate(arrInputs) {
         finput = document.getElementById(id);
         finput.addEventListener('blur', validate(id));
     }
+}
