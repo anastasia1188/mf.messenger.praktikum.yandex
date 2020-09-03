@@ -63,7 +63,7 @@
                         </p>
                     </p>
 
-                    <button>Сохранить</button>
+                    <button id="save">Сохранить</button>
                 </div>
             </div>
         </div>
@@ -79,6 +79,10 @@
             finput = document.getElementById(id);
             finput.addEventListener('blur', validate(id));
         }
+        let elemInEditor = document.getElementById("save");
+        elemInEditor.addEventListener('click', function(e) {
+            validate("save");
+        });
     </script>
 </body>
 

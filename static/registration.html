@@ -1,63 +1,69 @@
 <html>
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel="stylesheet" type="text/css" href="style.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
-	<div id="template-registration" type="text/x-handlebars-template">
-	<div class="wrapper">
+    <div id="template-registration" type="text/x-handlebars-template">
+        <div class="wrapper">
 
-		<div class="test">
-			<p> {{mesReg}} </p>
-		</div>
+            <div class="test">
+                <p> {{mesReg}} </p>
+            </div>
 
-		<div class="test">
-			<p>
-				<input class="test" id="email" name="email" type="email" placeholder={{mesEmail}}></input>
-			</p>
-		</div>
-		<p class="errmes hiddenerr" id="err-email">
-			Не верно введены данные
-		</p>
-		<div class="test">
-			<input class="test" id="login" name="login" type="text" placeholder={{mesLogin}}></input></p>
-			<p class="errmes hiddenerr" id="err-login">
-				Не верно введены данные
-			</p>
-		</div>
-		<div class="test">
-			<input class="test" id="password" name="password" type="password" placeholder={{mesPassword}}></input></p>
-			<p class="errmes hiddenerr" id="err-password">
-				Не верно введены данные
-			</p>
-		</div>
-		<div class="test">
-			<input class="test" id="passwordr" name="passwordr" type="password" placeholder={{mesPasswordR}}></input></p>
-			<p class="errmes hiddenerr" id="err-passwordr">
-				Не верно введены данные
-			</p>
-		</div>
+            <div class="test">
+                <p>
+                    <input class="test" id="email" name="email" type="email" placeholder={{mesEmail}}></input>
+                </p>
+            </div>
+            <p class="errmes hiddenerr" id="err-email">
+                Не верно введены данные
+            </p>
+            <div class="test">
+                <input class="test" id="login" name="login" type="text" placeholder={{mesLogin}}></input>
+                </p>
+                <p class="errmes hiddenerr" id="err-login">
+                    Не верно введены данные
+                </p>
+            </div>
+            <div class="test">
+                <input class="test" id="password" name="password" type="password" placeholder={{mesPassword}}></input>
+                </p>
+                <p class="errmes hiddenerr" id="err-password">
+                    Не верно введены данные
+                </p>
+            </div>
+            <div class="test">
+                <input class="test" id="passwordr" name="passwordr" type="password" placeholder={{mesPasswordR}}></input>
+                </p>
+                <p class="errmes hiddenerr" id="err-passwordr">
+                    Не верно введены данные
+                </p>
+            </div>
 
-		<div>
-			<p><button class="testbutton"> {{btnReg}} </button></p>
-		</div>
-	
-	</div>
-	</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
-	<script src="data-registration.js"></script>
-	<script src="validation.js"></script> 
-	<script>
-		let arrInputs = ["email", "login", "password", "passwordr"];
-		for (let i = 0; i < arrInputs.length; i++)
-		{			
-			let id = arrInputs[i];
-			finput = document.getElementById(id);
-			finput.addEventListener('blur', validate(id));
-		}	
-	</script>
+            <div>
+                <p><button id="reg" class="testbutton"> {{btnReg}} </button></p>
+            </div>
+
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
+    <script src="data-registration.js"></script>
+    <script src="validation.js"></script>
+    <script>
+        let arrInputs = ["email", "login", "password", "passwordr"];
+        for (let i = 0; i < arrInputs.length; i++) {
+            let id = arrInputs[i];
+            finput = document.getElementById(id);
+            finput.addEventListener('blur', validate(id));
+        }
+        let elemInEditor = document.getElementById("reg");
+        elemInEditor.addEventListener('click', function(e) {
+            validate("reg");
+        });
+    </script>
 
 </body>
 

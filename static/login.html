@@ -2,53 +2,57 @@
 <html lang="ru">
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel="stylesheet" type="text/css" href="style.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
-	<div id="template-login" type="text/x-handlebars-template">
-	<div class="wrapper">
+    <div id="template-login" type="text/x-handlebars-template">
+        <div class="wrapper">
 
-		<div class="test">
-			<p> {{mesEnter}} </p>
-		</div>
-		<div class="test">
-			<p>
-				<img src="img/trebleСlef.png" width="40px" height="40px"></img>
-				<input class="test" id="email" name="email" type="email" placeholder={{mesMail}}></input>
-				<p class="errmes hiddenerr" id="err-email">
-					Не верно введены данные
-				</p>
-			</p>
-		</div>
-		<div class="test">
-			<p><img src="img/bassСlef.jpg" width="40" height="40px"></img>
-				<input class="test" id="password" name="password" type="password" placeholder={{mesPassword}}></input></p>
-				<p class="errmes hiddenerr" id="err-password">
-					Не верно введены данные
-				</p>
-		</div>
-		<div>
-			<p><button class="testbutton"> {{mesAutorisation}} </button></p>
-		</div>
-		<div class="testhref">
-			<p><a href="musicmes.ru"> {{mesAccount}} </a></p>
-		</div>
-	</div>
-	</div>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
-	<script src="data-login.js"></script>
-	<script src="validation.js"></script>
-	<script>
-		let arrInputs = ["email", "password"];
-		for (let i = 0; i < arrInputs.length; i++)
-		{			
-			let id = arrInputs[i];
-			finput = document.getElementById(id);
-			finput.addEventListener('blur', validate(id));
-		}	
-	</script>
+            <div class="test">
+                <p> {{mesEnter}} </p>
+            </div>
+            <div class="test">
+                <p>
+                    <img src="img/trebleСlef.png" width="40px" height="40px"></img>
+                    <input class="test" id="email" name="email" type="email" placeholder={{mesMail}}></input>
+                    <p class="errmes hiddenerr" id="err-email">
+                        Не верно введены данные
+                    </p>
+                </p>
+            </div>
+            <div class="test">
+                <p><img src="img/bassСlef.jpg" width="40" height="40px"></img>
+                    <input class="test" id="password" name="password" type="password" placeholder={{mesPassword}}></input>
+                </p>
+                <p class="errmes hiddenerr" id="err-password">
+                    Не верно введены данные
+                </p>
+            </div>
+            <div>
+                <p><button id="autorisation" class="testbutton"> {{mesAutorisation}} </button></p>
+            </div>
+            <div class="testhref">
+                <p><a href="musicmes.ru"> {{mesAccount}} </a></p>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
+    <script src="data-login.js"></script>
+    <script src="validation.js"></script>
+    <script>
+        let arrInputs = ["email", "password"];
+        for (let i = 0; i < arrInputs.length; i++) {
+            let id = arrInputs[i];
+            finput = document.getElementById(id);
+            finput.addEventListener('blur', validate(id));
+        }
+        let elemInEditor = document.getElementById("autorisation");
+        elemInEditor.addEventListener('click', function(e) {
+            validate("autorisation");
+        });
+    </script>
 </body>
 
 </html>
