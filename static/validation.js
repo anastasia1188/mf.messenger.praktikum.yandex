@@ -1,7 +1,7 @@
 function isValid(id) {
     console.log(id);
-    let elem = document.getElementById(id);
-    let text = elem.value;
+    const elem = document.getElementById(id);
+    const text = elem.value;
     console.log(text);
 
     if (isEmpty(text)) {
@@ -11,25 +11,24 @@ function isValid(id) {
         switch (id) {
             case 'email':
                 {
-                    let rexp = new RegExp('^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$');
+                    const rexp = new RegExp('^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$');
                     return rexp.test(text);
                 }
 
             case 'login':
                 {
-                    let rexp = new RegExp('^([a-z0-9_-]+\.)*[a-z0-9_-]$');
+                    const rexp = new RegExp('^([a-z0-9_-]+\.)*[a-z0-9_-]$');
                     return rexp.test(text);
                 }
 
             case ('password' || 'passwordr'):
                 {
-                    let rexp = new RegExp('^([a-z0-9_-]+\.)*[a-z0-9_-]$');
+                    const rexp = new RegExp('^([a-z0-9_-]+\.)*[a-z0-9_-]$');
                     return rexp.test(text);
                 }
 
             case 'message':
                 {
-
                     return true;
                 }
 
@@ -43,7 +42,7 @@ function validate(id) {
     return function(idName = id) {
         let nameerr = `err-${id}`;
         let elemerr = document.getElementById(nameerr);
-        if (!isValid(id)) {
+        if (!isValid(idName)) {
             elemerr.classList.remove("hiddenerr");
             return false;
         } else {
@@ -64,7 +63,7 @@ function isEmpty(text) {
 function setValidate(arrInputs) {
     for (let i = 0; i < arrInputs.length; i++) {
         let id = arrInputs[i];
-        finput = document.getElementById(id);
+        const finput = document.getElementById(id);
         finput.addEventListener('blur', validate(id));
     }
 }

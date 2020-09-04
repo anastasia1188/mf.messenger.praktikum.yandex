@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" type="text/css" href="common.css">
     <link rel="stylesheet" type="text/css" href="chat.css">
+    <title>Chat</title>
 </head>
 
 <body>
@@ -12,7 +13,7 @@
             <div class="leftpart">
                 <div class="search">
                     <div class="logo">
-                        <img src="{{fimage}}" alt="" class="round" width="80px" height="80px"></img>
+                        <img src="{{fimage}}" alt="" class="round" width="80px" height="80px">
                         <div><a href="settings.html"> {{fname}} </a></div>
                     </div>
                     <div> <input class="searchfield" type="search" placeholder="Поиск"> </input>
@@ -50,22 +51,8 @@
             </div>
         </div>
     </div>
-    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
     <script src="data-chat.js"></script>
-    <script>
-        let = ["ineditor"];
-        setValidate(arrInputs);
-        let elemInEditor = document.getElementById("ineditor");
-        elemInEditor.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                if (validate(arrInputs)) {
-                    let data = getData(arrInputs);
-                    console.log(data);
-                }
-            }
-        });
-    </script>
 </body>
 
 </html>

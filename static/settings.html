@@ -12,7 +12,7 @@
         <div class="item">
             <div id="template-settings" type="text/x-handlebars-template">
                 <div class="settings">
-                    <img src={{fimg}} alt="" class="round" width="80px" height="80px"></img>
+                    <img src={{fimg}} alt="" class="round" width="80px" height="80px">
 
                     <div>
                         <p>{{fname}}</p>
@@ -21,7 +21,7 @@
                     <p>
                         <div class="itemrow">
                             <div class="leftitem">Почта</div>
-                            <input id="email" class="setting" value={{femail}}></input>
+                            <input id="email" class="setting" value={{femail}}>
                         </div>
                         <div class="line lv1"></div>
                         <p class="errmes hiddenerr" id="err-email">
@@ -33,7 +33,7 @@
                         <div class="itemrow">
 
                             <div class="leftitem">Логин</div>
-                            <input id="login" class="setting" value={{flogin}}></input>
+                            <input id="login" class="setting" value={{flogin}}>
                         </div>
                         <p class="errmes hiddenerr" id="err-login">
                             Не верно введены данные
@@ -45,7 +45,7 @@
                         <div class="itemrow">
 
                             <div class="leftitem">Пароль</div>
-                            <input id="password" class="setting" type="password" value={{fpassword}}></input>
+                            <input id="password" class="setting" type="password" value={{fpassword}}>
                         </div>
                         <div class="line lv1"></div>
                         <p class="errmes hiddenerr" id="err-password">
@@ -57,7 +57,7 @@
                         <div class="itemrow">
 
                             <div class="leftitem">Пароль (еще раз)</div>
-                            <input id="passwordr" class="setting" type="password" value={{fpasswordRepeat}}></input>
+                            <input id="passwordr" class="setting" type="password" value={{fpasswordRepeat}}>
                         </div>
                         <div class="line lv1"></div>
                         <p class="errmes hiddenerr" id="err-passwordr">
@@ -75,22 +75,7 @@
     <script src="data-settings.js"></script>
     <script src="validation.js"></script>
     <script src="data-gavering.js"></script>
-    <script>
-        let arrInputs = ["email", "login", "password", "passwordr"];
-        for (let i = 0; i < arrInputs.length; i++) {
-            let id = arrInputs[i];
-            finput = document.getElementById(id);
-            finput.addEventListener('blur', validate(id));
-        }
-        let elemInEditor = document.getElementById("save");
-        elemInEditor.addEventListener('click', function(e) {
 
-            if (validate(arrInputs)) {
-                let data = getData(arrInputs);
-                console.log(data);
-            }
-        });
-    </script>
 </body>
 
 </html>

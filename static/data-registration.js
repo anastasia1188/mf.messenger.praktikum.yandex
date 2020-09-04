@@ -1,12 +1,27 @@
-var source          = document.getElementById('template-registration').innerHTML;
-var template        = Handlebars.compile(source);
-var mesReg          = "Регистрация";
-var mesEmail        = "Почта";
-var mesLogin        = "Логин";
-var mesPassword     = "Пароль";
-var mesPasswordR    = "Пароль (еще раз)";
-var btnReg          = "Зарегистрироваться";
-var context         = { mesReg: mesReg, mesEmail: mesEmail, mesLogin: mesLogin, mesPassword: mesPassword, 
-                        mesPasswordR: mesPasswordR, btnReg: btnReg };
-var html            = template(context);
-document.getElementById('template-registration').innerHTML = html;
+const elemTempl = document.getElementById('template-registration');
+const source = elemTempl.innerHTML;
+const template = Handlebars.compile(source);
+const context = {
+    mesReg: "Регистрация",
+    mesEmail: "Почта",
+    mesLogin: "Логин",
+    mesPassword: "Пароль",
+    mesPasswordR: "Пароль (еще раз)",
+    btnReg: "Зарегистрироваться"
+};
+const html = template(context);
+elemTempl.innerHTML = html;
+
+const arrInputs = ["email", "login", "password", "passwordr"];
+for (let i = 0; i < arrInputs.length; i++) {
+    let id = arrInputs[i];
+    const finput = document.getElementById(id);
+    finput.addEventListener('blur', validate(id));
+}
+const elemInEditor = document.getElementById("reg");
+elemInEditor.addEventListener('click', function(e) {
+    if (validate(arrInputs)) {
+        const data = getData(arrInputs);
+        console.log(data);
+    }
+});
