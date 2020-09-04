@@ -1,7 +1,7 @@
 const elemTempl = document.getElementById('template-settings');
 const source = elemTempl.innerHTML;
 const template = Handlebars.compile(source);
-const context = { fimg: "img/ava.png", fname: "Анастасия", femail: "anastasia1188@mail.ru", flogin: "anastasia1188", fpassword: "********", fpasswordRepeat: "********" };
+const context = { fimg: "../common/img/ava.png", fname: "Анастасия", femail: "anastasia1188@mail.ru", flogin: "anastasia1188", fpassword: "********", fpasswordRepeat: "********" };
 const html = template(context);
 elemTempl.innerHTML = html;
 

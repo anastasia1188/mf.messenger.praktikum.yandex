@@ -1,5 +1,5 @@
 const elemTemplate = document.getElementById('template-login');
-const source = elemTeplate.innerHTML;
+const source = elemTemplate.innerHTML;
 const template = Handlebars.compile(source);
 const context = {
     mesEnter: "Вход",

@@ -2,7 +2,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" type="text/css" href="common.css">
+    <link rel="stylesheet" type="text/css" href="../common/common.css">
     <link rel="stylesheet" type="text/css" href="chat.css">
     <title>Chat</title>
 </head>
@@ -14,9 +14,9 @@
                 <div class="search">
                     <div class="logo">
                         <img src="{{fimage}}" alt="" class="round" width="80px" height="80px">
-                        <div><a href="settings.html"> {{fname}} </a></div>
+                        <div><a href="../settings/settings.html"> {{fname}} </a></div>
                     </div>
-                    <div> <input class="searchfield" type="search" placeholder="Поиск"> </input>
+                    <div> <input class="searchfield" type="search" placeholder="Поиск">
                     </div>
                 </div>
                 <div class="contacts">
@@ -42,7 +42,6 @@
                     {{/each}} {{/each}}
                     <div class="meseditor">
                         <input id="ineditor" class="ineditor">
-                        </input>
                         <p class="errmes hiddenerr" id="err-ineditor">
                             Не верно введены данные
                         </p>
@@ -52,7 +51,8 @@
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
-    <script src="data-chat.js"></script>
+    <script src="../common/validation.js"></script>
+    <script src="chat.js"></script>
 </body>
 
 </html>

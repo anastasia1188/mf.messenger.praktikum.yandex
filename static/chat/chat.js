@@ -34,7 +34,7 @@ const messages = [{
     }
 ];
 
-const context = { pianokeys: pianokeys, messages: messages, fimage: "img/ava.png", fname: "Анастасия" };
+const context = { pianokeys: pianokeys, messages: messages, fimage: "../common/img/ava.png", fname: "Анастасия" };
 const html = template(context);
 elemTemplate.innerHTML = html;
 
