@@ -43,14 +43,16 @@ function validate(id) {
     return function(idName = id) {
         let nameerr = `err-${id}`;
         let elemerr = document.getElementById(nameerr);
-        if (!isValid(id))
-            elemerr.classList.remove("hiddenerr")
-        else {
+        if (!isValid(id)) {
+            elemerr.classList.remove("hiddenerr");
+            return false;
+        } else {
             console.log("!", nameerr);
             console.log(elemerr.classList.contains("hiddenerr"));
             if (!elemerr.classList.contains("hiddenerr"))
                 elemerr.classList.add("hiddenerr");
             console.log(elemerr.classList);
+            return true;
         }
     }
 }

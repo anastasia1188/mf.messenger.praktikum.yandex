@@ -53,11 +53,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
     <script src="data-chat.js"></script>
     <script>
-        setValidate(["ineditor"]);
+        let = ["ineditor"];
+        setValidate(arrInputs);
         let elemInEditor = document.getElementById("ineditor");
         elemInEditor.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
-                validate("ineditor");
+                if (validate(arrInputs)) {
+                    let data = getData(arrInputs);
+                    console.log(data);
+                }
             }
         });
     </script>

@@ -3,6 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="myButton.css">
 </head>
 
 <body>
@@ -44,7 +45,7 @@
             </div>
 
             <div>
-                <p><button id="reg" class="testbutton"> {{btnReg}} </button></p>
+                <p><button id="reg" class="mybutton"> {{btnReg}} </button></p>
             </div>
 
         </div>
@@ -52,6 +53,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
     <script src="data-registration.js"></script>
     <script src="validation.js"></script>
+    <script src="data-gavering.js"></script>
     <script>
         let arrInputs = ["email", "login", "password", "passwordr"];
         for (let i = 0; i < arrInputs.length; i++) {
@@ -61,7 +63,10 @@
         }
         let elemInEditor = document.getElementById("reg");
         elemInEditor.addEventListener('click', function(e) {
-            validate("reg");
+            if (validate(arrInputs)) {
+                let data = getData(arrInputs);
+                console.log(data);
+            }
         });
     </script>
 
