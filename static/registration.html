@@ -1,36 +1,75 @@
 <html>
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel="stylesheet" type="text/css" href="style.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="common.css">
+    <link rel="stylesheet" type="text/css" href="myButton.css">
 </head>
 
 <body>
-	<div class="wrapper">
+    <div id="template-registration" type="text/x-handlebars-template">
+        <div class="wrapper">
 
-		<div class="test">
-			<p> Регистрация </p>
-		</div>
+            <div class="row">
+                <p> {{mesReg}} </p>
+            </div>
 
-		<div class="test">
-			<p>
-				<input class="test" name="email" type="email" placeholder="Почта"></input>
-			</p>
-		</div>
-		<div class="test">
-			<input class="test" name="login" type="text" placeholder="Логин"></input></p>
-		</div>
-		<div class="test">
-			<input class="test" name="password" type="password" placeholder="Пароль"></input></p>
-		</div>
-		<div class="test">
-			<input class="test" name="password" type="password" placeholder="Пароль (еще раз)"></input></p>
-		</div>
+            <div class="row">
+                <p>
+                    <input class="row" id="email" name="email" type="email" placeholder={{mesEmail}}></input>
+                </p>
+            </div>
+            <p class="errmes hiddenerr" id="err-email">
+                Не верно введены данные
+            </p>
+            <div class="row">
+                <input class="row" id="login" name="login" type="text" placeholder={{mesLogin}}></input>
+                </p>
+                <p class="errmes hiddenerr" id="err-login">
+                    Не верно введены данные
+                </p>
+            </div>
+            <div class="row">
+                <input class="row" id="password" name="password" type="password" placeholder={{mesPassword}}></input>
+                </p>
+                <p class="errmes hiddenerr" id="err-password">
+                    Не верно введены данные
+                </p>
+            </div>
+            <div class="row">
+                <input class="row" id="passwordr" name="passwordr" type="password" placeholder={{mesPasswordR}}></input>
+                </p>
+                <p class="errmes hiddenerr" id="err-passwordr">
+                    Не верно введены данные
+                </p>
+            </div>
 
-		<div>
-			<p><button class="testbutton"> Зарегистрироваться </button></p>
-		</div>
-	</div>
+            <div>
+                <p><button id="reg" class="mybutton"> {{btnReg}} </button></p>
+            </div>
+
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
+    <script src="data-registration.js"></script>
+    <script src="validation.js"></script>
+    <script src="data-gavering.js"></script>
+    <script>
+        let arrInputs = ["email", "login", "password", "passwordr"];
+        for (let i = 0; i < arrInputs.length; i++) {
+            let id = arrInputs[i];
+            finput = document.getElementById(id);
+            finput.addEventListener('blur', validate(id));
+        }
+        let elemInEditor = document.getElementById("reg");
+        elemInEditor.addEventListener('click', function(e) {
+            if (validate(arrInputs)) {
+                let data = getData(arrInputs);
+                console.log(data);
+            }
+        });
+    </script>
+
 </body>
 
 </html>

@@ -1,39 +1,96 @@
 <html>
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel="stylesheet" type="text/css" href="style.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="common.css">
+    <link rel="stylesheet" type="text/css" href="settings.css">
+    <link rel="stylesheet" type="text/css" href="myButton.css">
 </head>
 
 <body>
-	<div class="error">
-		<div class="erritem">
-			<img src="img/ава.jpg" alt="" class="round" width="80px" height="80px"></img>
-			<div>
-				<p>Анастасия</p>
-			</div>
+    <div class="basicWrapper">
+        <div class="item">
+            <div id="template-settings" type="text/x-handlebars-template">
+                <div class="settings">
+                    <img src={{fimg}} alt="" class="round" width="80px" height="80px"></img>
 
-			<p>
-			<div class="itemrow">
-				<div class="leftitem">Почта_________________________astramoon17@yandex.ru</div>
-			</div>
-			<div class="itemrow">
-				<p>
-				<div class="leftitem">Логин___________________________________astramoon17</div>
-				</p>
-			</div>
-			<div class="itemrow">
-				<p>
-				<div class="leftitem">Пароль_____________________________________********</div>
-				</p>
-			</div>
-			<div class="itemrow">
-				<p>
-				<div class="leftitem">Пароль (ещё раз)____________________________********</div>
-				</p>
-			</div>
-		</div>
-	</div>
+                    <div>
+                        <p>{{fname}}</p>
+                    </div>
+
+                    <p>
+                        <div class="itemrow">
+                            <div class="leftitem">Почта</div>
+                            <input id="email" class="setting" value={{femail}}></input>
+                        </div>
+                        <div class="line lv1"></div>
+                        <p class="errmes hiddenerr" id="err-email">
+                            Не верно введены данные
+                        </p>
+                    </p>
+
+                    <p>
+                        <div class="itemrow">
+
+                            <div class="leftitem">Логин</div>
+                            <input id="login" class="setting" value={{flogin}}></input>
+                        </div>
+                        <p class="errmes hiddenerr" id="err-login">
+                            Не верно введены данные
+                        </p>
+                        <div class="line lv1"></div>
+                    </p>
+
+                    <p>
+                        <div class="itemrow">
+
+                            <div class="leftitem">Пароль</div>
+                            <input id="password" class="setting" type="password" value={{fpassword}}></input>
+                        </div>
+                        <div class="line lv1"></div>
+                        <p class="errmes hiddenerr" id="err-password">
+                            Не верно введены данные
+                        </p>
+                    </p>
+
+                    <p>
+                        <div class="itemrow">
+
+                            <div class="leftitem">Пароль (еще раз)</div>
+                            <input id="passwordr" class="setting" type="password" value={{fpasswordRepeat}}></input>
+                        </div>
+                        <div class="line lv1"></div>
+                        <p class="errmes hiddenerr" id="err-passwordr">
+                            Не верно введены данные
+                        </p>
+                    </p>
+
+                    <button class="mybutton" id="save">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
+    <script src="data-settings.js"></script>
+    <script src="validation.js"></script>
+    <script src="data-gavering.js"></script>
+    <script>
+        let arrInputs = ["email", "login", "password", "passwordr"];
+        for (let i = 0; i < arrInputs.length; i++) {
+            let id = arrInputs[i];
+            finput = document.getElementById(id);
+            finput.addEventListener('blur', validate(id));
+        }
+        let elemInEditor = document.getElementById("save");
+        elemInEditor.addEventListener('click', function(e) {
+
+            if (validate(arrInputs)) {
+                let data = getData(arrInputs);
+                console.log(data);
+            }
+        });
+    </script>
 </body>
 
 </html>

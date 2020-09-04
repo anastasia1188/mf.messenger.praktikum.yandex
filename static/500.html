@@ -1,22 +1,26 @@
 <html>
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel="stylesheet" type="text/css" href="style.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="common.css">
 </head>
 
 <body>
-	<div class="error">
-		<div class="erritem">
-			<div class="errline">
-				<p> 500 </p>
-			</div>
-			<div class="errline">
-				<p> мы уже фиксим </p>
-			</div>
-			<div<p> <a href="musicmes.ru/chat.html"> назад к чатам </a></p>
-		</div>
-	</div>
+    <div id="template-500" type="text/x-handlebars-template">
+        <div class="basicwrapper">
+            <div class="item">
+                <div class="line">
+                    <p> {{errcode}} </p>
+                </div>
+                <div class="line">
+                    <p> {{errmes}} </p>
+                </div>
+                <div<p> <a href="chat.html"> назад к чатам </a></p>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
+    <script src="data-500.js"></script>
 </body>
 
 </html>
