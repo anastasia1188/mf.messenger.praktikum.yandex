@@ -33,46 +33,6 @@
     z-index: 5;
 }
 
-.wrapper {
-    margin: auto;
-    top: 20%;
-    left: 35%;
-    position: absolute;
-    background: #F4FEFE;
-    text-align: center;
-    width: 400px;
-    height: 500px;
-    text-align: center;
-    font-family: Cairo;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-}
-
-.test {
-    line-height: 50px;
-    border-left: 0;
-    border-right: 0;
-    border-top: 0;
-    background: #F4FEFE;
-}
-
-.testhref {
-    margin: 100px;
-    margin-left: 40%;
-    position: absolute;
-    width: 69px;
-    height: 20px;
-    font-family: Cairo;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 10px;
-    line-height: 20px;
-    /* identical to box height, or 200% */
-    text-align: center;
-    color: #60CBD1;
-}
-
 .whitepianokey {
     width: 99%;
     height: 52px;
@@ -219,19 +179,6 @@ input {
     text-security: '♪';
     -webkit-text-security: '♪';
     -moz-text-security: '♪';
-}
-
-.errmes {
-    text-align: center;
-    font-family: Cairo;
-    font-weight: normal;
-    font-size: 10px;
-    color: red;
-    display: block;
-}
-
-.hiddenerr {
-    display: none;
 }
 
 .line {
