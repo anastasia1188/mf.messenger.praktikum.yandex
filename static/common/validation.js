@@ -1,35 +1,36 @@
 function isValid(id) {
     const elem = document.getElementById(id);
     const text = elem.value;
-    console.log(text);
 
     if (isEmpty(text)) {
         console.log('empty');
         return true;
     } else {
+        console.log('switch', id);
         switch (id) {
             case 'email':
                 {
-                    validateEMail(text);
+                    return validateEMail(text);
                 }
 
             case 'login':
                 {
-                    validateLogin(text);
+                    return validateLogin(text);
                 }
 
             case ('password'):
                 {
-                    validatePassword(text);
+                    return validatePassword(text);
                 }
 
             case 'passwordr':
                 {
-                    validatePassword(text);
+                    const valuePwd = document.getElementById("password").value;
+                    return validatePasswordR(text, valuePwd);
                 }
             case 'message':
                 {
-                    validateMessage(text);
+                    return validateMessage(text);
                 }
 
 
@@ -39,21 +40,28 @@ function isValid(id) {
 }
 
 function validatePassword(password) {
+    console.log('validatePas');
     const errors = [];
     if (password.length < 8) {
-        errors.push("Your password must be at least 8 characters");
+        errors.push(1);
     }
     if (password.search(/[a-z]/i) < 0) {
-        errors.push("Your password must contain at least one letter.");
+        errors.push(2);
     }
     if (password.search(/[0-9]/) < 0) {
-        errors.push("Your password must contain at least one digit.");
+        errors.push(3);
     }
     if (errors.length > 0) {
-        alert(errors.join("\n"));
-        return false;
+        console.log('errors', errors);
+        return errors;
     }
     return true;
+}
+
+function validatePasswordR(value1, value2) {
+    if (value1 === value2)
+        return true;
+    return false;
 }
 
 function validateEMail(email) {
@@ -68,17 +76,23 @@ function validateMessage() {
 function validate(idV) {
     return function(id = idV) {
         let nameerr = `err-${id}`;
+        const resVal = isValid(id);
+        console.log('id', resVal);
+        if (typeof(resVal) === 'object') {
+            nameerr = nameerr + String(resVal[0]);
+        }
         let elemerr = document.getElementById(nameerr);
-        if (!isValid(id)) {
-            elemerr.classList.remove("hiddenerr");
-            return false;
+        if (resVal !== true) {
+            if (elemerr != null) {
+                if (elemerr.classList.remove("hiddenerr"))
+                    return false;
+            }
         } else {
-            console.log("!", nameerr);
-            console.log(elemerr.classList.contains("hiddenerr"));
-            if (!elemerr.classList.contains("hiddenerr"))
-                elemerr.classList.add("hiddenerr");
-            console.log(elemerr.classList);
-            return true;
+            if (elemerr != null) {
+                if (!elemerr.classList.contains("hiddenerr"))
+                    elemerr.classList.add("hiddenerr");
+                return true;
+            }
         }
     }
 }
@@ -100,5 +114,36 @@ function setValidate(arrInputs) {
         finput.addEventListener('blur', function(e) {
             func();
         });
+    }
+}
+
+function setFocus(arrInputs) {
+    for (let i = 0; i < arrInputs.length; i++) {
+        let id = arrInputs[i];
+        let finput = document.getElementById(id);
+        let className = finput.getAttribute("type");
+
+        finput.addEventListener('focus', function(e) {
+            elemFocus(id, className)
+        });
+    }
+}
+
+function elemFocus(id, className) {
+    const arrMesPwd = [1, 2, 3];
+    let nameerr = `err-${id}`;
+    const arrFields = [];
+    if ((className === "password") || (className === "passwordr")) {
+        for (let i = 0; i < arrMesPwd.length; i++)
+            arrFields.push(`${nameerr}${arrMesPwd[i]}`);
+    } else {
+        arrFields.push(nameerr);
+    }
+    for (let i = 0; i < arrFields.length; i++) {
+        let elemerr = document.getElementById(arrFields[i]);
+        if (elemerr != null) {
+            if (!elemerr.classList.contains("hiddenerr"))
+                elemerr.classList.add("hiddenerr");
+        }
     }
 }

@@ -18,9 +18,9 @@
             <div class="row">
                 <p>
                     <img src="img/trebleСlef.png" width="40px" height="40px">
-                    <input class="row" id="email" name="email" type="email" placeholder={{mesMail}}>
-                    <p class="errmes hiddenerr" id="err-email">
-                        Не верно введены данные
+                    <input class="row" id="login" name="login" type="login" placeholder={{mesMail}}>
+                    <p class="errmes hiddenerr" id="err-login">
+                        {{errmes}}
                     </p>
                 </p>
             </div>
@@ -28,8 +28,14 @@
                 <p><img src="img/bassСlef.jpg" width="40" height="40px">
                     <input class="row" id="password" name="password" type="password" placeholder={{mesPassword}}>
                 </p>
-                <p class="errmes hiddenerr" id="err-password">
-                    Не верно введены данные
+                <p class="errmes hiddenerr" id="err-password1">
+                    {{errmes1}}
+                </p>
+                <p class="errmes hiddenerr" id="err-password2">
+                    {{errmes2}}
+                </p>
+                <p class="errmes hiddenerr" id="err-password3">
+                    {{errmes3}}
                 </p>
             </div>
             <div>
