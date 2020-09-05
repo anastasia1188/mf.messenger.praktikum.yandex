@@ -31,7 +31,7 @@ const messages = [{
     }
 ];
 
-const context = { pianokeys: pianokeys, messages: messages, fimage: "../common/img/ava.png", fname: "Анастасия" };
+const context = { pianokeys: pianokeys, messages: messages, fimage: "../common/img/ava.png", fname: "Анастасия", errmes: "Не верно введены данные" };
 compileTemplate('template-chat', context);
 
 const arrinputs = ["inEditor"];
