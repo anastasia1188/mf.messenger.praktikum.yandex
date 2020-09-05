@@ -17,13 +17,19 @@ function compileTemplate(idTemplate, context) {
 }
 
 function setButtonEvents(idButton, arrInputs) {
-    const elemInEditor = document.getElementById(idButton);
-    elemInEditor.addEventListener('keypress', function(e) {
+    const elemButton = document.getElementById(idButton);
+    elemButton.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
-            if (validate(arrInputs)) {
+            if (isValidValues(arrInputs)) {
                 const data = getData(arrInputs);
-                console.log(data);
             }
+        }
+    });
+
+    elemButton.addEventListener('click', function(e) {
+        if (isValidValues(arrInputs)) {
+            const data = getData(arrInputs);
+            console.log(data);
         }
     })
 }

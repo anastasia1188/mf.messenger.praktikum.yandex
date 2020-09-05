@@ -1,6 +1,6 @@
 const context = {
     mesEnter: "Вход",
-    mesMail: "Введите почту",
+    mesMail: "Введите логин",
     mesPassword: "Введите пароль",
     mesAutorisation: "Авторизация",
     mesAccount: "нет аккаунта?",

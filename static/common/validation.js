@@ -3,10 +3,8 @@ function isValid(id) {
     const text = elem.value;
 
     if (isEmpty(text)) {
-        console.log('empty');
         return true;
     } else {
-        console.log('switch', id);
         switch (id) {
             case 'email':
                 {
@@ -28,7 +26,7 @@ function isValid(id) {
                     const valuePwd = document.getElementById("password").value;
                     return validatePasswordR(text, valuePwd);
                 }
-            case 'message':
+            case 'ineditor':
                 {
                     return validateMessage(text);
                 }
@@ -40,7 +38,6 @@ function isValid(id) {
 }
 
 function validatePassword(password) {
-    console.log('validatePas');
     const errors = [];
     if (password.length < 8) {
         errors.push(1);
@@ -52,7 +49,6 @@ function validatePassword(password) {
         errors.push(3);
     }
     if (errors.length > 0) {
-        console.log('errors', errors);
         return errors;
     }
     return true;
@@ -77,7 +73,6 @@ function validate(idV) {
     return function(id = idV) {
         let nameerr = `err-${id}`;
         const resVal = isValid(id);
-        console.log('id', resVal);
         if (typeof(resVal) === 'object') {
             nameerr = nameerr + String(resVal[0]);
         }
@@ -146,4 +141,13 @@ function elemFocus(id, className) {
                 elemerr.classList.add("hiddenerr");
         }
     }
+}
+
+function isValidValues(arrInputs) {
+    result = true;
+    for (let i = 0; i < arrInputs.length; i++) {
+        if (!validate(arrInputs[i])())
+            result = false;
+    }
+    return result;
 }
