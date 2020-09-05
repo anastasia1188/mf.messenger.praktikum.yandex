@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="login.css">
+    <link rel="stylesheet" type="text/css" href="../common/common.css">
+    <link rel="stylesheet" type="text/css" href="../myButton/myButton.css">
+    <title>Login</title>
+</head>
+
+<body>
+    <div id="template-login" type="text/x-handlebars-template">
+        <div class="wrapper">
+
+            <div class="row">
+                <p> {{mesEnter}} </p>
+            </div>
+            <div class="row">
+                <p>
+                    <img src="img/trebleСlef.png" width="40px" height="40px">
+                    <input class="row" id="login" name="login" type="login" placeholder={{mesMail}}>
+                    <p class="errmes hiddenerr" id="err-login">
+                        {{errmes}}
+                    </p>
+                </p>
+            </div>
+            <div class="row">
+                <p><img src="img/bassСlef.jpg" width="40" height="40px">
+                    <input class="row" id="password" name="password" type="password" placeholder={{mesPassword}}>
+                </p>
+                <p class="errmes hiddenerr" id="err-password1">
+                    {{errmes1}}
+                </p>
+                <p class="errmes hiddenerr" id="err-password2">
+                    {{errmes2}}
+                </p>
+                <p class="errmes hiddenerr" id="err-password3">
+                    {{errmes3}}
+                </p>
+            </div>
+            <div class="row">
+                <p><button id="autorisation" class="myButton"> {{mesAutorisation}} </button></p>
+            </div>
+            <div class="row noAccaunt">
+                <p><a href="../registration/registration.html"> {{mesAccount}} </a></p>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
+    <script src="../common/validation.js"></script>
+    <script src="../common/common.js"></script>
+    <script src="login.js"></script>
+
+</body>
+
+</html>

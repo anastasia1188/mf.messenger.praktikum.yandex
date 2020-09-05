@@ -1,0 +1,59 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="../common/common.css">
+    <link rel="stylesheet" type="text/css" href="chat.css">
+    <title>Chat</title>
+</head>
+
+<body>
+    <div id="template-chat" type="text/x-handlebars-template">
+        <div class="common">
+            <div class="leftpart">
+                <div class="search">
+                    <div class="logo">
+                        <img src="{{fimage}}" alt="" class="round" width="80px" height="80px">
+                        <div><a href="../settings/settings.html"> {{fname}} </a></div>
+                    </div>
+                    <div> <input class="searchfield" type="search" placeholder="Поиск">
+                    </div>
+                </div>
+                <div class="contacts">
+                    {{#each pianokeys}}
+                    <div class="whitepianokey">
+                        <div class="rowcontact">
+                            <div class="contact"> {{this.contact}} </div>
+                            <div class="countmes"> {{this.countmes}} </div>
+                        </div>
+                        <div class="blackpianokey" {{this.hidden}}></div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="chat">
+                <div class="messages">
+                    {{#each messages}}
+                    <div class="datemes"> {{this.date}}</div>
+                    {{#each this.message}}
+                    <div class={{classmes}}> {{this.text}}
+                        <div class="timemes"> {{this.time}} </div>
+                    </div>
+                    {{/each}} {{/each}}
+                    <div class="meseditor">
+                        <input id="ineditor" class="ineditor">
+                        <p class="errmes hiddenerr" id="err-ineditor">
+                            {{errmes}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
+    <script src="../common/validation.js"></script>
+    <script src="../common/common.js"></script>
+    <script src="chat.js"></script>
+</body>
+
+</html>
