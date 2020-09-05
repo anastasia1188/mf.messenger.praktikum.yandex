@@ -74,12 +74,6 @@
     position: relative;
 }
 
-.rowcontact {
-    display: flex;
-    flex-direction: row;
-    vertical-align: middle;
-}
-
 .messagein {
     text-align: left;
     font-family: Cairo;
@@ -122,20 +116,6 @@
     font-size: 12px;
 }
 
-.countmes {
-    text-align: right;
-    color: #CAF0EE;
-    margin-right: 10px;
-    margin-top: 15px;
-    width: 10%;
-    position: relative;
-}
-
-.searchfield {
-    border-color: #CAF0EE;
-    text-align: center;
-}
-
 .datemes {
     color: black;
     text-align: center;
@@ -168,14 +148,6 @@
     margin: 0 auto;
     text-align: center;
     border-bottom: 1px solid #CAF0EE;
-}
-
-.contact {
-    margin-top: 15px;
-    text-align: left;
-    vertical-align: middle;
-    position: relative;
-    width: 90%;
 }
 
 .meseditor {
