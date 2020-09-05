@@ -1,6 +1,3 @@
-const elemTemplate = document.getElementById('template-chat');
-const source = elemTemplate.innerHTML;
-const template = Handlebars.compile(source);
 const pianokeys = [
     { contact: "Арина", countmes: "♪", hidden: "" },
     { contact: "Папа", countmes: "♫", hidden: "" },
@@ -35,17 +32,9 @@ const messages = [{
 ];
 
 const context = { pianokeys: pianokeys, messages: messages, fimage: "../common/img/ava.png", fname: "Анастасия" };
-const html = template(context);
-elemTemplate.innerHTML = html;
+compileTemplate('template-chat', context);
 
-const arrinputs = ["email", "login", "password", "passwordr"];
+const arrinputs = ["inEditor"];
 setValidate(arrInputs);
-const elemInEditor = document.getElementById("ineditor");
-elemInEditor.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        if (validate(arrInputs)) {
-            const data = getData(arrInputs);
-            console.log(data);
-        }
-    }
-});
+
+setButtonEvents("inEditor", arrInputs);

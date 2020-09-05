@@ -1,5 +1,4 @@
 function isValid(id) {
-    console.log(id);
     const elem = document.getElementById(id);
     const text = elem.value;
     console.log(text);
@@ -11,38 +10,66 @@ function isValid(id) {
         switch (id) {
             case 'email':
                 {
-                    const rexp = new RegExp('^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$');
-                    return rexp.test(text);
+                    validateEMail(text);
                 }
 
             case 'login':
                 {
-                    const rexp = new RegExp('^([a-z0-9_-]+\.)*[a-z0-9_-]$');
-                    return rexp.test(text);
+                    validateLogin(text);
                 }
 
-            case ('password' || 'passwordr'):
+            case ('password'):
                 {
-                    const rexp = new RegExp('^([a-z0-9_-]+\.)*[a-z0-9_-]$');
-                    return rexp.test(text);
+                    validatePassword(text);
                 }
 
+            case 'passwordr':
+                {
+                    validatePassword(text);
+                }
             case 'message':
                 {
-                    return true;
+                    validateMessage(text);
                 }
+
 
         }
         return false;
     }
 }
 
-function validate(id) {
+function validatePassword(password) {
+    const errors = [];
+    if (password.length < 8) {
+        errors.push("Your password must be at least 8 characters");
+    }
+    if (password.search(/[a-z]/i) < 0) {
+        errors.push("Your password must contain at least one letter.");
+    }
+    if (password.search(/[0-9]/) < 0) {
+        errors.push("Your password must contain at least one digit.");
+    }
+    if (errors.length > 0) {
+        alert(errors.join("\n"));
+        return false;
+    }
+    return true;
+}
 
-    return function(idName = id) {
+function validateEMail(email) {
+    const rexp = new RegExp('^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$');
+    return rexp.test(email);
+}
+
+function validateMessage() {
+    return true;
+}
+
+function validate(idV) {
+    return function(id = idV) {
         let nameerr = `err-${id}`;
         let elemerr = document.getElementById(nameerr);
-        if (!isValid(idName)) {
+        if (!isValid(id)) {
             elemerr.classList.remove("hiddenerr");
             return false;
         } else {
@@ -56,6 +83,11 @@ function validate(id) {
     }
 }
 
+function validateLogin(text) {
+    let rexp = new RegExp('^([a-z0-9_-]+\.)*[a-z0-9_-]$');
+    return rexp.test(text);
+}
+
 function isEmpty(text) {
     return (text === "");
 }
@@ -64,6 +96,9 @@ function setValidate(arrInputs) {
     for (let i = 0; i < arrInputs.length; i++) {
         let id = arrInputs[i];
         const finput = document.getElementById(id);
-        finput.addEventListener('blur', validate(id));
+        const func = validate(id);
+        finput.addEventListener('blur', function(e) {
+            func();
+        });
     }
 }
