@@ -12,7 +12,7 @@ app.use(express.static("static/chat"));
  
 app.use("/", function(request, response){
      
-    response.send("<h1>Главная страница</h1>");
+    response.send('/index.html');
 });
  
 app.listen(3000);
