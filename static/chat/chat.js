@@ -16,17 +16,17 @@ const pianokeys = [
 const messages = [{
         date: "1 июля",
         message: [
-            { text: "Привет, ай-да на фильм?", classmes: "messagein", time: "14:39" },
-            { text: "Какой?", classmes: "messagefrom", time: "15:12" },
-            { text: "Крутой, про пиратов", classmes: "messagein", time: "15:38" },
-            { text: "Отличный фильм, когда следующий сеанс", classmes: "messagefrom", time: "15:42" },
+            { text: "Привет, ай-да на фильм?", classmes: "chat-wrapper__message-in", time: "14:39" },
+            { text: "Какой?", classmes: "chat-wrapper__message-from", time: "15:12" },
+            { text: "Крутой, про пиратов", classmes: "chat-wrapper__message-in", time: "15:38" },
+            { text: "Отличный фильм, когда следующий сеанс", classmes: "chat-wrapper__message-from", time: "15:42" },
         ]
     },
     {
         date: "2 июля",
         message: [
-            { text: "Привет, как дела?", classmes: "messagein", time: "17:38" },
-            { text: "хорошо:)", classmes: "messagefrom", time: "17:38" },
+            { text: "Привет, как дела?", classmes: "chat-wrapper__message-in", time: "17:38" },
+            { text: "хорошо:)", classmes: "chat-wrapper__message-from", time: "17:38" },
         ]
     }
 ];
@@ -35,6 +35,6 @@ const context = { pianokeys: pianokeys, messages: messages, fimage: "../common/i
 compileTemplate('template-chat', context);
 
 const arrInputs = ["ineditor"];
-setValidate(arrInputs);
+setValidate(arrInputs, "chat-wrapper__errmes-hiddenerr");
 
-setButtonEvents("ineditor", arrInputs);
+setButtonEvents("ineditor", arrInputs, "chat-wrapper__errmes-hiddenerr");

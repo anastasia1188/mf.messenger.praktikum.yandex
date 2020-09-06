@@ -8,10 +8,10 @@
 </head>
 
 <body>
-    <div class="basicWrapper">
-        <div class="item">
+    <div class="basic-wrapper">
+        <div class="basic-wrapper__item">
             <div id="template-settings" type="text/x-handlebars-template">
-                <div class="settings">
+                <div class="basic-wrapper__settings">
                     <img src={{fimg}} alt="" class="round" width="80px" height="80px">
 
                     <div>
@@ -19,58 +19,59 @@
                     </div>
 
                     <p>
-                        <div class="itemrow">
-                            <div class="leftitem">Почта</div>
-                            <input id="email" class="setting" value={{femail}}>
+                        <div class="basic-wrapper__itemrow">
+                            <div class="basic-wrapper__leftitem">Почта</div>
+                            <input id="email" class="basic-wrapper__setting" value={{femail}}>
                         </div>
-                        <div class="line lv1"></div>
-                        <p class="errmes hiddenerr" id="err-email">
+                        <div class="basic-wrapper__line"></div>
+                        <p class="basic-wrapper__errmes basic-wrapper__errmes-hiddenerr" id="err-email">
                             {{errmes}}
                         </p>
                     </p>
 
                     <p>
-                        <div class="itemrow">
+                        <div class="basic-wrapper__itemrow">
 
-                            <div class="leftitem">Логин</div>
-                            <input id="login" class="setting" value={{flogin}}>
+                            <div class="basic-wrapper__leftitem">Логин</div>
+                            <input id="login" class="basic-wrapper__setting" value={{flogin}}>
                         </div>
-                        <p class="errmes hiddenerr" id="err-login">
+                        <p class="basic-wrapper__errmes basic-wrapper__errmes-hiddenerr" id="err-login">
                             {{errmes}}
                         </p>
-                        <div class="line lv1"></div>
+                        <div class="basic-wrapper__line"></div>
                     </p>
 
                     <p>
-                        <div class="itemrow">
+                        <div class="basic-wrapper__itemrow">
 
-                            <div class="leftitem">Пароль</div>
-                            <input id="password" class="setting" type="password" value={{fpassword}}>
+                            <div class="basic-wrapper__leftitem">Пароль</div>
+                            <input id="password" class="basic-wrapper__setting" type="password" value={{fpassword}}>
                         </div>
-                        <p class="errmes hiddenerr" id="err-password1">
+                        <div class="basic-wrapper__line"></div>
+                        <p class="basic-wrapper__errmes basic-wrapper__errmes-hiddenerr" id="err-password1">
                             {{errmes1}}
                         </p>
-                        <p class="errmes hiddenerr" id="err-password2">
+                        <p class="basic-wrapper__errmes basic-wrapper__errmes-hiddenerr" id="err-password2">
                             {{errmes2}}
                         </p>
-                        <p class="errmes hiddenerr" id="err-password3">
+                        <p class="basic-wrapper__errmes basic-wrapper__errmes-hiddenerr" id="err-password3">
                             {{errmes3}}
                         </p>
                     </p>
 
                     <p>
-                        <div class="itemrow">
+                        <div class="basic-wrapper__itemrow">
 
-                            <div class="leftitem">Пароль (еще раз)</div>
-                            <input id="passwordr" class="setting" type="password" value={{fpasswordRepeat}}>
+                            <div class="basic-wrapper__leftitem">Пароль (еще раз)</div>
+                            <input id="passwordr" class="basic-wrapper__setting" type="password" value={{fpasswordRepeat}}>
                         </div>
-                        <div class="line lv1"></div>
-                        <p class="errmes hiddenerr" id="err-passwordr">
+                        <div class="basic-wrapper__line"></div>
+                        <p class="basic-wrapper__errmes basic-wrapper__errmes-hiddenerr" id="err-passwordr">
                             {{errmesr}}
                         </p>
                     </p>
 
-                    <button class="mybutton" id="save">Сохранить</button>
+                    <button class="my-button" id="save">Сохранить</button>
                 </div>
             </div>
         </div>

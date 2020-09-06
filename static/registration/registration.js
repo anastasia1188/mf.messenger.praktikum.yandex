@@ -14,7 +14,7 @@ const context = {
 compileTemplate('template-registration', context);
 
 const arrInputs = ["email", "login", "password", "passwordr"];
-setValidate(arrInputs);
-setFocus(arrInputs);
+setValidate(arrInputs, "wrapper__errmes-hiddenerr");
+setFocus(arrInputs, "wrapper__errmes-hiddenerr");
 
-setButtonEvents("reg", arrInputs);
+setButtonEvents("reg", arrInputs, "wrapper__errmes-hiddenerr");

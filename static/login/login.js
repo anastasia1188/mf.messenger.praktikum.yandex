@@ -12,7 +12,7 @@ const context = {
 compileTemplate('template-login', context);
 
 const arrInputs = ["login", "password"];
-setValidate(arrInputs);
-setFocus(arrInputs);
+setValidate(arrInputs, "wrapper__errmes-hiddenerr");
+setFocus(arrInputs, "wrapper__errmes-hiddenerr");
 
-setButtonEvents("autorisation", arrInputs);
+setButtonEvents("autorisation", arrInputs, "wrapper__errmes-hiddenerr");

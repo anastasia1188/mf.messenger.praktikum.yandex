@@ -51,6 +51,7 @@ function validatePassword(password) {
     if (errors.length > 0) {
         return errors;
     }
+
     return true;
 }
 
@@ -69,26 +70,29 @@ function validateMessage() {
     return true;
 }
 
-function validate(idV) {
-    return function(id = idV) {
+function validate(idV, nameHiddenErrV) {
+    return function(id = idV, nameHiddenErr = nameHiddenErrV) {
         let nameerr = `err-${id}`;
         const resVal = isValid(id);
+
         if (typeof(resVal) === 'object') {
             nameerr = nameerr + String(resVal[0]);
         }
         let elemerr = document.getElementById(nameerr);
+
         if (resVal !== true) {
             if (elemerr != null) {
-                if (elemerr.classList.remove("hiddenerr"))
+                if (elemerr.classList.remove(nameHiddenErr))
                     return false;
             }
         } else {
             if (elemerr != null) {
-                if (!elemerr.classList.contains("hiddenerr"))
-                    elemerr.classList.add("hiddenerr");
+                if (!elemerr.classList.contains(nameHiddenErr))
+                    elemerr.classList.add(nameHiddenErr);
                 return true;
             }
         }
+        return true;
     }
 }
 
@@ -101,30 +105,30 @@ function isEmpty(text) {
     return (text === "");
 }
 
-function setValidate(arrInputs) {
+function setValidate(arrInputs, nameHiddenErr) {
     for (let i = 0; i < arrInputs.length; i++) {
         let id = arrInputs[i];
         const finput = document.getElementById(id);
-        const func = validate(id);
+        const func = validate(id, nameHiddenErr);
         finput.addEventListener('blur', function(e) {
             func();
         });
     }
 }
 
-function setFocus(arrInputs) {
+function setFocus(arrInputs, nameHiddenErr) {
     for (let i = 0; i < arrInputs.length; i++) {
         let id = arrInputs[i];
         let finput = document.getElementById(id);
         let className = finput.getAttribute("type");
 
         finput.addEventListener('focus', function(e) {
-            elemFocus(id, className)
+            elemFocus(id, className, nameHiddenErr)
         });
     }
 }
 
-function elemFocus(id, className) {
+function elemFocus(id, className, nameHiddenErr) {
     const arrMesPwd = [1, 2, 3];
     let nameerr = `err-${id}`;
     const arrFields = [];
@@ -137,17 +141,19 @@ function elemFocus(id, className) {
     for (let i = 0; i < arrFields.length; i++) {
         let elemerr = document.getElementById(arrFields[i]);
         if (elemerr != null) {
-            if (!elemerr.classList.contains("hiddenerr"))
-                elemerr.classList.add("hiddenerr");
+            if (!elemerr.classList.contains(nameHiddenErr))
+                elemerr.classList.add(nameHiddenErr);
         }
     }
 }
 
-function isValidValues(arrInputs) {
-    result = true;
+function isValidValues(arrInputs, nameHiddenErr) {
+    let result = true;
+
     for (let i = 0; i < arrInputs.length; i++) {
-        if (!validate(arrInputs[i])())
+        if (!validate(arrInputs[i], nameHiddenErr)()) {
             result = false;
+        }
     }
     return result;
 }

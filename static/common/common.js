@@ -16,18 +16,20 @@ function compileTemplate(idTemplate, context) {
     elemTemplate.innerHTML = html;
 }
 
-function setButtonEvents(idButton, arrInputs) {
+function setButtonEvents(idButton, arrInputs, nameHiddenErr) {
     const elemButton = document.getElementById(idButton);
+
     elemButton.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
-            if (isValidValues(arrInputs)) {
+            if (isValidValues(arrInputs, nameHiddenErr)) {
                 const data = getData(arrInputs);
+                console.log(data);
             }
         }
     });
 
     elemButton.addEventListener('click', function(e) {
-        if (isValidValues(arrInputs)) {
+        if (isValidValues(arrInputs, nameHiddenErr)) {
             const data = getData(arrInputs);
             console.log(data);
         }

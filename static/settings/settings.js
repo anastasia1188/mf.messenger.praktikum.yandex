@@ -14,7 +14,7 @@ const context = {
 compileTemplate('template-settings', context);
 
 const arrInputs = ["email", "login", "password", "passwordr"];
-setValidate(arrInputs);
-setFocus(arrInputs);
+setValidate(arrInputs, "basic-wrapper__errmes-hiddenerr");
+setFocus(arrInputs, "basic-wrapper__errmes-hiddenerr");
 
-setButtonEvents("save", arrInputs);
+setButtonEvents("save", arrInputs, "basic-wrapper__errmes-hiddenerr");

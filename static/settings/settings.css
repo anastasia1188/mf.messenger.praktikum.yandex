@@ -1,19 +1,19 @@
-.leftitem {
+.basic-wrapper__leftitem {
     text-align: left;
     flex-direction: row;
 }
 
-.rightitem {
+.basic-wrapper__rightitem {
     text-align: right;
     flex-direction: row;
 }
 
-.itemrow {
+.basic-wrapper__itemrow {
     display: flex;
     flex-direction: row;
 }
 
-.setting {
+.basic-wrapper__setting {
     position: absolute;
     width: 173px;
     height: 14px;
@@ -29,14 +29,27 @@
     border: none;
 }
 
-.settings {
+.basic-wrapper__settings {
     width: 440px;
 }
 
-.line {
+.basic-wrapper__line {
     position: absolute;
     width: 100%;
     height: 1px;
     background: lightslategrey;
     display: block;
+}
+
+.basic-wrapper__errmes {
+    text-align: center;
+    font-family: Cairo;
+    font-weight: normal;
+    font-size: 10px;
+    color: red;
+    display: block;
+}
+
+.basic-wrapper__errmes-hiddenerr {
+    display: none;
 }
