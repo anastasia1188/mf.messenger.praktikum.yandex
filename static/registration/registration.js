@@ -5,16 +5,26 @@ const context = {
     mesPassword: "Пароль",
     mesPasswordR: "Пароль (еще раз)",
     btnReg: "Зарегистрироваться",
-    errmes: "Не верно введены данные",
-    errmes1: "Ваш пароль должен быть не менее 8 символов",
-    errmes2: "Ваш пароль должен содержать хотя бы один литерал",
-    errmes3: "Ваш пароль должен содержать хотя бы одну цифру",
-    errmesr: "Пароли не совпадают"
+    errorMes0: "Не верно введены данные",
+    errorMes1: "Ваш пароль должен быть не менее 8 символов",
+    errorMes2: "Ваш пароль должен содержать хотя бы один литерал",
+    errorMes3: "Ваш пароль должен содержать хотя бы одну цифру",
+    errorMes4: "Не допускаются пробелы",
+    errorMes5: "Длина должна быть не менее 5 символов",
+    errorMes6: "Пароли не совпадают"
 };
-compileTemplate('template-registration', context);
+compileTemplate('template-registration', window.templateRegistration(), context);
 
-const arrInputs = ["email", "login", "password", "passwordr"];
-setValidate(arrInputs, "wrapper__errmes-hiddenerr");
-setFocus(arrInputs, "wrapper__errmes-hiddenerr");
+const nameHiddenElement = "wrapper__errmes-hiddenerr";
+const arrInputs = [
+    { input: "email", func: validateEMail() },
+    { input: "login", func: validateLogin() },
+    { input: "password", func: validatePassword() },
+    { input: "passwordr", func: validatePasswordR() }
+];
 
-setButtonEvents("reg", arrInputs, "wrapper__errmes-hiddenerr");
+for (let i = 0; i < arrInputs.length; i++)
+    setValidate(arrInputs[i].input, arrInputs[i].func, nameHiddenElement);
+
+setFocus(arrInputs, nameHiddenElement);
+setButtonEvents("reg", arrInputs, nameHiddenElement);

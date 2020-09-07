@@ -32,9 +32,8 @@ const messages = [{
 ];
 
 const context = { pianokeys: pianokeys, messages: messages, fimage: "../common/img/ava.png", fname: "Анастасия", errmes: "Не верно введены данные" };
-compileTemplate('template-chat', context);
+compileTemplate('template-chat', window.templateChat(), context);
 
-const arrInputs = ["ineditor"];
-setValidate(arrInputs, "chat-wrapper__errmes-hiddenerr");
+setValidate("ineditor", validateMessage(), "chat-wrapper__errmes-hiddenerr");
 
 setButtonEvents("ineditor", arrInputs, "chat-wrapper__errmes-hiddenerr");

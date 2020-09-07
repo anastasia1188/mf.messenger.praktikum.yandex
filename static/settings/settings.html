@@ -8,76 +8,11 @@
 </head>
 
 <body>
-    <div class="basic-wrapper">
-        <div class="basic-wrapper__item">
-            <div id="template-settings" type="text/x-handlebars-template">
-                <div class="basic-wrapper__settings">
-                    <img src={{fimg}} alt="" class="round" width="80px" height="80px">
-
-                    <div>
-                        <p>{{fname}}</p>
-                    </div>
-
-                    <p>
-                        <div class="basic-wrapper__itemrow">
-                            <div class="basic-wrapper__leftitem">Почта</div>
-                            <input id="email" class="basic-wrapper__setting" value={{femail}}>
-                        </div>
-                        <div class="basic-wrapper__line"></div>
-                        <p class="basic-wrapper__errmes basic-wrapper__errmes-hiddenerr" id="err-email">
-                            {{errmes}}
-                        </p>
-                    </p>
-
-                    <p>
-                        <div class="basic-wrapper__itemrow">
-
-                            <div class="basic-wrapper__leftitem">Логин</div>
-                            <input id="login" class="basic-wrapper__setting" value={{flogin}}>
-                        </div>
-                        <p class="basic-wrapper__errmes basic-wrapper__errmes-hiddenerr" id="err-login">
-                            {{errmes}}
-                        </p>
-                        <div class="basic-wrapper__line"></div>
-                    </p>
-
-                    <p>
-                        <div class="basic-wrapper__itemrow">
-
-                            <div class="basic-wrapper__leftitem">Пароль</div>
-                            <input id="password" class="basic-wrapper__setting" type="password" value={{fpassword}}>
-                        </div>
-                        <div class="basic-wrapper__line"></div>
-                        <p class="basic-wrapper__errmes basic-wrapper__errmes-hiddenerr" id="err-password1">
-                            {{errmes1}}
-                        </p>
-                        <p class="basic-wrapper__errmes basic-wrapper__errmes-hiddenerr" id="err-password2">
-                            {{errmes2}}
-                        </p>
-                        <p class="basic-wrapper__errmes basic-wrapper__errmes-hiddenerr" id="err-password3">
-                            {{errmes3}}
-                        </p>
-                    </p>
-
-                    <p>
-                        <div class="basic-wrapper__itemrow">
-
-                            <div class="basic-wrapper__leftitem">Пароль (еще раз)</div>
-                            <input id="passwordr" class="basic-wrapper__setting" type="password" value={{fpasswordRepeat}}>
-                        </div>
-                        <div class="basic-wrapper__line"></div>
-                        <p class="basic-wrapper__errmes basic-wrapper__errmes-hiddenerr" id="err-passwordr">
-                            {{errmesr}}
-                        </p>
-                    </p>
-
-                    <button class="my-button" id="save">Сохранить</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div id="template-settings" type="text/x-handlebars-template"> </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
+    <script src="settings.tmpl.js"></script>
+    <script src="../common/regExps.js"></script>
     <script src="../common/validation.js"></script>
     <script src="../common/common.js"></script>
     <script src="settings.js"></script>

@@ -10,44 +10,10 @@
 </head>
 
 <body>
-    <div id="template-login" type="text/x-handlebars-template">
-        <div class="wrapper">
-
-            <div class="wrapper__row">
-                <p> {{mesEnter}} </p>
-            </div>
-            <div class="wrapper__row">
-                <p>
-                    <img src="img/trebleСlef.png" width="40px" height="40px">
-                    <input class="wrapper__row" id="login" name="login" type="login" placeholder={{mesMail}}>
-                    <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-login">
-                        {{errmes}}
-                    </p>
-                </p>
-            </div>
-            <div class="wrapper__row">
-                <p><img src="img/bassСlef.jpg" width="40" height="40px">
-                    <input class="wrapper__row" id="password" name="password" type="password" placeholder={{mesPassword}}>
-                </p>
-                <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-password1">
-                    {{errmes1}}
-                </p>
-                <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-password2">
-                    {{errmes2}}
-                </p>
-                <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-password3">
-                    {{errmes3}}
-                </p>
-            </div>
-            <div class="wrapper__row">
-                <p><button id="autorisation" class="my-button"> {{mesAutorisation}} </button></p>
-            </div>
-            <div class="wrapper__row wrapper__no-accaunt">
-                <p><a href="../registration/registration.html"> {{mesAccount}} </a></p>
-            </div>
-        </div>
-    </div>
+    <div id="template-login" type="text/x-handlebars-template"> </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
+    <script src="login.tmpl.js"></script>
+    <script src="../common/regExps.js"></script>
     <script src="../common/validation.js"></script>
     <script src="../common/common.js"></script>
     <script src="login.js"></script>

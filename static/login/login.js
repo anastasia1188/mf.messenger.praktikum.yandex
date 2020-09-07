@@ -4,15 +4,22 @@ const context = {
     mesPassword: "Введите пароль",
     mesAutorisation: "Авторизация",
     mesAccount: "нет аккаунта?",
-    errmes: "Не верно введены данные",
-    errmes1: "Ваш пароль должен быть не менее 8 символов",
-    errmes2: "Ваш пароль должен содержать хотя бы один литерал",
-    errmes3: "Ваш пароль должен содержать хотя бы одну цифру"
+    errorMes0: "Не верно введены данные",
+    errorMes1: "Ваш пароль должен быть не менее 8 символов",
+    errorMes2: "Ваш пароль должен содержать хотя бы один литерал",
+    errorMes3: "Ваш пароль должен содержать хотя бы одну цифру",
+    errorMes4: "Не допускаются пробелы",
+    errorMes5: "Длина должна быть не менее 5 символов"
 };
-compileTemplate('template-login', context);
+compileTemplate('template-login', window.templateLogin(), context);
 
-const arrInputs = ["login", "password"];
-setValidate(arrInputs, "wrapper__errmes-hiddenerr");
-setFocus(arrInputs, "wrapper__errmes-hiddenerr");
+const nameHiddenElement = "wrapper__errmes-hiddenerr";
+const arrInputs = [
+    { input: "login", func: validateLogin() },
+    { input: "password", func: validatePassword() }
+];
 
-setButtonEvents("autorisation", arrInputs, "wrapper__errmes-hiddenerr");
+setValidate(arrInputs, nameHiddenElement);
+setFocus(arrInputs, nameHiddenElement);
+
+setButtonEvents("autorisation", arrInputs, nameHiddenElement);

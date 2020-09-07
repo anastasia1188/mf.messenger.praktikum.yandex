@@ -1,159 +1,186 @@
-function isValid(id) {
-    const elem = document.getElementById(id);
-    const text = elem.value;
+const FORMAT_ERROR = 0;
+const LENGTH_PWD_ERROR = 1;
+const LITERAL_ERROR = 2;
+const NUMERAL_ERROR = 3;
+const GAP_ERROR = 4;
+const LENGTH_ERROR = 5;
+const PWDR_ERROR = 6;
 
-    if (isEmpty(text)) {
-        return true;
-    } else {
-        switch (id) {
-            case 'email':
-                {
-                    return validateEMail(text);
-                }
+function validateEMail() {
+    return function(idElement, nameHiddenError) {
 
-            case 'login':
-                {
-                    return validateLogin(text);
-                }
+        let errors = [];
+        let result = true;
+        const email = document.getElementById(idElement).value;
+        if (email.length < 5)
+            errors.push(LENGTH_ERROR);
 
-            case ('password'):
-                {
-                    return validatePassword(text);
-                }
+        if (!REXP_EMAIL.test(email))
+            errors.push(FORMAT_ERROR);
 
-            case 'passwordr':
-                {
-                    const valuePwd = document.getElementById("password").value;
-                    return validatePasswordR(text, valuePwd);
-                }
-            case 'ineditor':
-                {
-                    return validateMessage(text);
-                }
+        if (email.search(REXP_GAP) >= 0)
+            errors.push(GAP_ERROR);
 
+        if (errors.length > 0)
+            result = errors;
 
+        return validate(result, idElement, nameHiddenError);
+    }
+}
+
+function validateLogin() {
+    return function(idElement, nameHiddenError) {
+        let result = true;
+        let errors = [];
+        const login = document.getElementById(idElement).value;
+        if (login.length < 5)
+            errors.push(LENGTH_ERROR);
+
+        if (!REXP_LOGIN.test(login))
+            errors.push(FORMAT_ERROR);
+
+        if (login.search(REXP_GAP) >= 0)
+            errors.push(GAP_ERROR);
+
+        if (errors.length > 0)
+            result = errors;
+
+        return validate(result, idElement, nameHiddenError);
+    }
+}
+
+function validatePassword() {
+    return function(idElement, nameHiddenError) {
+        let result = true;
+
+        const password = document.getElementById(idElement).value;
+        const errors = [];
+
+        if (password.length < 8) {
+            errors.push(LENGTH_PWD_ERROR);
         }
-        return false;
+        if (password.search(REXP_LITERAL) < 0) {
+            errors.push(LITERAL_ERROR);
+        }
+        if (password.search(REXP_NUMERAL) < 0) {
+            errors.push(NUMERAL_ERROR);
+        }
+        if (password.search(REXP_GAP) >= 0) {
+            errors.push(GAP_ERROR);
+        }
+
+        if (errors.length > 0) {
+            result = errors;
+        }
+
+        return validate(result, idElement, nameHiddenError);
     }
 }
 
-function validatePassword(password) {
-    const errors = [];
-    if (password.length < 8) {
-        errors.push(1);
-    }
-    if (password.search(/[a-z]/i) < 0) {
-        errors.push(2);
-    }
-    if (password.search(/[0-9]/) < 0) {
-        errors.push(3);
-    }
-    if (errors.length > 0) {
-        return errors;
-    }
+function validatePasswordR() {
+    return function(idElement, nameHiddenError) {
+        let result = true;
+        const errors = [];
+        const passwordR = document.getElementById(idElement).value;
+        const password = document.getElementById("password").value;
+        if (!(password === passwordR))
+            errors.push(PWDR_ERROR);
 
-    return true;
-}
+        if (errors.length > 0)
+            result = errors;
 
-function validatePasswordR(value1, value2) {
-    if (value1 === value2)
-        return true;
-    return false;
-}
-
-function validateEMail(email) {
-    const rexp = new RegExp('^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$');
-    return rexp.test(email);
+        return validate(result, idElement, nameHiddenError);
+    }
 }
 
 function validateMessage() {
-    return true;
+    return function(idElement, nameHiddenError) {
+        let result = true;
+        const errors = [];
+        const valueElement = document.getElementById(idElement).value;
+
+        if (valueElement.length < 1)
+            errors.push(LENGTH_ERROR);
+
+        if (errors.length > 0)
+            result = errors;
+
+        return validate(result, idElement, nameHiddenError);
+    }
 }
 
-function validate(idV, nameHiddenErrV) {
-    return function(id = idV, nameHiddenErr = nameHiddenErrV) {
-        let nameerr = `err-${id}`;
-        const resVal = isValid(id);
+function validate(resultValidate, idElement, nameHiddenError) {
+    let nameError = `err-${idElement}`;
 
-        if (typeof(resVal) === 'object') {
-            nameerr = nameerr + String(resVal[0]);
-        }
-        let elemerr = document.getElementById(nameerr);
+    if (typeof(resultValidate) === 'object')
+        nameError = nameError + String(resultValidate[0]);
 
-        if (resVal !== true) {
-            if (elemerr != null) {
-                if (elemerr.classList.remove(nameHiddenErr))
-                    return false;
-            }
-        } else {
-            if (elemerr != null) {
-                if (!elemerr.classList.contains(nameHiddenErr))
-                    elemerr.classList.add(nameHiddenErr);
-                return true;
-            }
-        }
+    let elementError = document.getElementById(nameError);
+
+    if (resultValidate !== true) {
+        showHiddenElement(elementError, nameHiddenError);
+        return false;
+    } else {
+        hideHiddenElement();
         return true;
     }
 }
 
-function validateLogin(text) {
-    let rexp = new RegExp('^([a-z0-9_-]+\.)*[a-z0-9_-]$');
-    return rexp.test(text);
+function showHiddenElement(elementError, nameHiddenError) {
+    if (elementError != null)
+        elementError.classList.remove(nameHiddenError);
 }
 
-function isEmpty(text) {
-    return (text === "");
+function hideHiddenElement(elementError, nameHiddenError) {
+    if (elementError != null && (!elementError.classList.contains(nameHiddenError)))
+        elementError.classList.add(nameHiddenError);
 }
 
-function setValidate(arrInputs, nameHiddenErr) {
+function setValidate(idInput, funcValidate, nameHiddenError) {
+    const finput = document.getElementById(idInput);
+    finput.addEventListener('blur', function(e) {
+        funcValidate(idInput, nameHiddenError);
+    });
+}
+
+function setFocus(arrInputs, nameHiddenError) {
     for (let i = 0; i < arrInputs.length; i++) {
-        let id = arrInputs[i];
-        const finput = document.getElementById(id);
-        const func = validate(id, nameHiddenErr);
-        finput.addEventListener('blur', function(e) {
-            func();
-        });
-    }
-}
-
-function setFocus(arrInputs, nameHiddenErr) {
-    for (let i = 0; i < arrInputs.length; i++) {
-        let id = arrInputs[i];
+        let id = arrInputs[i].input;
         let finput = document.getElementById(id);
         let className = finput.getAttribute("type");
 
         finput.addEventListener('focus', function(e) {
-            elemFocus(id, className, nameHiddenErr)
+            elemFocus(id, className, nameHiddenError)
         });
     }
 }
 
-function elemFocus(id, className, nameHiddenErr) {
-    const arrMesPwd = [1, 2, 3];
-    let nameerr = `err-${id}`;
+function elemFocus(id, className, nameHiddenError) {
+    const arrMesPwd = [0, 1, 2, 3, 4, 5, 6];
+    let nameError = `err-${id}`;
     const arrFields = [];
-    if ((className === "password") || (className === "passwordr")) {
-        for (let i = 0; i < arrMesPwd.length; i++)
-            arrFields.push(`${nameerr}${arrMesPwd[i]}`);
-    } else {
-        arrFields.push(nameerr);
-    }
+
+    for (let i = 0; i < arrMesPwd.length; i++)
+        arrFields.push(`${nameError}${arrMesPwd[i]}`);
+
     for (let i = 0; i < arrFields.length; i++) {
-        let elemerr = document.getElementById(arrFields[i]);
-        if (elemerr != null) {
-            if (!elemerr.classList.contains(nameHiddenErr))
-                elemerr.classList.add(nameHiddenErr);
-        }
+        let elementError = document.getElementById(arrFields[i]);
+        if ((elementError != null) && (!elementError.classList.contains(nameHiddenError)))
+            elementError.classList.add(nameHiddenError);
     }
 }
 
-function isValidValues(arrInputs, nameHiddenErr) {
+function isValidValues(arrInputs, nameHiddenError) {
     let result = true;
 
     for (let i = 0; i < arrInputs.length; i++) {
-        if (!validate(arrInputs[i], nameHiddenErr)()) {
+        const funcValidate = arrInputs[i].func;
+        const idElement = arrInputs[i].input;
+
+        if (!funcValidate(idElement, nameHiddenError)) {
             result = false;
         }
     }
+
     return result;
 }
