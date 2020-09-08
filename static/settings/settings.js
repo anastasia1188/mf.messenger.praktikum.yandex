@@ -27,4 +27,4 @@ for (let i = 0; i < arrInputs.length; i++)
     setValidate(arrInputs[i].input, arrInputs[i].func, nameHiddenElement);
 
 setFocus(arrInputs, nameHiddenElement);
-setButtonEvents("reg", arrInputs, nameHiddenElement);
+setButtonEvents("save", arrInputs, nameHiddenElement);

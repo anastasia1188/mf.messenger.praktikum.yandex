@@ -5,6 +5,7 @@ const NUMERAL_ERROR = 3;
 const GAP_ERROR = 4;
 const LENGTH_ERROR = 5;
 const PWDR_ERROR = 6;
+const INEDITOR_ERROR = 7;
 
 function validateEMail() {
     return function(idElement, nameHiddenError) {
@@ -100,7 +101,7 @@ function validateMessage() {
         const valueElement = document.getElementById(idElement).value;
 
         if (valueElement.length < 1)
-            errors.push(LENGTH_ERROR);
+            errors.push(INEDITOR_ERROR);
 
         if (errors.length > 0)
             result = errors;
@@ -145,18 +146,17 @@ function setValidate(idInput, funcValidate, nameHiddenError) {
 
 function setFocus(arrInputs, nameHiddenError) {
     for (let i = 0; i < arrInputs.length; i++) {
-        let id = arrInputs[i].input;
-        let finput = document.getElementById(id);
-        let className = finput.getAttribute("type");
+        const id = arrInputs[i].input;
+        const finput = document.getElementById(id);
 
         finput.addEventListener('focus', function(e) {
-            elemFocus(id, className, nameHiddenError)
+            elemFocus(id, nameHiddenError)
         });
     }
 }
 
-function elemFocus(id, className, nameHiddenError) {
-    const arrMesPwd = [0, 1, 2, 3, 4, 5, 6];
+function elemFocus(id, nameHiddenError) {
+    const arrMesPwd = [0, 1, 2, 3, 4, 5, 6, 7];
     let nameError = `err-${id}`;
     const arrFields = [];
 

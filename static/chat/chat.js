@@ -31,9 +31,24 @@ const messages = [{
     }
 ];
 
-const context = { pianokeys: pianokeys, messages: messages, fimage: "../common/img/ava.png", fname: "Анастасия", errmes: "Не верно введены данные" };
+const nameHiddenError = "chat-wrapper__errmes-hiddenerr";
+const context = { pianokeys: pianokeys, messages: messages, fimage: "../common/img/ava.png", fname: "Анастасия", errmes: "Пустое сообщение" };
 compileTemplate('template-chat', window.templateChat(), context);
 
-setValidate("ineditor", validateMessage(), "chat-wrapper__errmes-hiddenerr");
+const arrInputs = [{ input: "ineditor", func: validateMessage() }];
 
-setButtonEvents("ineditor", arrInputs, "chat-wrapper__errmes-hiddenerr");
+const elemButton = document.getElementById("ineditor");
+elemButton.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        if (isValidValues(arrInputs, nameHiddenError)) {
+            const data = getData(arrInputs);
+            console.log(data);
+        }
+    } else {
+        let elementError = document.getElementById('err-ineditor7');
+
+        if ((elementError != null) && (!elementError.classList.contains(nameHiddenError)))
+            elementError.classList.add(nameHiddenError);
+    }
+
+});

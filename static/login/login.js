@@ -19,7 +19,9 @@ const arrInputs = [
     { input: "password", func: validatePassword() }
 ];
 
-setValidate(arrInputs, nameHiddenElement);
+for (let i = 0; i < arrInputs.length; i++)
+    setValidate(arrInputs[i].input, arrInputs[i].func, nameHiddenElement);
+
 setFocus(arrInputs, nameHiddenElement);
 
 setButtonEvents("autorisation", arrInputs, nameHiddenElement);
