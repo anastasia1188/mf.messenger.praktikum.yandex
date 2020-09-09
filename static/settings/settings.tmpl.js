@@ -1,4 +1,4 @@
-window.templateSettings = (function() {
+function getTemplateSettings {
     return `<div class="basic-wrapper">
     <div class="basic-wrapper__item">
         <div class="basic-wrapper__settings">
@@ -91,4 +91,4 @@ window.templateSettings = (function() {
         </div>
     </div>
 </div>`;
-});
+}
