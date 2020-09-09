@@ -11,7 +11,7 @@ const context = {
     errorMes4: "Не допускаются пробелы",
     errorMes5: "Длина должна быть не менее 5 символов"
 };
-compileTemplate('template-login', window.templateLogin(), context);
+compileTemplate('template-login', getTemplateLogin(), context);
 
 const nameHiddenElement = "wrapper__errmes-hiddenerr";
 const arrInputs = [

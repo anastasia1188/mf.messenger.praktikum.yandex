@@ -13,7 +13,7 @@ const context = {
     errorMes5: "Длина должна быть не менее 5 символов",
     errorMes6: "Пароли не совпадают"
 };
-compileTemplate('template-settings', window.templateSettings(), context);
+compileTemplate('template-settings', getTemplateSettings(), context);
 
 const nameHiddenElement = "wrapper__errmes-hiddenerr";
 const arrInputs = [

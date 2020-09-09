@@ -1,4 +1,4 @@
-window.templateChat = (function() {
+function getTemplateChat() {
     return `<div class="chat-wrapper">
     <div class="chat-wrapper__left-part">
         <div class="chat-wrapper__search">
@@ -39,4 +39,4 @@ window.templateChat = (function() {
         </div>
     </div>
 </div>`;
-});
+}

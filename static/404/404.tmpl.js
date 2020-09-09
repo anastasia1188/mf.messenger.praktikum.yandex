@@ -1,4 +1,4 @@
-window.template404 = (function() {
+function getTemplate404() {
     return `<div class="basic-wrapper">
     <div class="basic-wrapper__item">
         <div class="basic-wrapper__line">
@@ -12,4 +12,4 @@ window.template404 = (function() {
         </div>
     </div>
 </div>`;
-});
+}

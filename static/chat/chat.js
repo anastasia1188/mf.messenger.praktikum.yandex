@@ -33,7 +33,7 @@ const messages = [{
 
 const nameHiddenError = "chat-wrapper__errmes-hiddenerr";
 const context = { pianokeys: pianokeys, messages: messages, fimage: "../common/img/ava.png", fname: "Анастасия", errmes: "Пустое сообщение" };
-compileTemplate('template-chat', window.templateChat(), context);
+compileTemplate('template-chat', getTemplateChat(), context);
 
 const arrInputs = [{ input: "ineditor", func: validateMessage() }];
 

@@ -1,4 +1,4 @@
-window.templateLogin = (function() {
+function getTemplateLogin() {
     return ` <div class="wrapper">
 
     <div class="wrapper__row">
@@ -49,4 +49,4 @@ window.templateLogin = (function() {
         <p><a href="../registration/registration.html"> {{mesAccount}} </a></p>
     </div>
 </div>`;
-});
+}
