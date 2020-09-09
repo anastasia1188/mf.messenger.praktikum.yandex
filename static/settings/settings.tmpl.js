@@ -1,4 +1,4 @@
-function getTemplateSettings {
+function getTemplateSettings() {
     return `<div class="basic-wrapper">
     <div class="basic-wrapper__item">
         <div class="basic-wrapper__settings">
