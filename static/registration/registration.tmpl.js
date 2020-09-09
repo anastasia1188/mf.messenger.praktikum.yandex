@@ -1,4 +1,4 @@
-window.templateRegistration = (function() {
+function getTemplateRegistration() {
     return `<div class="wrapper">
 
     <div class="wrapper__row">
@@ -62,4 +62,4 @@ window.templateRegistration = (function() {
     </div>
 
 </div>`;
-});
+}
