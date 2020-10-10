@@ -1,0 +1,14 @@
+[
+    { "contact": "Арина", "countmes": "♪", "hidden": false, "pressed": false },
+    { "contact": "Папа ", "countmes": "♫", "hidden": false, "pressed": false },
+    { "contact": "Мама", "countmes": "♪", "hidden": false, "pressed": false },
+    { "contact": "", "countmes": "", "hidden": "hidden=true", "pressed": false },
+    { "contact": "", "countmes": "", "hidden": "", "pressed": false },
+    { "contact": "", "countmes": "", "hidden": "", "pressed": false },
+    { "contact": "", "countmes": "", "hidden": "hidden=true", "pressed": false },
+    { "contact": "", "countmes": "", "hidden": "", "pressed": false },
+    { "contact": "", "countmes": "", "hidden": "", "pressed": false },
+    { "contact": "", "countmes": "", "hidden": "", "pressed": false },
+    { "contact": "", "countmes": "", "hidden": "hidden=true", "pressed": false },
+    { "contact": "", "countmes": "", "hidden": "", "pressed": false }
+]

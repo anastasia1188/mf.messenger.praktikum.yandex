@@ -1,0 +1,41 @@
+[{
+        "contact": "Арина",
+        "history": [{
+                "date": "1 июля",
+                "message": [
+                    { "text": "Привет, ай-да на фильм?", "classmes": "chat-wrapper__message-in", "time": "14:39" },
+                    { "text": "Какой?", "classmes": "chat-wrapper__message-from", "time": "15:12" },
+                    { "text": "Крутой, про пиратов", "classmes": "chat-wrapper__message-in", "time": "15:38" },
+                    { "text": "Отличный фильм, когда следующий сеанс", "classmes": "chat-wrapper__message-from", "time": "15:42" }
+                ]
+            },
+            {
+                "date": "2 июля",
+                "message": [
+                    { "text": "Привет, как дела?", "classmes": "chat-wrapper__message-in", "time": "17:38" },
+                    { "text": "хорошо:)", "classmes": "chat-wrapper__message-from", "time": "17:38" }
+                ]
+            }
+        ]
+    },
+    {
+        "contact": "Папа",
+        "history": [{
+            "date": "7 июля",
+            "message": [
+                { "text": "Привет", "classmes": "chat-wrapper__message-in", "time": "14:39" },
+                { "text": "Привет", "classmes": "chat-wrapper__message-from", "time": "15:12" }
+            ]
+        }]
+    },
+    {
+        "contact": "Мама",
+        "history": [{
+            "date": "9 июля",
+            "message": [
+                { "text": "Привет, как дела", "classmes": "chat-wrapper__message-in", "time": "14:39" },
+                { "text": "Привет, как дела", "classmes": "chat-wrapper__message-from", "time": "15:12" }
+            ]
+        }]
+    }
+]
