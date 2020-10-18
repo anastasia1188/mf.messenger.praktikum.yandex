@@ -1,4 +1,4 @@
-function isEqual(lhs, rhs) {
+export function isEqual(lhs, rhs) {
     return lhs === rhs;
 }
 
@@ -51,7 +51,7 @@ export class Route {
         window.currentBlock = this._block;
         render(this._props.rootQuery, this._block);
         this._block.setEvents()
-        //this._block.show();//TODO
+            //this._block.show();//TODO
 
     }
 }

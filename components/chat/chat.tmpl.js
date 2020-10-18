@@ -32,14 +32,12 @@ export default function getTemplateChat() {
             <div class={{classmes}}> {{this.text}}
                 <div class="chat-wrapper__time-mes"> {{this.time}} </div>
             </div>
-            {{/each}} {{/each}}
-            <div class="chat-wrapper__mes-editor">
-                <input id="ineditor" class="chat-wrapper__in-editor">
-                <p class="chat-wrapper__errmes chat-wrapper__errmes-hiddenerr" id="err-ineditor7">
-                    {{errmes}}
-                </p>
-            </div>
+            {{/each}} {{/each}}           
         </div>
+        <input id="ineditor" class="chat-wrapper__in-editor">
+        <p class="chat-wrapper__errmes chat-wrapper__errmes-hiddenerr" id="err-ineditor7">
+            {{errmes}}
+        </p>
     </div>
 </div>`;
 }

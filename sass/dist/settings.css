@@ -1,0 +1,55 @@
+.basic-wrapper__errmes {
+  text-align: center;
+  font-family: Cairo;
+  font-weight: normal;
+}
+
+.basic-wrapper__leftitem {
+  text-align: left;
+  flex-direction: row;
+}
+
+.basic-wrapper__rightitem {
+  text-align: right;
+  flex-direction: row;
+}
+
+.basic-wrapper__itemrow {
+  display: flex;
+  flex-direction: row;
+}
+
+.basic-wrapper__setting {
+  position: absolute;
+  width: 173px;
+  height: 14px;
+  left: 250px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 14px;
+  text-align: right;
+  background-color: #F4FEFE;
+  display: inline;
+  border: none;
+}
+
+.basic-wrapper__settings {
+  width: 440px;
+}
+
+.basic-wrapper__line {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: lightslategrey;
+  display: block;
+}
+
+.basic-wrapper__errmes {
+  color: red;
+  display: block;
+}
+
+.basic-wrapper__errmes-hiddenerr {
+  display: none;
+}
