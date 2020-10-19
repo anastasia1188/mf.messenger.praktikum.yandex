@@ -12,7 +12,7 @@
     </script>
     <!-- добавим chai -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
-    <script type="module" src="test.js"></script>
+    <script type="module" src="common.js"></script>
     <script>
         // chai предоставляет большое количество функций. Объявим assert глобально
         let assert = chai.assert;
@@ -21,7 +21,8 @@
 
 <body>
     <!-- скрипт со спецификацией (describe, it...) -->
-    <script src="test1.js"></script>
+    <script src="testRouter.js"></script>
+    <script src="testFetch.js"></script>
 
     <!-- элемент с id="mocha" будет содержать результаты тестов -->
     <div id="mocha"></div>
@@ -29,10 +30,8 @@
     <!-- запускаем тесты! -->
     <script>
         setTimeout(function() {
-            let foo = window.isEqual;
-            console.log(foo, window, window.isEqual);
             mocha.run();
-        }, 3000);
+        }, 2000);
     </script>
 </body>
 
