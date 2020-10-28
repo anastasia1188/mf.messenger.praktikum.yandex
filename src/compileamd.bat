@@ -1,0 +1,3 @@
+
+cd C:\OSPanel\domains\mf.messenger.praktikum.yandex\testts\src
+tsc -t es2018 --module amd --outFile ../../dist/modules.js common/block.ts common/common.d.ts common/common.ts common/eventBus.ts common/fetch.ts common/httpTransport.ts common/references.d.ts common/regexp.d.ts common/regExps.ts common/router.ts common/validation.ts chat/index.ts chat/chat.tmpl.ts err/index.ts err/err.tmpl.ts login/index.ts login/login.tmpl.ts registration/index.ts registration/registration.tmpl.ts settings/index.ts settings/settings.tmpl.ts utils/renderDOM.ts

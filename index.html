@@ -1,26 +1,24 @@
+<!DOCTYPE html>
 <html>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" type="text/css" href="../sass/dist/main.css">
+    <title>Chat</title>
+</head>
 
-    <body>
-        <script>
-            function pow(x, n) {
-                /* код функции, пока что пусто */
-            }
-        </script>
+<body>
+    <div class="app"> </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
+    <script>
+        var exports = {};
+        let mainRouter;
+    </script>
+    <script src="./dist/modules/regExps.js"></script>
+    <script src="./dist/modules/validation.js"></script>
+    <script src="./dist/modules/common.js"></script>
 
-        <script>
-            let mainRouter;
-        </script>
-        <div class="app"> </div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.min.js"></script>
-        <script src="../common/regExps.js"></script>
-        <script src="../common/validation.js"></script>
-        <script src="../common/common.js"></script>
-        <script src="https://requirejs.org/docs/release/2.3.6/comments/require.js"></script>
-        <script type="module" src="index.js"></script>
-    </body>
+    <script type="module" src="index.js"></script>
+</body>
 
 </html>

@@ -1,8 +1,8 @@
-import { Login } from './components/login/index.js';
-import { Registration } from './components/registration/index.js';
-import { Chat } from './components/chat/index.js';
-import { Settings } from './components/settings/index.js';
-import router from './modules/router.js';
+import { Login } from './dist/components/login/index.js';
+import { Registration } from './dist/components/registration/index.js';
+import { Chat } from './dist/components/chat/index.js';
+import { Settings } from './dist/components/settings/index.js';
+import router from './dist/modules/router.js';
 
 let mainRouter = new router(".app");
 //let login = new Login();
