@@ -5,7 +5,7 @@ export default function getTemplateLogin() {
     </div>
     <div class="wrapper__row">
         <p>
-            <img src="../img/trebleСlef.png" width="40px" height="40px">
+            <img src="../data/img/trebleСlef.png" width="40px" height="40px">
             <input class="wrapper__row" id="login" name="login" type="login" placeholder={{mesMail}}>
            
                 <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-login0">
@@ -20,7 +20,7 @@ export default function getTemplateLogin() {
         </p>
     </div>
     <div class="wrapper__row">
-        <p><img src="../img/bassСlef.jpg" width="40" height="40px">
+        <p><img src="../data/img/bassСlef.jpg" width="40" height="40px">
             <input class="wrapper__row" id="password" name="password" type="password" placeholder={{mesPassword}}>
         </p>
         <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-password1">

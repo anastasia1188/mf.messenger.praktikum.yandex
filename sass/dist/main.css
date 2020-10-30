@@ -101,7 +101,7 @@
 .chat-wrapper__chat {
     width: 80%;
     height: 100%;
-    background-image: url("../../../img/background.png");
+    background-image: url("../../../data/img/background.png");
     background-size: 100% 100%;
     mix-blend-mode: screen;
     z-index: 5;
@@ -358,7 +358,7 @@
 .chat-wrapper__chat {
     width: 80%;
     height: 100%;
-    background-image: url("../../../img/background.png");
+    background-image: url("../../../data/img/background.png");
     background-size: 100% 100%;
     mix-blend-mode: screen;
     z-index: 5;

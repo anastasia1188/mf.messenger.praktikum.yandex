@@ -1,14 +1,14 @@
 [
-    { "contact": "Арина", "countmes": "♪", "hidden": false, "pressed": false },
-    { "contact": "Папа ", "countmes": "♫", "hidden": false, "pressed": false },
-    { "contact": "Мама", "countmes": "♪", "hidden": false, "pressed": false },
-    { "contact": "", "countmes": "", "hidden": "hidden=true", "pressed": false },
-    { "contact": "", "countmes": "", "hidden": "", "pressed": false },
-    { "contact": "", "countmes": "", "hidden": "", "pressed": false },
-    { "contact": "", "countmes": "", "hidden": "hidden=true", "pressed": false },
-    { "contact": "", "countmes": "", "hidden": "", "pressed": false },
-    { "contact": "", "countmes": "", "hidden": "", "pressed": false },
-    { "contact": "", "countmes": "", "hidden": "", "pressed": false },
-    { "contact": "", "countmes": "", "hidden": "hidden=true", "pressed": false },
-    { "contact": "", "countmes": "", "hidden": "", "pressed": false }
+    { "contact": "Арина", "countmes": "♪", "hidden": false, "pressed": false, "pianokey": "7si.mp3" },
+    { "contact": "Папа ", "countmes": "♫", "hidden": false, "pressed": false, "pianokey": "6lya.mp3" },
+    { "contact": "Мама", "countmes": "♪", "hidden": false, "pressed": false, "pianokey": "5sol.mp3" },
+    { "contact": "Аня", "countmes": "", "hidden": "hidden=true", "pressed": false, "pianokey": "4fa.mp3" },
+    { "contact": "Саша", "countmes": "", "hidden": "", "pressed": false, "pianokey": "3mi.mp3" },
+    { "contact": "Коля", "countmes": "", "hidden": "", "pressed": false, "pianokey": "2re.mp3" },
+    { "contact": "Таня", "countmes": "", "hidden": "hidden=true", "pressed": false, "pianokey": "1do.mp3" },
+    { "contact": "Света", "countmes": "", "hidden": "", "pressed": false, "pianokey": "7si.mp3" },
+    { "contact": "Андрей", "countmes": "", "hidden": "", "pressed": false, "pianokey": "6lya.mp3" },
+    { "contact": "Миша", "countmes": "", "hidden": "", "pressed": false, "pianokey": "5sol.mp3" },
+    { "contact": "Оля", "countmes": "", "hidden": "hidden=true", "pressed": false, "pianokey": "4fa.mp3" },
+    { "contact": "Юля", "countmes": "", "hidden": "", "pressed": false, "pianokey": "3mi.mp3" }
 ]

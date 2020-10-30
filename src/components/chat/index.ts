@@ -85,7 +85,7 @@ export class Chat extends Block {
     }
 
     _getImage() {
-        let result = "../../../img/ava.png";
+        let result = "../../../data/img/ava.png";
         //console.log('img', result);
         return result;
     }

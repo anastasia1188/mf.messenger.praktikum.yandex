@@ -8,7 +8,7 @@ export class Settings extends Block {
     }
     _getData() {
         var result = {
-            fimg: "../../../img/ava.png",
+            fimg: "../../../data/img/ava.png",
             fname: "Анастасия",
             femail: "anastasia1188@mail.ru",
             flogin: "anastasia1188",
