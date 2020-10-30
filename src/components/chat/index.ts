@@ -5,7 +5,7 @@ import HTTPTransport from "../../../dist/modules/httpTransport.js";
 
 export class Chat extends Block {
     messages:[{contact:string, history:any[]}];
-    contacts:[{contact:string, pressed:string}];
+    contacts:[{contact:string, pressed:string, pianokey: string}];
     fimage:string;
     fname:string;
     errmes:string;
@@ -142,6 +142,8 @@ export class Chat extends Block {
             //console.log(this.contacts[i].contact, idContact);
             if (this.contacts[i].contact.trim() == idContact.trim()) {
                 this.contacts[i].pressed = "chat-wrapper__white-pianokey-pressed";
+                let sound = new Audio('../../../data/sounds/'+ this.contacts[i].pianokey);
+                sound.play();
                 //console.log("cont_true");
             } else {
                 this.contacts[i].pressed = "";

@@ -1,4 +1,10 @@
-basic-wrapper__leftitem {
+.basic-wrapper__errmes {
+  text-align: center;
+  font-family: Cairo;
+  font-weight: normal;
+}
+
+.basic-wrapper__leftitem {
   text-align: left;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
@@ -6,7 +12,7 @@ basic-wrapper__leftitem {
           flex-direction: row;
 }
 
-basic-wrapper__rightitem {
+.basic-wrapper__rightitem {
   text-align: right;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
@@ -14,7 +20,7 @@ basic-wrapper__rightitem {
           flex-direction: row;
 }
 
-basic-wrapper__itemrow {
+.basic-wrapper__itemrow {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -24,13 +30,11 @@ basic-wrapper__itemrow {
           flex-direction: row;
 }
 
-basic-wrapper__setting {
+.basic-wrapper__setting {
   position: absolute;
   width: 173px;
   height: 14px;
   left: 250px;
-  font-family: Cairo;
-  font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 14px;
@@ -40,11 +44,11 @@ basic-wrapper__setting {
   border: none;
 }
 
-basic-wrapper__settings {
+.basic-wrapper__settings {
   width: 440px;
 }
 
-basic-wrapper__line {
+.basic-wrapper__line {
   position: absolute;
   width: 100%;
   height: 1px;
@@ -52,16 +56,12 @@ basic-wrapper__line {
   display: block;
 }
 
-basic-wrapper__errmes {
-  text-align: center;
-  font-family: Cairo;
-  font-weight: normal;
-  font-size: 10px;
+.basic-wrapper__errmes {
   color: red;
   display: block;
 }
 
-basic-wrapper__errmes-hiddenerr {
+.basic-wrapper__errmes-hiddenerr {
   display: none;
 }
 /*# sourceMappingURL=settings.css.map */
