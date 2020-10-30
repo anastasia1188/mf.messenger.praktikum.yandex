@@ -2,6 +2,10 @@
 
 Мессенджер в музыкальном стиле позволяет отправлять и принимать сообщения.
 
+## Установка
+
+git clone https://github.com/anastasia1188/mf.messenger.praktikum.yandex.git
+
 ## **Примеры использования**
 
 На сайте https://amazing-turing-810a80.netlify.app в дальнейшем вы увидите его работу.

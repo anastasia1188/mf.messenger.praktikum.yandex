@@ -4,7 +4,9 @@
   "description": "Мессенджер в музыкальном стиле позволяет отправлять и принимать сообщения.",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "gulp-postcss": "^9.0.0",
+    "handlebars": "^4.7.6"
   },
   "devDependencies": {},
   "scripts": {

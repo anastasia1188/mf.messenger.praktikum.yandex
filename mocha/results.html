@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- добавим стили mocha для отображения результатов -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.css">
+    <!-- добавляем сам фреймворк mocha -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.js"></script>
+    <script>
+        // включаем режим тестирования в стиле BDD
+        mocha.setup('bdd');
+    </script>
+    <!-- добавим chai -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
+    <script type="module" src="common.js"></script>
+    <script>
+        // chai предоставляет большое количество функций. Объявим assert глобально
+        let assert = chai.assert;
+    </script>
+</head>
+
+<body>
+    <!-- скрипт со спецификацией (describe, it...) -->
+    <script src="testRouter.js"></script>
+    <script src="testFetch.js"></script>
+
+    <!-- элемент с id="mocha" будет содержать результаты тестов -->
+    <div id="mocha"></div>
+
+    <!-- запускаем тесты! -->
+    <script>
+        setTimeout(function() {
+            mocha.run();
+        }, 2000);
+    </script>
+
+    <div id="echamps-calendar-widget" class="_calendar_widget" data-key="48806ac5-17a0-42f0-82dd-1830c9c1a3df" data-server="https://e-champs.com"></div>
+    <script type="text/javascript" src="https://e-champs.com/calendarWidget.js"></script>
+</body>
+
+</html>
