@@ -197,7 +197,7 @@ export class Chat extends Block {
                 }
             } else {
                 var elementError = document.getElementById('err-ineditor7');
-                if ((elementError != null) && (!elementError.classList.contains(nameHiddenError)))
+                if (elementError && (!elementError.classList.contains(nameHiddenError)))
                     elementError.classList.add(nameHiddenError);
             }
         });

@@ -122,10 +122,9 @@ export class Chat extends Block {
             //console.log(this.contacts[i].contact, idContact);
             if (this.contacts[i].contact.trim() == idContact.trim()) {
                 this.contacts[i].pressed = "chat-wrapper__white-pianokey-pressed";
-                let sound = new Audio('../../../data/sounds/' + this.contacts[i].pianokey);
-                sound.play();
                 //console.log("cont_true");
-            } else {
+            }
+            else {
                 this.contacts[i].pressed = "";
                 //console.log("cont_false");
             }
@@ -138,7 +137,8 @@ export class Chat extends Block {
         if (elemContact.classList.contains("chat-wrapper__contact")) {
             elem = elemContact;
             //console.log("!");
-        } else {
+        }
+        else {
             elem = elemContact.querySelector("chat-wrapper__contact");
             if (elem == undefined)
                 elem = elemContact.querySelector("chat-wrapper__contact");
@@ -163,15 +163,16 @@ export class Chat extends Block {
         var nameHiddenError = "chat-wrapper";
         var arrInputs = [{ input: "ineditor", value: validateMessage() }];
         var elemButton = document.getElementById("ineditor");
-        elemButton.addEventListener('keypress', function(e) {
+        elemButton.addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 if (isValidValues(arrInputs, nameHiddenError)) {
                     var data = getData(arrInputs);
                     //console.log(data);
                 }
-            } else {
+            }
+            else {
                 var elementError = document.getElementById('err-ineditor7');
-                if ((elementError != null) && (!elementError.classList.contains(nameHiddenError)))
+                if (elementError && (!elementError.classList.contains(nameHiddenError)))
                     elementError.classList.add(nameHiddenError);
             }
         });
@@ -179,19 +180,16 @@ export class Chat extends Block {
         console.log(elemButtonId);
         if (elemButtonId != null) {
             console.log('click');
-            elemButtonId.addEventListener('click', function(e) {
+            elemButtonId.addEventListener('click', function (e) {
                 //console.log(mainRouter, window.currentBlock);
                 window.currentBlock.showChatHistory(event.target);
             });
         }
-
     }
 }
-
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-
 function onFullFill(chat) {
     let context = chat.getData();
     //console.log(context);
@@ -200,11 +198,10 @@ function onFullFill(chat) {
     return result;
     //console.log('onfullfill');
 }
-
-function onReject() {} {
+function onReject() { }
+{
     //console.log('onReject');
 }
-
 function render(query, block) {
     const root = document.querySelector(query);
     root.appendChild(block.getContent());

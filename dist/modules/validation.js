@@ -162,13 +162,12 @@ function elemFocus(id, nameHiddenError) {
     }
 }
 function isValidValues(arrInputs, nameHiddenError) {
-    var result = true;
     for (var i = 0; i < arrInputs.length; i++) {
         var funcValidate = arrInputs[i].value;
         var idElement = arrInputs[i].input;
         if (!funcValidate(idElement, nameHiddenError)) {
-            result = false;
+            return false;
         }
     }
-    return result;
+    return true;
 }
