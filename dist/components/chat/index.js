@@ -44,9 +44,10 @@ export class Chat extends Block {
         let messages = [];
         let pianokeys = this.contacts;
         let fimage = this._getImage();
+        let fimagesound = "../../../data/img/sound.jpg";
         let fname = this._getFName();
         let errmes = this._getErrMes();
-        return { pianokeys: pianokeys, messages: messages, fimage: fimage, fname: fname, errmes: errmes };
+        return { pianokeys: pianokeys, messages: messages, fimage: fimage, fimagesound: fimagesound, fname: fname, errmes: errmes };
     }
     getMes() {
         console.log(this.messages);
@@ -122,8 +123,10 @@ export class Chat extends Block {
             //console.log(this.contacts[i].contact, idContact);
             if (this.contacts[i].contact.trim() == idContact.trim()) {
                 this.contacts[i].pressed = "chat-wrapper__white-pianokey-pressed";
-                let sound = new Audio('../../../data/sounds/' + this.contacts[i].pianokey);
-                sound.play();
+                if (!window.noSound) {
+                    let sound = new Audio('../../../data/sounds/' + this.contacts[i].pianokey);
+                    sound.play();
+                }
                 //console.log("cont_true");
             }
             else {
@@ -169,7 +172,7 @@ export class Chat extends Block {
             if (e.key === 'Enter') {
                 if (isValidValues(arrInputs, nameHiddenError)) {
                     var data = getData(arrInputs);
-                    //console.log(data);
+                    console.log(data);
                 }
             }
             else {
@@ -187,6 +190,17 @@ export class Chat extends Block {
                 window.currentBlock.showChatHistory(event.target);
             });
         }
+        let elemSound = document.getElementById("sound");
+        elemSound.addEventListener('click', function (e) {
+            if (elemSound.src == "http://mf.messenger.praktikum.yandex/data/img/sound.jpg") {
+                elemSound.src = "http://mf.messenger.praktikum.yandex/data/img/nosound.jpg";
+                window.noSound = true;
+            }
+            else {
+                elemSound.src = "http://mf.messenger.praktikum.yandex/data/img/sound.jpg";
+                window.noSound = false;
+            }
+        });
     }
 }
 function delay(ms) {

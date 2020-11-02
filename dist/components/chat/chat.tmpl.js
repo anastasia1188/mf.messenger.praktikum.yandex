@@ -6,6 +6,7 @@ export default function getTemplateChat() {
                 <img src="{{fimage}}" alt="" class="round" width="80px" height="80px">
                 <div><a href="/#settings" onclick = "window.location.hash = '#settings'"> {{fname}} </a></div>
             </div>
+            <img id="sound" src="{{fimagesound}}" alt="" class="round" width="20px" height="20px">
             <div> <input class="chat-wrapper__search-field" type="search" placeholder="Поиск">
             </div>
         </div>
