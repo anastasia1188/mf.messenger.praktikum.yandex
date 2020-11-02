@@ -4,12 +4,14 @@ import getTemplateChat from "./chat.tmpl.js";
 import HTTPTransport from "../../../dist/modules/httpTransport.js";
 
 export class Chat extends Block {
-    messages:[{contact:string, history:any[]}];
-    contacts:[{contact:string, pressed:string}];
-    fimage:string;
-    fname:string;
-    errmes:string;
-    proxyData:any;
+    messages: [{ contact: string, history: any[] }];
+    contacts: [{ contact: string, pressed: string, pianokey: string }];
+    fimage: string;
+    fimagesound: string;
+    fname: string;
+    errmes: string;
+    proxyData: any;
+
     constructor(props) {
         super("chat", props);
         //this.messages = [];
@@ -54,9 +56,10 @@ export class Chat extends Block {
         let messages = [];
         let pianokeys = this.contacts;
         let fimage = this._getImage();
+        let fimagesound = "../../../data/img/sound.jpg";
         let fname = this._getFName();
         let errmes = this._getErrMes();
-        return { pianokeys: pianokeys, messages: messages, fimage: fimage, fname: fname, errmes: errmes };
+        return { pianokeys: pianokeys, messages: messages, fimage: fimage, fimagesound: fimagesound, fname: fname, errmes: errmes };
     }
 
     getMes() {
@@ -100,7 +103,7 @@ export class Chat extends Block {
         return result;
     }
 
-    render(context=undefined) {
+    render(context = undefined) {
         //this._getData(); //.then(console.log('ready'), console.log()).finally(console.log('finally'));
 
         //console.log('gdata', this.messages);
@@ -142,6 +145,10 @@ export class Chat extends Block {
             //console.log(this.contacts[i].contact, idContact);
             if (this.contacts[i].contact.trim() == idContact.trim()) {
                 this.contacts[i].pressed = "chat-wrapper__white-pianokey-pressed";
+                if (!(<any>window).noSound) {
+                    let sound = new Audio('../../../data/sounds/' + this.contacts[i].pianokey);
+                    sound.play();
+                }
                 //console.log("cont_true");
             } else {
                 this.contacts[i].pressed = "";
@@ -189,15 +196,15 @@ export class Chat extends Block {
         var nameHiddenError = "chat-wrapper";
         var arrInputs = [{ input: "ineditor", value: validateMessage() }];
         var elemButton = document.getElementById("ineditor");
-        elemButton.addEventListener('keypress', function(e) {
+        elemButton.addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 if (isValidValues(arrInputs, nameHiddenError)) {
                     var data = getData(arrInputs);
-                    //console.log(data);
+                    console.log(data);
                 }
             } else {
                 var elementError = document.getElementById('err-ineditor7');
-                if ((elementError != null) && (!elementError.classList.contains(nameHiddenError)))
+                if (elementError && (!elementError.classList.contains(nameHiddenError)))
                     elementError.classList.add(nameHiddenError);
             }
         });
@@ -207,12 +214,26 @@ export class Chat extends Block {
         if (elemButtonId != null) {
             console.log('click');
             elemButtonId.addEventListener('click',
-                function(e) {
+                function (e) {
                     //console.log(mainRouter, window.currentBlock);
                     (<any>window).currentBlock.showChatHistory(event.target);
                 }
             );
         }
+        let elemSound = <HTMLImageElement>document.getElementById("sound");
+        elemSound.addEventListener('click', function (e) {
+            if (elemSound.src == "http://mf.messenger.praktikum.yandex/data/img/sound.jpg")
+            {
+                elemSound.src = "http://mf.messenger.praktikum.yandex/data/img/nosound.jpg";
+                (<any>window).noSound = true;
+            }    
+            else
+            {
+                elemSound.src = "http://mf.messenger.praktikum.yandex/data/img/sound.jpg";
+                (<any>window).noSound = false;
+            }   
+
+        });
     }
 
 }
@@ -230,7 +251,7 @@ function onFullFill(chat) {
     //console.log('onfullfill');
 }
 
-function onReject() {} {
+function onReject() { } {
     //console.log('onReject');
 }
 

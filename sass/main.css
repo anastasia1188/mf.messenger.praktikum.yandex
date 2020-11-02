@@ -1,4 +1,4 @@
-.wrapper__errmes, .wrapper, .chat-wrapper__message-in, .chat-wrapper__message-from, .chat-wrapper__in-editor, .chat-wrapper__errmes, .basic-wrapper__errmes {
+.wrapper__errmes, .wrapper, .chat-wrapper__in-editor, .chat-wrapper__errmes, .basic-wrapper__errmes {
   font-family: Cairo;
   font-style: normal;
   font-weight: normal;
@@ -81,7 +81,7 @@ html {
   border: 1px solid grey;
 }
 
-.wrapper__errmes, .wrapper, .chat-wrapper__message-in, .chat-wrapper__message-from, .chat-wrapper__in-editor, .chat-wrapper__errmes, .basic-wrapper__errmes {
+.wrapper__errmes, .wrapper, .chat-wrapper__in-editor, .chat-wrapper__errmes, .basic-wrapper__errmes {
   text-align: center;
   font-family: Cairo;
   font-weight: normal;
@@ -271,7 +271,7 @@ html {
   width: 78vw;
   height: 50px;
   vertical-align: bottom;
-  border-radius: 10px;
+  border-radius: 1;
   z-index: 100;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -295,7 +295,7 @@ html {
   background: silver;
 }
 
-.wrapper__errmes, .wrapper, .chat-wrapper__message-in, .chat-wrapper__message-from, .chat-wrapper__in-editor, .chat-wrapper__errmes, .basic-wrapper__errmes {
+.wrapper__errmes, .wrapper, .chat-wrapper__in-editor, .chat-wrapper__errmes, .basic-wrapper__errmes {
   text-align: center;
   font-family: Cairo;
   font-weight: normal;
