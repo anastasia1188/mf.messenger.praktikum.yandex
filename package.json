@@ -8,7 +8,10 @@
     "gulp-postcss": "^9.0.0",
     "handlebars": "^4.7.6"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"

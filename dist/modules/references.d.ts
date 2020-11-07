@@ -16,3 +16,4 @@ declare function setButtonEvents(idButton:string, arrInputs: unknown[], nameHidd
 declare function getTemplateRegistration():string;
 declare function validateEMail();
 declare function getTemplateSettings();
+declare function setFormEvents(arrInputs: { input: string, value: any}[], nameHiddenErr:string);

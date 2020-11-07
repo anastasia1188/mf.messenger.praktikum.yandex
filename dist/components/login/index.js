@@ -1,5 +1,6 @@
 /// <reference path="../../../dist/modules/references.d.ts" />
 /// <reference path="../../../dist/modules/regexp.d.ts" />
+/// <reference path="../../../dist/modules/common.d.ts" />
 import Block from "../../../dist/modules/block.js";
 import getTemplateLogin from "./login.tmpl.js";
 import HTTPTransport from "../../../dist/modules/httpTransport.js";
@@ -8,10 +9,9 @@ export class Login extends Block {
         super("login", props);
         this.users = [];
         this.setEvents();
-        //console.log("hash", window.location.hash);
     }
-    _getData() {
-        let result = {
+    getData() {
+        const result = {
             mesEnter: "Вход",
             mesMail: "Введите логин",
             mesPassword: "Введите пароль",
@@ -27,14 +27,14 @@ export class Login extends Block {
         return result;
     }
     ;
-    async _getUsers() {
-        let httpTransport = new HTTPTransport;
-        let res = await httpTransport.get('../../data/users.json');
-        let resHTTP = await JSON.parse(res.response);
+    async getUsers() {
+        const httpTransport = new HTTPTransport;
+        const res = await httpTransport.get('../../data/users.json');
+        const resHTTP = await JSON.parse(res.response);
         this.users = resHTTP;
     }
     isPassAutorisation(login, password) {
-        this._getUsers();
+        this.getUsers();
         for (let i = 0; i < this.users.length; i++) {
             if ((this.users[i] === login) && (this.users[i] === login))
                 return true;
@@ -42,46 +42,27 @@ export class Login extends Block {
         return false;
     }
     render() {
-        var context = this._getData();
+        const context = this.getData();
         return compileTemplate('.app', getTemplateLogin(), context);
     }
     ;
     show() {
     }
     setEvents() {
-        //console.log("hi");
-        var nameHiddenElement = "wrapper__errmes-hiddenerr";
-        var arrInputs = [
+        const nameHiddenElement = "wrapper__errmes-hiddenerr";
+        const arrInputs = [
             { input: "login", value: validateLogin() },
             { input: "password", value: validatePassword() }
         ];
-        for (var i = 0; i < arrInputs.length; i++)
+        for (let i = 0; i < arrInputs.length; i++)
             setValidate(arrInputs[i].input, arrInputs[i].value, nameHiddenElement);
         setFocus(arrInputs, nameHiddenElement);
-        setButtonEvents("autorisation", arrInputs, nameHiddenElement);
-        //let btnAutorisation = document.querySelector("#autorisation");
-        //btnAutorisation.onclick = "console.log('kjkj')";
-        //console.log('btnAutorisation', btnAutorisation);
-        /*btnAutorisation.addEventListener("click", function(e) {
-            //console.log("autorisation");
-            window.location.hash = '#chat';
-            autorisation();
-        });*/
+        setFormEvents(arrInputs, nameHiddenElement);
     }
     ;
-    autorisation() {
-        return true;
-        /*let login = document.querySelector("#login").textContent;
-        //console.log(login);
-        let password = document.querySelector("#password").textContent;
-        if (isPassAutorisation(login, password)) {
-            console.log("Чат");
-        }*/
-    }
 }
 function render(query, block) {
     const root = document.querySelector(query);
-    //root.appendChild(block.getContent());
     return root;
 }
 ;

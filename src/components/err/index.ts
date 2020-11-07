@@ -9,7 +9,7 @@ export class Err extends Block {
     }
 
     render() {
-        var context = { errmes: "Не туда попали", errcode: this.props.errcode, backToChat: "назад к чатам" };
+        const context = { errmes: "Не туда попали", errcode: this.props.errcode, backToChat: "назад к чатам" };
         return compileTemplate('.template-err', getTemplateErr(), context);
     }
 }

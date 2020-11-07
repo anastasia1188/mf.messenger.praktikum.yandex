@@ -1,11 +1,11 @@
 describe("fetch", function() {
     it("Check get successfull address", function() {
         let httpTransport = new window.HTTPTransport;
-        httpTransport.get("../data/messages.json").then(res => onload = assert.equal(true, true));
+        httpTransport.get("../data/messages.json").then(res => assert.isDefined(res.responseText, "data has been received"));
     });
     it("Check get wrong address", function() {
         let httpTransport = new window.HTTPTransport;
-        httpTransport.get("../data/messages.json1").then(res => onerror = assert.equal(true, true));
+        httpTransport.get("../data/messages1.json").then(res => assert.equal(res.statusText, 'Not Found', "Wrong address"));
     });
 
     it("Check post", function() {
@@ -22,7 +22,7 @@ describe("fetch", function() {
         };
 
         let httpTransport = new window.HTTPTransport;
-        httpTransport.post('user.json', options).then(res => { if (res.statusText == "OK") { return assert.equal(true, true) } else { return assert.equal(false, true) } });
+        httpTransport.post('user.json', options).then(res => assert.equal(res.statusText, 'OK', 'Status text is valid'));
     });
 
     it("Check put", function() {
@@ -35,11 +35,11 @@ describe("fetch", function() {
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
-            body: JSON.stringify(user),
+            data: JSON.stringify(user),
         };
 
         let httpTransport = new window.HTTPTransport;
-        httpTransport.put('user.json', options).then(res => { if (res.statusText == "OK") { return assert.equal(true, true) } else { return assert.equal(false, true) } });
+        httpTransport.put('user.json', options).then(res => assert.equal(res.statusText, 'OK', 'Status text is valid'));
     });
 
     it("Check delete", function() {
@@ -49,7 +49,9 @@ describe("fetch", function() {
                 'Content-Type': 'application/json;charset=utf-8'
             },
         };
-        httpTransport.delete('user.json', options).then(res => { if (res.statusText == "OK") { return assert.equal(true, true) } else { return assert.equal(false, true) } });
+        httpTransport.delete('user.json', options).then(res => {
+            assert.equal(res.statusText, 'OK', 'Status text is valid')
+        });
     });
 
 });

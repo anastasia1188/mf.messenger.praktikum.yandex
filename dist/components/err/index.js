@@ -6,7 +6,7 @@ export class Err extends Block {
         super("err404", props);
     }
     render() {
-        var context = { errmes: "Не туда попали", errcode: this.props.errcode, backToChat: "назад к чатам" };
+        const context = { errmes: "Не туда попали", errcode: this.props.errcode, backToChat: "назад к чатам" };
         return compileTemplate('.template-err', getTemplateErr(), context);
     }
 }

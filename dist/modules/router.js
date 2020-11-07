@@ -1,102 +1,114 @@
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, privateMap, value) {
+    if (!privateMap.has(receiver)) {
+        throw new TypeError("attempted to set private field on non-instance");
+    }
+    privateMap.set(receiver, value);
+    return value;
+};
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, privateMap) {
+    if (!privateMap.has(receiver)) {
+        throw new TypeError("attempted to get private field on non-instance");
+    }
+    return privateMap.get(receiver);
+};
+var _pathname, _blockClass, _block, _props, _currentRoute, _rootQuery, _currentBlock;
 function isEqual(lhs, rhs) {
     return lhs === rhs;
 }
 function render(query, block) {
     const root = document.querySelector(query);
     root.innerHtml = block.render();
-    //console.log('root', root);
-    //console.log('root', root);
-    //console.log('innerhtml', root.innerHtml);
     return root;
 }
 export class Route {
     constructor(pathname, view, props) {
-        this._pathname = pathname;
-        this._blockClass = view;
-        this._block = null;
-        this._props = props;
+        _pathname.set(this, void 0);
+        _blockClass.set(this, void 0);
+        _block.set(this, void 0);
+        _props.set(this, void 0);
+        __classPrivateFieldSet(this, _pathname, pathname);
+        __classPrivateFieldSet(this, _blockClass, view);
+        __classPrivateFieldSet(this, _block, null);
+        __classPrivateFieldSet(this, _props, props);
     }
     navigate(pathname) {
         if (this.match(pathname)) {
-            this._pathname = pathname;
+            __classPrivateFieldSet(this, _pathname, pathname);
             this.render();
         }
     }
     leave() {
-        if (this._block) {
-            this._block.hide();
+        if (__classPrivateFieldGet(this, _block)) {
+            __classPrivateFieldGet(this, _block).hide();
         }
     }
     match(pathname) {
-        return isEqual(pathname, this._pathname);
+        return isEqual(pathname, __classPrivateFieldGet(this, _pathname));
     }
     render() {
-        //console.log('block', this._block);        
-        if (!this._block) {
-            //console.log('rourter');
-            this._block = new this._blockClass();
-            console.log('rourter', this._block);
-            render(this._props.rootQuery, this._block);
-            this._block.show();
-            this._block.setEvents();
-            window.currentBlock = this._block;
+        if (!__classPrivateFieldGet(this, _block)) {
+            __classPrivateFieldSet(this, _block, new (__classPrivateFieldGet(this, _blockClass))());
+            render(__classPrivateFieldGet(this, _props).rootQuery, __classPrivateFieldGet(this, _block));
+            __classPrivateFieldGet(this, _block).show();
+            __classPrivateFieldGet(this, _block).setEvents();
+            window.currentBlock = __classPrivateFieldGet(this, _block);
             return;
         }
-        window.currentBlock = this._block;
-        render(this._props.rootQuery, this._block);
-        this._block.setEvents();
-        //this._block.show();//TODO
+        window.currentBlock = __classPrivateFieldGet(this, _block);
+        render(__classPrivateFieldGet(this, _props).rootQuery, __classPrivateFieldGet(this, _block));
+        __classPrivateFieldGet(this, _block).setEvents();
     }
 }
+_pathname = new WeakMap(), _blockClass = new WeakMap(), _block = new WeakMap(), _props = new WeakMap();
 export default class Router {
     constructor(rootQuery) {
+        _currentRoute.set(this, void 0);
+        _rootQuery.set(this, void 0);
+        _currentBlock.set(this, void 0);
         if (Router.__instance) {
             return Router.__instance;
         }
         this.routes = [];
         this.history = window.history;
-        this._currentRoute = null;
-        this._rootQuery = rootQuery;
-        this._currentBlock = null;
+        __classPrivateFieldSet(this, _currentRoute, null);
+        __classPrivateFieldSet(this, _rootQuery, rootQuery);
+        __classPrivateFieldSet(this, _currentBlock, null);
         Router.__instance = this;
     }
     use(pathname, block) {
-        const route = new Route(pathname, block, { rootQuery: this._rootQuery });
+        const route = new Route(pathname, block, { rootQuery: __classPrivateFieldGet(this, _rootQuery) });
         this.routes.push(route);
         return this;
     }
     start() {
         window.onpopstate = (event => {
-            this._onRoute(event.currentTarget.location.pathname);
+            this.onRoute(event.currentTarget.location.pathname);
         }).bind(this);
-        //console.log(window.location.pathname);
-        this._onRoute(window.location.pathname);
+        this.onRoute(window.location.pathname);
     }
-    _onRoute(pathname) {
+    onRoute(pathname) {
         const route = this.getRoute(pathname);
         if (!route) {
             return;
         }
-        if (this._currentRoute) {
-            this._currentRoute.leave();
+        if (__classPrivateFieldGet(this, _currentRoute)) {
+            __classPrivateFieldGet(this, _currentRoute).leave();
         }
         route.render(route, pathname);
-        this._currentRoute = route;
-        console.log('route', route);
+        __classPrivateFieldSet(this, _currentRoute, route);
     }
     go(pathname) {
         this.history.pushState({}, "", pathname);
-        this._onRoute(pathname);
+        this.onRoute(pathname);
     }
     back() {
-        console.log(this.history);
         this.history.back();
     }
     forward() {
-        console.log(this.history);
         this.history.forward();
     }
     getRoute(pathname) {
         return this.routes.find(route => route.match(pathname));
     }
 }
+_currentRoute = new WeakMap(), _rootQuery = new WeakMap(), _currentBlock = new WeakMap();

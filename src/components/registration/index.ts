@@ -8,8 +8,8 @@ export class Registration extends Block {
         super("registration", props);
     }
 
-    _getData() {
-        var result = {
+    private getData() {
+        const result = {
             mesReg: "Регистрация",
             mesEmail: "Почта",
             mesLogin: "Логин",
@@ -28,33 +28,26 @@ export class Registration extends Block {
     };
 
     render() {
-        //console.log("!test");
-        var context = this._getData();
+        const context = this.getData();
         return compileTemplate('.app', getTemplateRegistration(), context);
     };
 
     setEvents() {
-        var nameHiddenElement = "wrapper__errmes-hiddenerr";
-        var arrInputs = [
+        const nameHiddenElement = "wrapper__errmes-hiddenerr";
+        const arrInputs = [
             { input: "email", value: validateEMail() },
             { input: "login", value: validateLogin() },
             { input: "password", value: validatePassword() },
-            { input: "passwordr", value: validatePasswordR() }
+            { input: "passwordr", value: validatePassword() }
         ];
-        for (var i = 0; i < arrInputs.length; i++)
+        for (let i = 0; i < arrInputs.length; i++)
             setValidate(arrInputs[i].input, arrInputs[i].value, nameHiddenElement);
         setFocus(arrInputs, nameHiddenElement);
-        setButtonEvents("reg", arrInputs, nameHiddenElement);
+        setFormEvents(arrInputs, nameHiddenElement);
     };
 }
 
-function render(query, block) {
+function render(query) {
     const root = document.querySelector(query);
-    //root.appendChild(block.getContent());
     return root;
 };
-
-//const registration = new Registration;
-
-//render(".app", registration);
-//setEvents();

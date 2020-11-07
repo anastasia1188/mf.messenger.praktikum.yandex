@@ -1,10 +1,10 @@
 /// <reference path="common.d.ts" />
-function getData(arrFields: { input: string, value: any}[] = []):unknown[] {
+function getData(arrFields: { input: string, value: string}[] = []):string[] {
     const result: string[] = [];
-    let i: number;
+
     for (let i = 0; i < arrFields.length; i++) {
-        let idinput:string = arrFields[i].input;
-        let finput = <HTMLInputElement>document.getElementById(idinput);
+        const idinput:string = arrFields[i].input;
+        const finput = <HTMLInputElement>document.getElementById(idinput);
         result.push(finput.value);
     }
     return result;
@@ -22,19 +22,32 @@ function setButtonEvents(idButton:string, arrInputs: { input: string, value: any
     const elemButton:HTMLElement = document.getElementById(idButton);
     elemButton.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
-            if (isValidValues(arrInputs, nameHiddenErr)) {
-                const data: object = getData(arrInputs);
-                console.log(data);
-                window.location.hash = '#chat';
-            }
+            goNextPage(arrInputs, nameHiddenErr);
         }
     });
 
     elemButton.addEventListener('click', function(e) {
-        if (isValidValues(arrInputs, nameHiddenErr)) {
-            const data: unknown[] = getData(arrInputs);
-            console.log(data);
-            window.location.hash = '#chat';
-        }
+        goNextPage(arrInputs, nameHiddenErr);
     })
 }
+
+function goNextPage(arrInputs: { input: string, value: any}[], nameHiddenErr:string)
+{
+    if (isValidValues(arrInputs, nameHiddenErr)) {
+        const data: unknown[] = getData(arrInputs);
+        console.log(data);
+        window.location.hash = '#chat';
+    }
+}
+
+function setFormEvents(arrInputs: { input: string, value: any}[], nameHiddenErr:string) {
+    const frmAutorisation = document.querySelector("#form");
+    frmAutorisation.addEventListener("submit", function(e) {
+        e.preventDefault();
+        goNextPage(arrInputs, nameHiddenErr);            
+    });
+}
+
+function deepEqual (obj1:object, obj2:object){
+    return JSON.stringify(obj1)===JSON.stringify(obj2);
+ }

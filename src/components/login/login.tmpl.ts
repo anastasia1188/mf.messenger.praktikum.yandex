@@ -1,5 +1,6 @@
 export default function getTemplateLogin() {
     return ` <div class="wrapper">
+    <form method="post" id="form" action="#">
     <div class="wrapper__row">
         <p> {{mesEnter}} </p>
     </div>
@@ -40,10 +41,11 @@ export default function getTemplateLogin() {
         </p>
     </div>
     <div class="wrapper__row">
-        <p><button id="autorisation" class="my-button"> {{mesAutorisation}} </button></p>
+        <p><button id="autorisation" type="submit" class="my-button"> {{mesAutorisation}} </button></p>
     </div>
     <div class="wrapper__row wrapper__no-accaunt">
         <p id="noAccount"><a href="/#registration" onclick = " window.location.hash = '#registration'"> {{mesAccount}} </a></p>
     </div>
+    </form>
 </div>`;
 }

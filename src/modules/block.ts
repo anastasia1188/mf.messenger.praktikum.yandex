@@ -1,3 +1,4 @@
+/// <reference path="references.d.ts" />
 import { EventBus } from "./eventBus.js";
 
 export default class Block {
@@ -10,65 +11,56 @@ export default class Block {
     props:Object;
     eventBus:any;
 
-    _element = null;
-    _meta = null;
+    #element:any = null;
+    #meta:any = null;
 
-    /** JSDoc
-     * @param {string} tagName
-     * @param {Object} props
-     *
-     * @returns {void}
-     */
     constructor(tagName = "div", props = {}) {
         const eventBus = new EventBus();
 
-        this._meta = {
+        this.#meta = {
             tagName,
             props
         };
 
-        this.props = this._makePropsProxy(props);
+        this.props = this.makePropsProxy(props);
 
         this.eventBus = () => eventBus;
 
-        this._registerEvents(eventBus);
+        this.registerEvents(eventBus);
         eventBus.emit(Block.EVENTS.INIT);
     }
 
-    _registerEvents(eventBus) {
+    private registerEvents(eventBus) {
         eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
-        eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
-        eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
-        eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
+        eventBus.on(Block.EVENTS.FLOW_CDM, this.componentDidMountLocal.bind(this));
+        eventBus.on(Block.EVENTS.FLOW_CDU, this.componentDidUpdateLocal.bind(this));
+        eventBus.on(Block.EVENTS.FLOW_RENDER, this.render.bind(this));
     }
 
-    _createResources() {
-        const { tagName } = this._meta;
-        this._element = this._createDocumentElement(tagName);
+    private createResources() {
+        const { tagName } = this.#meta;
+        this.#element = this.createDocumentElement(tagName);
     }
 
     init() {
-        this._createResources();
+        this.createResources();
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
     }
 
-    _componentDidMount() {
-        this.componentDidMount();
+    private componentDidMountLocal() {
         this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
 
-    componentDidMount(oldProps = undefined) {}
-
-    _componentDidUpdate(oldProps, newProps) {
+    private componentDidUpdateLocal(oldProps, newProps) {
         const response = this.componentDidUpdate(oldProps, newProps);
         if (!response) {
             return;
         }
-        this._render();
+        this.render();
     }
 
     componentDidUpdate(oldProps, newProps) {
-        return true;
+        return deepEqual(oldProps,newProps);
     }
 
     setProps = nextProps => {
@@ -80,27 +72,19 @@ export default class Block {
     };
 
     get element() {
-        return this._element;
+        return this.#element;
     }
 
-    _render() {
+    private render() {
         const block = this.render();
-        // Этот небезопасный метод для упрощения логики
-        // Используйте шаблонизатор из npm или напишите свой безопасный
-        // Нужно не в строку компилировать (или делать это правильно),
-        // либо сразу в DOM-элементы превращать из возвращать из compile DOM-ноду
-        this._element.innerHTML = block;
+        this.#element.innerHTML = block;
     }
-
-    render() {}
 
     getContent() {
         return this.element;
     }
 
-    _makePropsProxy(props) {
-        // Можно и так передать this
-        // Такой способ больше не применяется с приходом ES6+
+    private makePropsProxy(props) {
         const self = this;
 
         return new Proxy(props, {
@@ -111,8 +95,6 @@ export default class Block {
             set(target, prop, value) {
                 target[prop] = value;
 
-                // Запускаем обновление компоненты
-                // Плохой cloneDeep, в след итерации нужно заставлять добавлять cloneDeep им самим
                 self.eventBus().emit(Block.EVENTS.FLOW_CDU, {...target }, target);
                 return true;
             },
@@ -122,8 +104,7 @@ export default class Block {
         });
     }
 
-    _createDocumentElement(tagName) {
-        // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
+    private createDocumentElement(tagName) {
         return document.createElement(tagName);
     }
 
