@@ -4,51 +4,34 @@ const METHODS = {
     POST: 'POST',
     DELETE: 'DELETE'
 };
-
-function queryStringify(data, result, obj) {
-    if (result === void 0) { result = ""; }
-    if (obj === void 0) { obj = ""; }
-    for (var key in data) {
-        if (typeof data[key] === 'object') {
-
-            if (obj == '')
-                obj = key;
-            else
-                obj = obj + "[" + key + "]";
-            result = queryStringify(data[key], result, obj);
-            obj = "";
-        } else {
-
-            if (result !== "")
-                result = result + "&";
-            if (obj != "")
-                result = result + obj + "[" + key + "]" + "=" + data[key].toString();
-            else
-                result = result + key + "=" + data[key].toString();
-        }
+function queryStringify(data) {
+    let result = "?";
+    for (let key in data) {
+        result = result + key + "=" + data[key].toString() + "&";
     }
+    result = result.substring(0, result.length - 1);
     return result;
 }
 export default class HTTPTransport {
     constructor() {
         this.get = (url, options) => {
-            return this.request(url, {...options, method: METHODS.GET });
+            return this.request(url, { ...options, method: METHODS.GET });
         };
         this.put = (url, options) => {
-            return this.request(url, {...options, method: METHODS.PUT });
+            return this.request(url, { ...options, method: METHODS.PUT });
         };
         this.post = (url, options) => {
-            return this.request(url, {...options, method: METHODS.POST });
+            return this.request(url, { ...options, method: METHODS.POST });
         };
         this.delete = (url, options) => {
-            return this.request(url, {...options, method: METHODS.DELETE });
+            return this.request(url, { ...options, method: METHODS.DELETE });
         };
         this.request = (url, options) => {
             const { headers, data, method } = options;
             return new Promise((resolve, reject) => {
                 const xhr = new XMLHttpRequest();
                 xhr.open(method, url);
-                xhr.onload = function() {
+                xhr.onload = function () {
                     resolve(xhr);
                 };
                 if (headers != undefined) {
@@ -60,7 +43,8 @@ export default class HTTPTransport {
                 xhr.ontimeout = reject;
                 if (method === METHODS.GET || !data) {
                     xhr.send();
-                } else {
+                }
+                else {
                     xhr.send(data);
                 }
             });

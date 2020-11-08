@@ -1,11 +1,12 @@
 /// <reference path="../../../dist/modules/references.d.ts" />
+/// <reference path="./err.d.ts" />
 import Block from "../../../dist/modules/block.js";
 import { getTemplateErr } from "./err.tmpl.js";
 
 export class Err extends Block {
     props:{errcode:string}
     constructor(props) {
-        super("err404", props);
+        super("err", props);
     }
 
     render() {
@@ -21,7 +22,7 @@ function render(query, block) {
 }
 
 const err = new Err({
-    errcode: '404',
+    errcode: errorCode,
 });
 
 render(".template-err", err);
