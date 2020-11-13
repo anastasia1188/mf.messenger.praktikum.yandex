@@ -5,7 +5,7 @@ const METHODS = {
     DELETE: 'DELETE'
 };
 
-function queryStringify(data:{key:any}) {
+function queryStringify(data: { key: string }) {
     let result = "?";
     for (let key in data) {
         result = result + key + "=" + data[key].toString() + "&";
@@ -17,30 +17,30 @@ function queryStringify(data:{key:any}) {
 }
 
 export default class HTTPTransport {
-    get = (url, options = {timeout:0}) => {
-        return this.request(url, {...options, method: METHODS.GET }, options.timeout);
+    get = (url: string, options: { timeout: number, headers: { key: string, value: string }[], data: any }) => {
+        return this.request(url, { ...options, method: METHODS.GET });
     };
 
-    put = (url, options = {timeout:0}) => {
-        return this.request(url, {...options, method: METHODS.PUT }, options.timeout);
+    put = (url: string, options: { timeout: number, headers: { key: string, value: string }[], data: any }) => {
+        return this.request(url, { ...options, method: METHODS.PUT });
     };
 
-    post = (url, options = {timeout:0}) => {
-        return this.request(url, {...options, method: METHODS.POST }, options.timeout);
+    post = (url: string, options: { timeout: number, headers: { key: string, value: string }[], data: any }) => {
+        return this.request(url, { ...options, method: METHODS.POST });
     };
 
-    delete = (url, options = {timeout:0}) => {
-        return this.request(url, {...options, method: METHODS.DELETE }, options.timeout);
+    delete = (url: string, options: { timeout: number, headers: { key: string, value: string }[], data: any }) => {
+        return this.request(url, { ...options, method: METHODS.DELETE });
     };
 
-    request = (url, options, timeout = 5000) => {
+    request = (url: string, options: { timeout: number, headers: { key: string, value: string }[], data: any, method: string }) => {
         const { headers, data, method } = options;
 
         return new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest();
             xhr.open(method, url);
 
-            xhr.onload = function() {
+            xhr.onload = function () {
                 resolve(xhr);
             };
 

@@ -1,20 +1,16 @@
-import { Login } from './dist/components/login/index.js';
-import { Registration } from './dist/components/registration/index.js';
-import { Chat } from './dist/components/chat/index.js';
-import { Settings } from './dist/components/settings/index.js';
+import { Login } from './dist/pages/login/index.js';
+import { Registration } from './dist/pages/registration/index.js';
+import { Chat } from './dist/pages/chat/index.js';
+import { Settings } from './dist/pages/settings/index.js';
 import router from './dist/modules/router.js';
 
 let mainRouter = new router(".app");
-//let login = new Login();
-//login.setEvents();
-let exports = {};
 
 function changeRoute() {
     console.log(window.location.hash);
     mainRouter.go("/" + window.location.hash);
 }
 
-//console.log('hash', window.location.hash);
 mainRouter
     .use("/#login", Login)
     .use("/#registration", Registration)
@@ -25,8 +21,8 @@ mainRouter
 
 
 setTimeout(() => {
-    //console.log("main");
     mainRouter.go("/#login");
 }, 1000);
 
 window.addEventListener("hashchange", changeRoute);
+window.Chat = Chat;

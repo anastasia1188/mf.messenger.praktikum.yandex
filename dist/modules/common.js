@@ -1,11 +1,10 @@
 /// <reference path="common.d.ts" />
 function getData(arrFields = []) {
-    const result = [];
-    let i;
+    const result = {};
     for (let i = 0; i < arrFields.length; i++) {
-        let idinput = arrFields[i].input;
-        let finput = document.getElementById(idinput);
-        result.push(finput.value);
+        const idinput = arrFields[i].input;
+        const finput = document.getElementById(idinput);
+        result[idinput] = finput.value;
     }
     return result;
 }
@@ -20,18 +19,27 @@ function setButtonEvents(idButton, arrInputs, nameHiddenErr) {
     const elemButton = document.getElementById(idButton);
     elemButton.addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
-            if (isValidValues(arrInputs, nameHiddenErr)) {
-                const data = getData(arrInputs);
-                console.log(data);
-                window.location.hash = '#chat';
-            }
+            goNextPage(arrInputs, nameHiddenErr);
         }
     });
     elemButton.addEventListener('click', function (e) {
-        if (isValidValues(arrInputs, nameHiddenErr)) {
-            const data = getData(arrInputs);
-            console.log(data);
-            window.location.hash = '#chat';
-        }
+        goNextPage(arrInputs, nameHiddenErr);
     });
+}
+function goNextPage(arrInputs, nameHiddenErr) {
+    if (isValidValues(arrInputs, nameHiddenErr)) {
+        const data = getData(arrInputs);
+        console.log(data);
+        window.location.hash = '#chat';
+    }
+}
+function setFormEvents(arrInputs, nameHiddenErr) {
+    const frmAutorisation = document.querySelector("#form");
+    frmAutorisation.addEventListener("submit", function (e) {
+        e.preventDefault();
+        goNextPage(arrInputs, nameHiddenErr);
+    });
+}
+function deepEqual(obj1, obj2) {
+    return JSON.stringify(obj1) === JSON.stringify(obj2);
 }

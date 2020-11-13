@@ -1,24 +1,28 @@
 /// <reference path="regexp.d.ts" />
-var FORMAT_ERROR = 0;
-var LENGTH_PWD_ERROR = 1;
-var LITERAL_ERROR = 2;
-var NUMERAL_ERROR = 3;
-var GAP_ERROR = 4;
-var LENGTH_ERROR = 5;
-var PWDR_ERROR = 6;
-var INEDITOR_ERROR = 7;
+var typeErrors;
+(function (typeErrors) {
+    typeErrors[typeErrors["FORMAT_ERROR"] = 0] = "FORMAT_ERROR";
+    typeErrors[typeErrors["LENGTH_PWD_ERROR"] = 1] = "LENGTH_PWD_ERROR";
+    typeErrors[typeErrors["LITERAL_ERROR"] = 2] = "LITERAL_ERROR";
+    typeErrors[typeErrors["NUMERAL_ERROR"] = 3] = "NUMERAL_ERROR";
+    typeErrors[typeErrors["GAP_ERROR"] = 4] = "GAP_ERROR";
+    typeErrors[typeErrors["LENGTH_ERROR"] = 5] = "LENGTH_ERROR";
+    typeErrors[typeErrors["PWDR_ERROR"] = 6] = "PWDR_ERROR";
+    typeErrors[typeErrors["INEDITOR_ERROR"] = 7] = "INEDITOR_ERROR";
+})(typeErrors || (typeErrors = {}));
+;
 function validateEMail() {
     return function (idElement, nameHiddenError) {
-        var errors = [];
-        var result = { isValid: true, errors: [] };
-        var elemEmail = document.getElementById(idElement);
-        var email = elemEmail.value;
+        const errors = [];
+        const result = { isValid: true, errors: [] };
+        const elemEmail = document.getElementById(idElement);
+        const email = elemEmail.value;
         if (email.length < 5)
-            errors.push(LENGTH_ERROR);
+            errors.push(typeErrors.LENGTH_ERROR);
         if (!REXP_EMAIL.test(email))
-            errors.push(FORMAT_ERROR);
+            errors.push(typeErrors.FORMAT_ERROR);
         if (email.search(REXP_GAP) >= 0)
-            errors.push(GAP_ERROR);
+            errors.push(typeErrors.GAP_ERROR);
         if (errors.length > 0)
             result.isValid = false;
         result.errors = errors;
@@ -27,16 +31,16 @@ function validateEMail() {
 }
 function validateLogin() {
     return function (idElement, nameHiddenError) {
-        var errors = [];
-        var result = { isValid: true, errors: [] };
-        var elemLogin = document.getElementById(idElement);
-        var login = elemLogin.value;
+        const errors = [];
+        const result = { isValid: true, errors: [] };
+        const elemLogin = document.getElementById(idElement);
+        const login = elemLogin.value;
         if (login.length < 5)
-            errors.push(LENGTH_ERROR);
+            errors.push(typeErrors.LENGTH_ERROR);
         if (!REXP_LOGIN.test(login))
-            errors.push(FORMAT_ERROR);
+            errors.push(typeErrors.FORMAT_ERROR);
         if (login.search(REXP_GAP) >= 0)
-            errors.push(GAP_ERROR);
+            errors.push(typeErrors.GAP_ERROR);
         if (errors.length > 0)
             result.isValid = false;
         result.errors = errors;
@@ -45,52 +49,40 @@ function validateLogin() {
 }
 function validatePassword() {
     return function (idElement, nameHiddenError) {
-        var errors = [];
-        var result = { isValid: true, errors: [] };
-        var elemPassword = document.getElementById(idElement);
-        var password = elemPassword.value;
+        const errors = [];
+        const result = { isValid: true, errors: [] };
+        const elementPassword = document.getElementById(idElement);
+        const password = elementPassword.value;
         if (password.length < 8) {
-            errors.push(LENGTH_PWD_ERROR);
+            errors.push(typeErrors.LENGTH_PWD_ERROR);
         }
         if (password.search(REXP_LITERAL) < 0) {
-            errors.push(LITERAL_ERROR);
+            errors.push(typeErrors.LITERAL_ERROR);
         }
         if (password.search(REXP_NUMERAL) < 0) {
-            errors.push(NUMERAL_ERROR);
+            errors.push(typeErrors.NUMERAL_ERROR);
         }
         if (password.search(REXP_GAP) >= 0) {
-            errors.push(GAP_ERROR);
+            errors.push(typeErrors.GAP_ERROR);
         }
         if (errors.length > 0)
             result.isValid = false;
-        result.errors = errors;
-        return validate(result, idElement, nameHiddenError);
-    };
-}
-function validatePasswordR() {
-    return function (idElement, nameHiddenError) {
-        var errors = [];
-        var result = { isValid: true, errors: [] };
-        var elempasswordR = document.getElementById(idElement);
-        var elempassword = document.getElementById("password");
-        var passwordR = elempasswordR.value;
-        var password = elempassword.value;
-        if (!(password === passwordR))
-            errors.push(PWDR_ERROR);
-        if (errors.length > 0)
-            result.isValid = false;
+        const elementPasswordRepeat = document.getElementById(idElement);
+        const passwordRepeat = elementPasswordRepeat.value;
+        if (!(password === passwordRepeat))
+            errors.push(typeErrors.PWDR_ERROR);
         result.errors = errors;
         return validate(result, idElement, nameHiddenError);
     };
 }
 function validateMessage() {
     return function (idElement, nameHiddenError) {
-        var errors = [];
-        var result = { isValid: true, errors: [] };
-        var valueHTMLElement = document.getElementById(idElement);
-        var valueElement = valueHTMLElement.value;
+        const errors = [];
+        const result = { isValid: true, errors: [] };
+        const valueHTMLElement = document.getElementById(idElement);
+        const valueElement = valueHTMLElement.value;
         if (valueElement.length < 1)
-            errors.push(INEDITOR_ERROR);
+            errors.push(typeErrors.INEDITOR_ERROR);
         if (errors.length > 0)
             result.isValid = false;
         result.errors = errors;
@@ -98,10 +90,10 @@ function validateMessage() {
     };
 }
 function validate(resultValidate, idElement, nameHiddenError) {
-    var nameError = "err-" + idElement;
+    let nameError = "err-" + idElement;
     if (resultValidate.errors.length > 0)
         nameError = nameError + String(resultValidate.errors[0]);
-    var elementError = document.getElementById(nameError);
+    const elementError = document.getElementById(nameError);
     if (!resultValidate.isValid) {
         showHiddenElement(elementError, nameHiddenError);
         return false;
@@ -132,39 +124,36 @@ function hideHiddenElement(elementError, nameHiddenError) {
         elementError.classList.add(nameHiddenError);
 }
 function setValidate(idInput, funcValidate, nameHiddenError) {
-    var finput = document.getElementById(idInput);
+    const finput = document.getElementById(idInput);
     finput.addEventListener('blur', function (e) {
         funcValidate(idInput, nameHiddenError);
     });
 }
 function setFocus(arrInputs, nameHiddenError) {
-    var _loop_1 = function (i) {
-        var id = arrInputs[i].input;
-        var finput = document.getElementById(id);
+    for (let i = 0; i < arrInputs.length; i++) {
+        const id = arrInputs[i].input;
+        const finput = document.getElementById(id);
         finput.addEventListener('focus', function (e) {
             elemFocus(id, nameHiddenError);
         });
-    };
-    for (var i = 0; i < arrInputs.length; i++) {
-        _loop_1(i);
     }
 }
 function elemFocus(id, nameHiddenError) {
-    var arrMesPwd = [0, 1, 2, 3, 4, 5, 6, 7];
-    var nameError = "err-" + id;
-    var arrFields = [];
-    for (var i = 0; i < arrMesPwd.length; i++)
+    const arrMesPwd = [0, 1, 2, 3, 4, 5, 6, 7];
+    const nameError = "err-" + id;
+    const arrFields = [];
+    for (let i = 0; i < arrMesPwd.length; i++)
         arrFields.push("" + nameError + arrMesPwd[i]);
-    for (var i = 0; i < arrFields.length; i++) {
-        var elementError = document.getElementById(arrFields[i]);
+    for (let i = 0; i < arrFields.length; i++) {
+        const elementError = document.getElementById(arrFields[i]);
         if ((elementError != null) && (!elementError.classList.contains(nameHiddenError)))
             elementError.classList.add(nameHiddenError);
     }
 }
 function isValidValues(arrInputs, nameHiddenError) {
-    for (var i = 0; i < arrInputs.length; i++) {
-        var funcValidate = arrInputs[i].value;
-        var idElement = arrInputs[i].input;
+    for (let i = 0; i < arrInputs.length; i++) {
+        const funcValidate = arrInputs[i].value;
+        const idElement = arrInputs[i].input;
         if (!funcValidate(idElement, nameHiddenError)) {
             return false;
         }

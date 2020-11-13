@@ -1,27 +1,30 @@
 /// <reference path="../../../dist/modules/references.d.ts" />
+/// <reference path="./err.d.ts" />
 import Block from "../../../dist/modules/block.js";
 import { getTemplateErr } from "./err.tmpl.js";
 
 export class Err extends Block {
-    props:{errcode:string}
-    constructor(props) {
-        super("err404", props);
+    props: {
+        errcode: string
+    }
+    constructor(props: { errcode: string }) {
+        super("err", props);
     }
 
     render() {
-        var context = { errmes: "Не туда попали", errcode: this.props.errcode, backToChat: "назад к чатам" };
+        const context = { errmes: "Не туда попали", errcode: this.props.errcode, backToChat: "назад к чатам" };
         return compileTemplate('.template-err', getTemplateErr(), context);
     }
 }
 
-function render(query, block) {
+function render(query: string, block: Block) {
     const root = document.querySelector(query);
     root.appendChild(block.getContent());
     return root;
 }
 
 const err = new Err({
-    errcode: '404',
+    errcode: errorCode,
 });
 
 render(".template-err", err);

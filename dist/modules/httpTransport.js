@@ -14,19 +14,19 @@ function queryStringify(data) {
 }
 export default class HTTPTransport {
     constructor() {
-        this.get = (url, options = { timeout: 0 }) => {
-            return this.request(url, { ...options, method: METHODS.GET }, options.timeout);
+        this.get = (url, options) => {
+            return this.request(url, { ...options, method: METHODS.GET });
         };
-        this.put = (url, options = { timeout: 0 }) => {
-            return this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
+        this.put = (url, options) => {
+            return this.request(url, { ...options, method: METHODS.PUT });
         };
-        this.post = (url, options = { timeout: 0 }) => {
-            return this.request(url, { ...options, method: METHODS.POST }, options.timeout);
+        this.post = (url, options) => {
+            return this.request(url, { ...options, method: METHODS.POST });
         };
-        this.delete = (url, options = { timeout: 0 }) => {
-            return this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
+        this.delete = (url, options) => {
+            return this.request(url, { ...options, method: METHODS.DELETE });
         };
-        this.request = (url, options, timeout = 5000) => {
+        this.request = (url, options) => {
             const { headers, data, method } = options;
             return new Promise((resolve, reject) => {
                 const xhr = new XMLHttpRequest();

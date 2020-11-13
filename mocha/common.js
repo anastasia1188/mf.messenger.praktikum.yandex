@@ -1,4 +1,4 @@
-import { isEqual } from "../modules/router.js";
-import HTTPTransport from "../modules/httpTransport.js";
+import { isEqual } from "../dist/modules/router.js";
+import HTTPTransport from "../dist/modules/httpTransport.js";
 window.isEqual = isEqual;
 window.HTTPTransport = HTTPTransport;
