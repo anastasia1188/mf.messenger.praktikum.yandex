@@ -2,6 +2,7 @@
 /// <reference path="../../../dist/modules/regexp.d.ts" />
 import Block from "../../../dist/modules/block.js";
 import getTemplateRegistration from "./registration.tmpl.js";
+import { registration } from "../../../dist/modules/autorisation.js";
 
 export class Registration extends Block {
     constructor(props) {
