@@ -8,11 +8,11 @@ export default class Block {
         FLOW_CDU: "flow:component-did-update",
         FLOW_RENDER: "flow:render"
     };
-    props:Object;
-    eventBus:any;
+    props: Object;
+    eventBus: any;
 
-    #element:any = null;
-    #meta:any = null;
+    #element: any = null;
+    #meta: any = null;
 
     constructor(tagName = "div", props = {}) {
         const eventBus = new EventBus();
@@ -30,7 +30,7 @@ export default class Block {
         eventBus.emit(Block.EVENTS.INIT);
     }
 
-    private registerEvents(eventBus) {
+    private registerEvents(eventBus: EventBus) {
         eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDM, this.componentDidMountLocal.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDU, this.componentDidUpdateLocal.bind(this));
@@ -51,7 +51,7 @@ export default class Block {
         this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
 
-    private componentDidUpdateLocal(oldProps, newProps) {
+    private componentDidUpdateLocal(oldProps: Object, newProps: Object) {
         const response = this.componentDidUpdate(oldProps, newProps);
         if (!response) {
             return;
@@ -59,8 +59,8 @@ export default class Block {
         this.render();
     }
 
-    componentDidUpdate(oldProps, newProps) {
-        return deepEqual(oldProps,newProps);
+    componentDidUpdate(oldProps: Object, newProps: Object) {
+        return deepEqual(oldProps, newProps);
     }
 
     setProps = nextProps => {
@@ -95,7 +95,7 @@ export default class Block {
             set(target, prop, value) {
                 target[prop] = value;
 
-                self.eventBus().emit(Block.EVENTS.FLOW_CDU, {...target }, target);
+                self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
                 return true;
             },
             deleteProperty() {
@@ -104,7 +104,7 @@ export default class Block {
         });
     }
 
-    private createDocumentElement(tagName) {
+    private createDocumentElement(tagName: string) {
         return document.createElement(tagName);
     }
 

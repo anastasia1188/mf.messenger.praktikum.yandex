@@ -1,14 +1,16 @@
 /// <reference path="regexp.d.ts" />
-const typeErrors = {
-    FORMAT_ERROR: 0,
-    LENGTH_PWD_ERROR: 1,
-    LITERAL_ERROR: 2,
-    NUMERAL_ERROR: 3,
-    GAP_ERROR: 4,
-    LENGTH_ERROR: 5,
-    PWDR_ERROR: 6,
-    INEDITOR_ERROR: 7
-};
+var typeErrors;
+(function (typeErrors) {
+    typeErrors[typeErrors["FORMAT_ERROR"] = 0] = "FORMAT_ERROR";
+    typeErrors[typeErrors["LENGTH_PWD_ERROR"] = 1] = "LENGTH_PWD_ERROR";
+    typeErrors[typeErrors["LITERAL_ERROR"] = 2] = "LITERAL_ERROR";
+    typeErrors[typeErrors["NUMERAL_ERROR"] = 3] = "NUMERAL_ERROR";
+    typeErrors[typeErrors["GAP_ERROR"] = 4] = "GAP_ERROR";
+    typeErrors[typeErrors["LENGTH_ERROR"] = 5] = "LENGTH_ERROR";
+    typeErrors[typeErrors["PWDR_ERROR"] = 6] = "PWDR_ERROR";
+    typeErrors[typeErrors["INEDITOR_ERROR"] = 7] = "INEDITOR_ERROR";
+})(typeErrors || (typeErrors = {}));
+;
 function validateEMail() {
     return function (idElement, nameHiddenError) {
         const errors = [];
@@ -49,8 +51,8 @@ function validatePassword() {
     return function (idElement, nameHiddenError) {
         const errors = [];
         const result = { isValid: true, errors: [] };
-        const elemPassword = document.getElementById(idElement);
-        const password = elemPassword.value;
+        const elementPassword = document.getElementById(idElement);
+        const password = elementPassword.value;
         if (password.length < 8) {
             errors.push(typeErrors.LENGTH_PWD_ERROR);
         }
@@ -65,8 +67,8 @@ function validatePassword() {
         }
         if (errors.length > 0)
             result.isValid = false;
-        const elempasswordR = document.getElementById(idElement);
-        const passwordRepeat = elempasswordR.value;
+        const elementPasswordRepeat = document.getElementById(idElement);
+        const passwordRepeat = elementPasswordRepeat.value;
         if (!(password === passwordRepeat))
             errors.push(typeErrors.PWDR_ERROR);
         result.errors = errors;

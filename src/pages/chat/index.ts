@@ -6,18 +6,18 @@ import HTTPTransport from "../../../dist/modules/httpTransport.js";
 export class Chat extends Block {
     messages: [{ contact: string, history: any[] }];
     contacts: [{ contact: string, pressed: string, pianokey: string }];
-    fimage: string;
-    fimagesound: string;
-    fname: string;
-    errmes: string;
+    fileImage: string;
+    fileImageSound: string;
+    name: string;
+    errorMessage: string;
     proxyData: any;
 
     constructor(props) {
         super("chat", props);
-        this.fimage = "";
-        this.fname = "";
-        this.errmes = "";
-        this.getData();
+        this.fileImage = "";
+        this.name = "";
+        this.errorMessage = "";
+        this.getFileData();
 
         const data = {
             messages: this.messages,
@@ -36,22 +36,25 @@ export class Chat extends Block {
             },
         });
     }
-    private async getData() {
+    private async getFileData() {
         await this.getMessages();
         await this.getPianokeys();
     }
 
     getAllData() {
         let messages = [];
-        const pianokeys = this.contacts;
-        const fimage = this.getImage();
-        const fimagesound = "../../../data/img/sound.jpg";
-        let fname = this.getFName();
-        let errmes = this.getErrMes();
-        return { pianokeys: pianokeys, messages: messages, fimage: fimage, fimagesound: fimagesound, fname: fname, errmes: errmes };
+        const pianoKeys = this.contacts;
+        const fileImage = this.getImage();
+        const fileAdd  = "../../../data/img/add.jpg";
+        const fileDelete = "../../../data/img/delete.jpg";
+        const fileImageSound = "../../../data/img/sound.jpg";
+        let name = this.getName();
+        let errorMessage = this.getErrorMessage();
+        return { pianoKeys: pianoKeys, messages: messages, fileImage: fileImage, fileImageSound: fileImageSound, name: name, 
+            errorMessage: errorMessage, fileAdd: fileAdd, fileDelete: fileDelete };
     }
 
-    getMes() {
+    getChatMessages() {
         return this.messages;
     }
 
@@ -63,7 +66,7 @@ export class Chat extends Block {
         this.messages = resHTTP;
     }
 
-     private async getPianokeys() {
+    private async getPianokeys() {
         const httpTransport = new HTTPTransport;
         const res = await httpTransport.get('../../../data/contacts.json');
         const resHTTP = await JSON.parse(res.response);
@@ -76,12 +79,12 @@ export class Chat extends Block {
         return result;
     }
 
-    private getFName() {
+    private getName() {
         const result = "Анастасия";
         return result;
     }
 
-    private getErrMes() {
+    private getErrorMessage() {
         const result = "Пустое сообщение";
         return result;
     }
@@ -93,14 +96,14 @@ export class Chat extends Block {
         return result;
     }
 
-    showChatHistory(elemContact) {
-        const idContact = this.getIdContact(elemContact);
+    showChatHistory(elementContact) {
+        const idContact = this.getIdContact(elementContact);
         if (idContact !== undefined) {
             const history = this.getHistoryChat(idContact);
             this.updateContacts(idContact);
-            const ctx = this.getAllData();
-            ctx.messages = history;
-            this.render(ctx);
+            const context = this.getAllData();
+            context.messages = history;
+            this.render(context);
             this.setEvents();
         }
     }
@@ -119,21 +122,20 @@ export class Chat extends Block {
         }
     }
 
-
-    getIdContact(elemContact) {
-        let elem = undefined;
+    getIdContact(elementContact) {
+        let element = undefined;
         let result = undefined;
 
-        if (elemContact.classList.contains("chat-wrapper__contact")) {
-            elem = elemContact;
+        if (elementContact.classList.contains("chat-wrapper__contact")) {
+            element = elementContact;
         } else {
-            elem = elemContact.querySelector("chat-wrapper__contact");
-            if (elem == undefined)
-                elem = elemContact.querySelector("chat-wrapper__contact");
+            element = elementContact.querySelector("chat-wrapper__contact");
+            if (element == undefined)
+                element = elementContact.querySelector("chat-wrapper__contact");
         }
-        
-        if (elem !== null)
-            result = elem.textContent;
+
+        if (element !== null)
+            result = element.textContent;
 
         return result;
     }
@@ -150,12 +152,12 @@ export class Chat extends Block {
 
     setEvents() {
         const nameHiddenError = "chat-wrapper";
-        const arrInputs = [{ input: "ineditor", value: validateMessage() }];
-        const elemButton = document.getElementById("ineditor");
-        elemButton.addEventListener('keypress', function (e) {
+        const inputs = [{ input: "ineditor", value: validateMessage() }];
+        const button = document.getElementById("ineditor");
+        button.addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
-                if (isValidValues(arrInputs, nameHiddenError)) {
-                    let data = getData(arrInputs);
+                if (isValidValues(inputs, nameHiddenError)) {
+                    let data = getData(inputs);
                     console.log(data);
                 }
             } else {
@@ -165,32 +167,65 @@ export class Chat extends Block {
             }
         });
 
-        const elemButtonId = document.querySelector(".chat-wrapper__left-part");
+        const elementButtonId = document.querySelector(".chat-wrapper__left-part");
 
-        if (elemButtonId != null) {
+        if (elementButtonId != null) {
 
-            elemButtonId.addEventListener('click',
+            elementButtonId.addEventListener('click',
                 function (e) {
                     (<any>window).currentBlock.showChatHistory(event.target);
                 }
             );
         }
-        const elemSound = <HTMLImageElement>document.getElementById("sound");
-        elemSound.addEventListener('click', function (e) {
-            if (elemSound.src == "http://mf.messenger.praktikum.yandex/data/img/sound.jpg")
-            {
-                elemSound.src = "http://mf.messenger.praktikum.yandex/data/img/nosound.jpg";
+        const elementSound = <HTMLImageElement>document.getElementById("sound");
+        elementSound.addEventListener('click', function (e) {
+            if (elementSound.src == "http://mf.messenger.praktikum.yandex/data/img/sound.jpg") {
+                elementSound.src = "http://mf.messenger.praktikum.yandex/data/img/nosound.jpg";
                 (<any>window).noSound = true;
-            }    
-            else
-            {
-                elemSound.src = "http://mf.messenger.praktikum.yandex/data/img/sound.jpg";
+            }
+            else {
+                elementSound.src = "http://mf.messenger.praktikum.yandex/data/img/sound.jpg";
                 (<any>window).noSound = false;
-            }   
-
+            }
         });
+        const elementAddChat = <HTMLElement>document.querySelector("#add");
+        elementAddChat.addEventListener('click', function(e) { addChat() });
+        const elementDeleteChat = <HTMLElement>document.querySelector("#delete");
+        elementDeleteChat.addEventListener('click', function(e) { deleteChat() });
     }
 }
+
+function addChat() {
+    const elementSearch = <HTMLInputElement>document.querySelector("#search");
+    const value = elementSearch.value;
+    if (value === "")
+        alert("Укажите имя чата")
+    else {
+        const curChat = (<any>window).currentBlock;
+        curChat.contacts.unshift({ "contact": value, "countmes": "", "hidden": false, "pressed": false, "pianokey": "7si.mp3" });
+        curChat.render();
+        curChat.setEvents();
+    }
+}
+
+function deleteChat() {
+    const curChat = (<any>window).currentBlock;
+    const idContact = getCurrentContact(curChat.contacts);
+    curChat.contacts.splice(idContact, 1);
+    curChat.render();
+    curChat.setEvents();
+}
+
+function getCurrentContact(contacts) {
+
+    for (let i = 0; i < contacts.length; i++) {
+        if (contacts[i].pressed)
+            return i;
+    }
+
+    return -1;
+}
+
 
 function render(query, block) {
     const root = document.querySelector(query);

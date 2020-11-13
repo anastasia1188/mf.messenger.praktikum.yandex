@@ -1,6 +1,6 @@
 export default function getTemplateLogin() {
     return ` <div class="wrapper">
-    <form method="post" id="form" action="#">
+    <form method="post" id="form" action="#" enctype="multipart/form-data">
     <div class="wrapper__row">
         <p> {{mesEnter}} </p>
     </div>
@@ -39,6 +39,9 @@ export default function getTemplateLogin() {
         <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-password5">
             {{errorMes5}}
         </p>
+        <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-password6">
+        {{errorMes6}}
+    </p>
     </div>
     <div class="wrapper__row">
         <p><button id="autorisation" type="submit" class="my-button"> {{mesAutorisation}} </button></p>

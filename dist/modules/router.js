@@ -11,7 +11,7 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
     }
     return privateMap.get(receiver);
 };
-var _pathname, _blockClass, _block, _props, _currentRoute, _rootQuery, _currentBlock;
+var _pathName, _blockClass, _block, _props, _currentRoute, _rootQuery, _currentBlock;
 function isEqual(lhs, rhs) {
     return lhs === rhs;
 }
@@ -21,19 +21,19 @@ function render(query, block) {
     return root;
 }
 export class Route {
-    constructor(pathname, view, props) {
-        _pathname.set(this, void 0);
+    constructor(pathName, view, props) {
+        _pathName.set(this, void 0);
         _blockClass.set(this, void 0);
         _block.set(this, void 0);
         _props.set(this, void 0);
-        __classPrivateFieldSet(this, _pathname, pathname);
+        __classPrivateFieldSet(this, _pathName, pathName);
         __classPrivateFieldSet(this, _blockClass, view);
         __classPrivateFieldSet(this, _block, null);
         __classPrivateFieldSet(this, _props, props);
     }
-    navigate(pathname) {
-        if (this.match(pathname)) {
-            __classPrivateFieldSet(this, _pathname, pathname);
+    navigate(pathName) {
+        if (this.match(pathName)) {
+            __classPrivateFieldSet(this, _pathName, pathName);
             this.render();
         }
     }
@@ -42,8 +42,8 @@ export class Route {
             __classPrivateFieldGet(this, _block).hide();
         }
     }
-    match(pathname) {
-        return isEqual(pathname, __classPrivateFieldGet(this, _pathname));
+    match(pathName) {
+        return isEqual(pathName, __classPrivateFieldGet(this, _pathName));
     }
     render() {
         if (!__classPrivateFieldGet(this, _block)) {
@@ -59,7 +59,7 @@ export class Route {
         __classPrivateFieldGet(this, _block).setEvents();
     }
 }
-_pathname = new WeakMap(), _blockClass = new WeakMap(), _block = new WeakMap(), _props = new WeakMap();
+_pathName = new WeakMap(), _blockClass = new WeakMap(), _block = new WeakMap(), _props = new WeakMap();
 export default class Router {
     constructor(rootQuery) {
         _currentRoute.set(this, void 0);
@@ -75,8 +75,8 @@ export default class Router {
         __classPrivateFieldSet(this, _currentBlock, null);
         Router.__instance = this;
     }
-    use(pathname, block) {
-        const route = new Route(pathname, block, { rootQuery: __classPrivateFieldGet(this, _rootQuery) });
+    use(pathName, block) {
+        const route = new Route(pathName, block, { rootQuery: __classPrivateFieldGet(this, _rootQuery) });
         this.routes.push(route);
         return this;
     }
@@ -86,20 +86,20 @@ export default class Router {
         }).bind(this);
         this.onRoute(window.location.pathname);
     }
-    onRoute(pathname) {
-        const route = this.getRoute(pathname);
+    onRoute(pathName) {
+        const route = this.getRoute(pathName);
         if (!route) {
             return;
         }
         if (__classPrivateFieldGet(this, _currentRoute)) {
             __classPrivateFieldGet(this, _currentRoute).leave();
         }
-        route.render(route, pathname);
+        route.render(route, pathName);
         __classPrivateFieldSet(this, _currentRoute, route);
     }
-    go(pathname) {
-        this.history.pushState({}, "", pathname);
-        this.onRoute(pathname);
+    go(pathName) {
+        this.history.pushState({}, "", pathName);
+        this.onRoute(pathName);
     }
     back() {
         this.history.back();
@@ -107,8 +107,8 @@ export default class Router {
     forward() {
         this.history.forward();
     }
-    getRoute(pathname) {
-        return this.routes.find(route => route.match(pathname));
+    getRoute(pathName) {
+        return this.routes.find(route => route.match(pathName));
     }
 }
 _currentRoute = new WeakMap(), _rootQuery = new WeakMap(), _currentBlock = new WeakMap();

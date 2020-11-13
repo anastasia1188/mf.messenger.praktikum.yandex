@@ -4,8 +4,10 @@ import Block from "../../../dist/modules/block.js";
 import { getTemplateErr } from "./err.tmpl.js";
 
 export class Err extends Block {
-    props:{errcode:string}
-    constructor(props) {
+    props: {
+        errcode: string
+    }
+    constructor(props: { errcode: string }) {
         super("err", props);
     }
 
@@ -15,7 +17,7 @@ export class Err extends Block {
     }
 }
 
-function render(query, block) {
+function render(query: string, block: Block) {
     const root = document.querySelector(query);
     root.appendChild(block.getContent());
     return root;

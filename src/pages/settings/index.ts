@@ -2,6 +2,7 @@
 /// <reference path="../../../dist/modules/regexp.d.ts" />
 import Block from "../../../dist/modules/block.js";
 import getTemplateSettings from "./settings.tmpl.js";
+import { registration } from "../../../dist/modules/autorisation.js";
 
 export class Settings extends Block {
     constructor(props) {
@@ -34,18 +35,49 @@ export class Settings extends Block {
 
     setEvents() {
         const nameHiddenElement = "wrapper__errmes-hiddenerr";
-        const arrInputs = [
+        const inputs = [
             { input: "email", value: validateEMail() },
             { input: "login", value: validateLogin() },
             { input: "password", value: validatePassword() },
             { input: "passwordr", value: validatePassword() }
         ];
-        for (let i = 0; i < arrInputs.length; i++)
-            setValidate(arrInputs[i].input, arrInputs[i].value, nameHiddenElement);
-        setFocus(arrInputs, nameHiddenElement);
-        setButtonEvents("save", arrInputs, nameHiddenElement);
-        setFormEvents(arrInputs, nameHiddenElement);
+        for (let i = 0; i < inputs.length; i++)
+            setValidate(inputs[i].input, inputs[i].value, nameHiddenElement);
+        setFocus(inputs, nameHiddenElement);
+        setButtonEvents("save", inputs, nameHiddenElement);
+        setFormEvent(inputs, nameHiddenElement);
     }
+}
+
+function setFormEvent(arrInputs: { input: string, value: any }[], nameHiddenElement: string) {
+    const frmAutorisation = document.querySelector("#form");
+    
+    frmAutorisation.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const user: ObjectInterface = getData(arrInputs);
+        registration(user);
+        setTimeout(function () {
+            if (user.result)
+                goNextPage(arrInputs, nameHiddenElement);
+            else {
+                const elementError = document.querySelector("#err-password6");
+                if ((elementError != null) && (elementError.classList.contains(nameHiddenElement))) {
+                    elementError.classList.remove(nameHiddenElement);
+                }
+            }
+        }, 1000);
+    });
+
+    const inpFile = <HTMLInputElement>document.querySelector("#newPhoto");
+    //console.log(inpFile, inpFile.value);
+    inpFile.addEventListener("change", function(e){
+        //console.log(inpFile, inpFile.value);
+        const value = inpFile.files[0];
+        const imgAvatar = <HTMLImageElement>document.querySelector("#avatar");
+        imgAvatar.src = window.URL.createObjectURL(value);
+        console.log(e,  imgAvatar.src );
+        //alert( imgAvatar.src );
+    });
 }
 
 function render(query) {

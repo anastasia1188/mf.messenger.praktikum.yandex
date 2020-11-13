@@ -4,9 +4,13 @@
 import Block from "../../../dist/modules/block.js";
 import getTemplateLogin from "./login.tmpl.js";
 import HTTPTransport from "../../../dist/modules/httpTransport.js";
+import { autorisation } from "../../../dist/modules/autorisation.js";
 
+interface ObjectInterface {
+    [key: string]: string;
+}
 export class Login extends Block {
-    users:[];
+    users: [];
     constructor(props) {
         super("login", props);
         this.users = [];
@@ -25,7 +29,8 @@ export class Login extends Block {
             errorMes2: "Ваш пароль должен содержать хотя бы один литерал",
             errorMes3: "Ваш пароль должен содержать хотя бы одну цифру",
             errorMes4: "Не допускаются пробелы",
-            errorMes5: "Длина должна быть не менее 5 символов"
+            errorMes5: "Длина должна быть не менее 5 символов",
+            errorMes6: "Неверный логин или пароль"
         }
         return result;
     };
@@ -37,7 +42,7 @@ export class Login extends Block {
         this.users = resHTTP;
     }
 
-    isPassAutorisation(login, password) {
+    isPassAutorisation(login: string, password: string) {
         this.getUsers();
         for (let i = 0; i < this.users.length; i++) {
             if ((this.users[i] === login) && (this.users[i] === login))
@@ -57,15 +62,35 @@ export class Login extends Block {
 
     setEvents() {
         const nameHiddenElement = "wrapper__errmes-hiddenerr";
-        const arrInputs = [
+        const inputs = [
             { input: "login", value: validateLogin() },
             { input: "password", value: validatePassword() }
         ];
-        for (let i = 0; i < arrInputs.length; i++)
-            setValidate(arrInputs[i].input, arrInputs[i].value, nameHiddenElement);
-        setFocus(arrInputs, nameHiddenElement);
-        setFormEvents(arrInputs, nameHiddenElement);
+        for (let i = 0; i < inputs.length; i++)
+            setValidate(inputs[i].input, inputs[i].value, nameHiddenElement);
+        setFocus(inputs, nameHiddenElement);
+        setFormEvent(inputs, nameHiddenElement);
     };
+}
+
+function setFormEvent(arrInputs: { input: string, value: any }[], nameHiddenElement: string) {
+    const frmAutorisation = document.querySelector("#form");
+    
+    frmAutorisation.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const user: ObjectInterface = getData(arrInputs);
+        autorisation(user);
+        setTimeout(function () {
+            if (user.result)
+                goNextPage(arrInputs, nameHiddenElement);
+            else {
+                const elementError = document.querySelector("#err-password6");
+                if ((elementError != null) && (elementError.classList.contains(nameHiddenElement))) {
+                    elementError.classList.remove(nameHiddenElement);
+                }
+            }
+        }, 1000);
+    });
 }
 
 function render(query, block) {

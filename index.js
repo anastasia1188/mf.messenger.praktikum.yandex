@@ -25,3 +25,4 @@ setTimeout(() => {
 }, 1000);
 
 window.addEventListener("hashchange", changeRoute);
+window.Chat = Chat;

@@ -3,15 +3,17 @@ export default function getTemplateChat() {
     <div class="chat-wrapper__left-part">
         <div class="chat-wrapper__search">
             <div class="chat-wrapper__logo">
-                <img src="{{fimage}}" alt="" class="round" width="80px" height="80px">
-                <div><a href="/#settings" onclick = "window.location.hash = '#settings'"> {{fname}} </a></div>
+                <img id="avatar" src="{{fileImage}}" alt="" class="round" width="80px" height="80px">
+                <div><a href="/#settings" onclick = "window.location.hash = '#settings'"> {{name}} </a></div>
             </div>
-            <img id="sound" src="{{fimagesound}}" alt="" class="round" width="20px" height="20px">
-            <div> <input class="chat-wrapper__search-field" type="search" placeholder="Поиск">
+            <img id="sound" src="{{fileImageSound}}" alt="" class="round" width="20px" height="20px">
+            <div> <input id="search" class="chat-wrapper__search-field" type="search" placeholder="Поиск">
+            <img id="add" src="{{fileAdd}}" alt="" class="round" width="20x" height="20px">
+            <img id="delete" src="{{fileDelete}}" alt="" class="round" width="20px" height="20px">
             </div>
         </div>
         <div class="chat-wrapper__contacts">
-            {{#each pianokeys}}
+            {{#each pianoKeys}}
             <div class="chat-wrapper__white-pianokey {{this.pressed}}">
                 <div class="chat-wrapper__row-contact">
                     <div class="chat-wrapper__contact"> {{this.contact}} </div>
@@ -37,5 +39,8 @@ export default function getTemplateChat() {
             {{errmes}}
         </p>
     </div>
+</div>
+
+
 </div>`;
 }

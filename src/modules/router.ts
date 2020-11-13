@@ -9,20 +9,20 @@ function render(query, block) {
 }
 
 export class Route {
-    #pathname: any;
+    #pathName: string;
     #blockClass: any;
     #block: any;
     #props: any;
-    constructor(pathname, view, props) {
-        this.#pathname = pathname;
+    constructor(pathName, view, props) {
+        this.#pathName = pathName;
         this.#blockClass = view;
         this.#block = null;
         this.#props = props;
     }
 
-    navigate(pathname) {
-        if (this.match(pathname)) {
-            this.#pathname = pathname;
+    navigate(pathName) {
+        if (this.match(pathName)) {
+            this.#pathName = pathName;
             this.render();
         }
     }
@@ -33,11 +33,11 @@ export class Route {
         }
     }
 
-    match(pathname) {
-        return isEqual(pathname, this.#pathname);
+    match(pathName: string) {
+        return isEqual(pathName, this.#pathName);
     }
 
-    render() {       
+    render() {
         if (!this.#block) {
             this.#block = new this.#blockClass();
             render(this.#props.rootQuery, this.#block);
@@ -73,8 +73,8 @@ export default class Router {
         Router.__instance = this;
     }
 
-    use(pathname, block) {
-        const route = new Route(pathname, block, { rootQuery: this.#rootQuery });
+    use(pathName: string, block) {
+        const route = new Route(pathName, block, { rootQuery: this.#rootQuery });
         this.routes.push(route);
         return this;
     }
@@ -87,8 +87,8 @@ export default class Router {
         this.onRoute(window.location.pathname);
     }
 
-    private onRoute(pathname) {
-        const route = this.getRoute(pathname);
+    private onRoute(pathName: string) {
+        const route = this.getRoute(pathName);
         if (!route) {
             return;
         }
@@ -97,13 +97,13 @@ export default class Router {
             this.#currentRoute.leave();
         }
 
-        route.render(route, pathname);
+        route.render(route, pathName);
         this.#currentRoute = route;
     }
 
-    go(pathname) {
-        this.history.pushState({}, "", pathname);
-        this.onRoute(pathname);
+    go(pathName: string) {
+        this.history.pushState({}, "", pathName);
+        this.onRoute(pathName);
     }
 
     back() {
@@ -114,7 +114,7 @@ export default class Router {
         this.history.forward();
     }
 
-    getRoute(pathname) {
-        return this.routes.find(route => route.match(pathname));
+    getRoute(pathName: string) {
+        return this.routes.find(route => route.match(pathName));
     }
 }

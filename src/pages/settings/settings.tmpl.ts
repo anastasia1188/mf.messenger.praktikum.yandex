@@ -3,7 +3,14 @@ export default function getTemplateSettings() {
     <div class="basic-wrapper">
     <form method="post" id="form" class="basic-wrapper__item">
         <div class="basic-wrapper__settings">
-            <img src={{fimg}} alt="" class="round" width="80px" height="80px">
+            
+            <p>
+                <img src={{fimg}} alt="" id="avatar" class="round" width="80px" height="80px">
+            </p>
+            <p>
+                <input type="file" id="newPhoto"></input>
+            </p>
+           
             <div>
                 <p>{{fname}}</p>
             </div>

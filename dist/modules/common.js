@@ -1,10 +1,10 @@
 /// <reference path="common.d.ts" />
 function getData(arrFields = []) {
-    const result = [];
+    const result = {};
     for (let i = 0; i < arrFields.length; i++) {
         const idinput = arrFields[i].input;
         const finput = document.getElementById(idinput);
-        result.push(finput.value);
+        result[idinput] = finput.value;
     }
     return result;
 }

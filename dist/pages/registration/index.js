@@ -32,18 +32,36 @@ export class Registration extends Block {
     ;
     setEvents() {
         const nameHiddenElement = "wrapper__errmes-hiddenerr";
-        const arrInputs = [
+        const inputs = [
             { input: "email", value: validateEMail() },
             { input: "login", value: validateLogin() },
             { input: "password", value: validatePassword() },
             { input: "passwordr", value: validatePassword() }
         ];
-        for (let i = 0; i < arrInputs.length; i++)
-            setValidate(arrInputs[i].input, arrInputs[i].value, nameHiddenElement);
-        setFocus(arrInputs, nameHiddenElement);
-        setFormEvents(arrInputs, nameHiddenElement);
+        for (let i = 0; i < inputs.length; i++)
+            setValidate(inputs[i].input, inputs[i].value, nameHiddenElement);
+        setFocus(inputs, nameHiddenElement);
+        setFormEvent(inputs, nameHiddenElement);
     }
     ;
+}
+function setFormEvent(arrInputs, nameHiddenElement) {
+    const frmAutorisation = document.querySelector("#form");
+    frmAutorisation.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const user = getData(arrInputs);
+        registration(user);
+        setTimeout(function () {
+            if (user.result)
+                goNextPage(arrInputs, nameHiddenElement);
+            else {
+                const elementError = document.querySelector("#err-password6");
+                if ((elementError != null) && (elementError.classList.contains(nameHiddenElement))) {
+                    elementError.classList.remove(nameHiddenElement);
+                }
+            }
+        }, 1000);
+    });
 }
 function render(query) {
     const root = document.querySelector(query);

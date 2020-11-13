@@ -1,13 +1,13 @@
 /// <reference path="regexp.d.ts" />
-const typeErrors = {
-    FORMAT_ERROR: 0,
-    LENGTH_PWD_ERROR: 1,
-    LITERAL_ERROR: 2,
-    NUMERAL_ERROR: 3,
-    GAP_ERROR: 4,
-    LENGTH_ERROR: 5,
-    PWDR_ERROR: 6,
-    INEDITOR_ERROR: 7
+enum typeErrors {
+    FORMAT_ERROR = 0,
+    LENGTH_PWD_ERROR = 1,
+    LITERAL_ERROR = 2,
+    NUMERAL_ERROR = 3,
+    GAP_ERROR = 4,
+    LENGTH_ERROR = 5,
+    PWDR_ERROR = 6,
+    INEDITOR_ERROR = 7
 };
 
 function validateEMail() {
@@ -52,8 +52,8 @@ function validatePassword() {
     return function (idElement: string, nameHiddenError: string) {
         const errors = [];
         const result = { isValid: true, errors: [] };
-        const elemPassword = <HTMLInputElement>document.getElementById(idElement);
-        const password = elemPassword.value;
+        const elementPassword = <HTMLInputElement>document.getElementById(idElement);
+        const password = elementPassword.value;
         if (password.length < 8) {
             errors.push(typeErrors.LENGTH_PWD_ERROR);
         }
@@ -69,8 +69,8 @@ function validatePassword() {
         if (errors.length > 0)
             result.isValid = false;
 
-        const elempasswordR = <HTMLInputElement>document.getElementById(idElement);
-        const passwordRepeat = elempasswordR.value;
+        const elementPasswordRepeat = <HTMLInputElement>document.getElementById(idElement);
+        const passwordRepeat = elementPasswordRepeat.value;
 
         if (!(password === passwordRepeat))
             errors.push(typeErrors.PWDR_ERROR);
@@ -131,7 +131,7 @@ function setValidate(idInput, funcValidate, nameHiddenError) {
 }
 
 function setFocus(arrInputs, nameHiddenError) {
-    for (let i=0; i<arrInputs.length; i++){
+    for (let i = 0; i < arrInputs.length; i++) {
         const id = arrInputs[i].input;
         const finput = document.getElementById(id);
         finput.addEventListener('focus', function (e) {
