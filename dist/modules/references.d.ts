@@ -21,3 +21,7 @@ declare function getTemplateSettings();
 declare function setFormEvents(arrInputs: { input: string}[], nameHiddenErr:string);
 declare function goNextPage(arrInputs: { input: string}[], nameHiddenErr: string);
 declare function registration(user);
+declare function isValidEmail(idElement: string);
+declare function isValidLogin(idElement: string);
+declare function isValidPassword(idElement: string);
+declare function isValidMessage(idElement: string);

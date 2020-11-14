@@ -50,10 +50,10 @@ export class Registration extends Block {
             validatePassword("passwordr", nameHiddenElement);
         });
         const inputs = [
-            { input: "email" },
-            { input: "login" },
-            { input: "password" },
-            { input: "passwordr" }
+            { input: "email", value: isValidEmail },
+            { input: "login", value: isValidLogin },
+            { input: "password", value: isValidPassword },
+            { input: "passwordr", value: isValidPassword }
         ];
         setFocus(inputs, nameHiddenElement);
         setFormEvent(inputs, nameHiddenElement);

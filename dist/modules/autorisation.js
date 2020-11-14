@@ -1,5 +1,6 @@
 export function autorisation(user) {
-    const host = 'http://mf.messenger.praktikum.yandex';
+    //const host = 'http://mf.messenger.praktikum.yandex';
+    const host = 'https://amazing-turing-810a80.netlify.app/';
     fetch(`${host}/data/users.json`, {
         method: 'POST',
         credentials: 'include',
@@ -36,7 +37,8 @@ export function autorisation(user) {
     });
 }
 export async function registration(user) {
-    const host = 'http://mf.messenger.praktikum.yandex';
+    //const host = 'http://mf.messenger.praktikum.yandex';
+    const host = 'https://amazing-turing-810a80.netlify.app/';
     let res = await fetch(`${host}/data/users.json`);
     let resJSON = await res.json();
     if (resJSON.indexOf(user.login) === -1) {

@@ -164,7 +164,9 @@ function isValidValues(arrInputs, nameHiddenError) {
     for (let i = 0; i < arrInputs.length; i++) {
         const funcValidate = arrInputs[i].value;
         const idElement = arrInputs[i].input;
-        if (!funcValidate(idElement, nameHiddenError)) {
+        const result = funcValidate(idElement);
+        if (!result.isValid) {
+            showErrors(result, idElement, nameHiddenError);
             return false;
         }
     }

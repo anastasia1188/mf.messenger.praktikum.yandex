@@ -57,10 +57,10 @@ export class Registration extends Block {
         });
 
         const inputs = [
-            { input: "email"},
-            { input: "login"},
-            { input: "password"},
-            { input: "passwordr"}
+            { input: "email", value: isValidEmail },
+            { input: "login", value: isValidLogin },
+            { input: "password", value: isValidPassword },
+            { input: "passwordr", value: isValidPassword }
         ];
 
         setFocus(inputs, nameHiddenElement);
