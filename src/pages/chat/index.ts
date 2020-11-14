@@ -152,7 +152,7 @@ export class Chat extends Block {
 
     setEvents() {
         const nameHiddenError = "chat-wrapper";
-        const inputs = [{ input: "ineditor", value: validateMessage() }];
+        const inputs = [{ input: "ineditor", value: validateMessage("ineditor", nameHiddenError) }];
         const button = document.getElementById("ineditor");
         button.addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {

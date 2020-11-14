@@ -52,12 +52,18 @@ export class Login extends Block {
     }
     setEvents() {
         const nameHiddenElement = "wrapper__errmes-hiddenerr";
+        const elementLogin = document.getElementById("login");
+        elementLogin.addEventListener('blur', function (e) {
+            validateLogin("login", nameHiddenElement);
+        });
+        const elementPassword = document.getElementById("password");
+        elementPassword.addEventListener('blur', function (e) {
+            validatePassword("password", nameHiddenElement);
+        });
         const inputs = [
-            { input: "login", value: validateLogin() },
-            { input: "password", value: validatePassword() }
+            { input: "login" },
+            { input: "password" }
         ];
-        for (let i = 0; i < inputs.length; i++)
-            setValidate(inputs[i].input, inputs[i].value, nameHiddenElement);
         setFocus(inputs, nameHiddenElement);
         setFormEvent(inputs, nameHiddenElement);
     }
