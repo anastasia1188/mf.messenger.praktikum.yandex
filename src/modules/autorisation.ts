@@ -1,4 +1,4 @@
-import HTTPTransport from "../../../dist/modules/httpTransport.js";
+import {HTTPTransport} from "../../../dist/modules/httpTransport.js";
 export async function autorisation(user) {
     const host = 'http://mf.messenger.praktikum.yandex';
     //const host =  'https://amazing-turing-810a80.netlify.app/'
