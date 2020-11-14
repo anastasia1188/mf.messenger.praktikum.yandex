@@ -16,7 +16,6 @@ export function autorisation(user) {
         }),
     }).then(response => response.text())
         .then(data => {
-            console.log(data);
             return data;
         })
         .then(data => {
@@ -45,10 +44,8 @@ export async function registration(user) {
     let resJSON = await res.json();
     if (resJSON.indexOf(user.login) === -1) {
         user.result = true;
-        console.log(resJSON);
         resJSON.push(JSON.stringify(user));
         let body = JSON.stringify(resJSON);
-        console.log("body", body);
         fetch(`${host}/data/users.json`, {
             method: 'PUT',
             headers: {

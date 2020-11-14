@@ -35,21 +35,41 @@ export class Settings extends Block {
 
     setEvents() {
         const nameHiddenElement = "wrapper__errmes-hiddenerr";
+        
+        const elementEmail = document.getElementById("email");
+        elementEmail.addEventListener('blur', function (e) {
+            validateEMail("email", nameHiddenElement);
+        });
+
+        const elementLogin = document.getElementById("login");
+        elementLogin.addEventListener('blur', function (e) {
+            validateLogin("login", nameHiddenElement);
+        });
+
+        const elementPassword = document.getElementById("password");
+        elementPassword.addEventListener('blur', function (e) {
+            validatePassword("password", nameHiddenElement);
+        });
+
+        const elementRepeatPassword = document.getElementById("passwordr");
+        elementRepeatPassword.addEventListener('blur', function (e) {
+            validatePassword("passwordr", nameHiddenElement);
+        });        
+        
         const inputs = [
-            { input: "email", value: validateEMail() },
-            { input: "login", value: validateLogin() },
-            { input: "password", value: validatePassword() },
-            { input: "passwordr", value: validatePassword() }
+            { input: "email"},
+            { input: "login"},
+            { input: "password"},
+            { input: "passwordr"}
         ];
-        for (let i = 0; i < inputs.length; i++)
-            setValidate(inputs[i].input, inputs[i].value, nameHiddenElement);
+
         setFocus(inputs, nameHiddenElement);
         setButtonEvents("save", inputs, nameHiddenElement);
         setFormEvent(inputs, nameHiddenElement);
     }
 }
 
-function setFormEvent(arrInputs: { input: string, value: any }[], nameHiddenElement: string) {
+function setFormEvent(arrInputs: { input: string}[], nameHiddenElement: string) {
     const frmAutorisation = document.querySelector("#form");
     
     frmAutorisation.addEventListener("submit", function (e) {
@@ -69,14 +89,12 @@ function setFormEvent(arrInputs: { input: string, value: any }[], nameHiddenElem
     });
 
     const inpFile = <HTMLInputElement>document.querySelector("#newPhoto");
-    //console.log(inpFile, inpFile.value);
+
     inpFile.addEventListener("change", function(e){
-        //console.log(inpFile, inpFile.value);
         const value = inpFile.files[0];
         const imgAvatar = <HTMLImageElement>document.querySelector("#avatar");
         imgAvatar.src = window.URL.createObjectURL(value);
-        console.log(e,  imgAvatar.src );
-        //alert( imgAvatar.src );
+
     });
 }
 

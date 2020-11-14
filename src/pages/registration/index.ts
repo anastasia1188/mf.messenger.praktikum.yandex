@@ -34,15 +34,35 @@ export class Registration extends Block {
     };
 
     setEvents() {
-        const nameHiddenElement = "wrapper__errmes-hiddenerr";
+        const nameHiddenElement = "wrapper__errmes-hiddenerr"; 
+        
+        const elementEmail = document.getElementById("email");
+        elementEmail.addEventListener('blur', function (e) {
+            validateEMail("email", nameHiddenElement);
+        });
+
+        const elementLogin = document.getElementById("login");
+        elementLogin.addEventListener('blur', function (e) {
+            validateLogin("login", nameHiddenElement);
+        });
+
+        const elementPassword = document.getElementById("password");
+        elementPassword.addEventListener('blur', function (e) {
+            validatePassword("password", nameHiddenElement);
+        });
+
+        const elementRepeatPassword = document.getElementById("passwordr");
+        elementRepeatPassword.addEventListener('blur', function (e) {
+            validatePassword("passwordr", nameHiddenElement);
+        });
+
         const inputs = [
-            { input: "email", value: validateEMail() },
-            { input: "login", value: validateLogin() },
-            { input: "password", value: validatePassword() },
-            { input: "passwordr", value: validatePassword() }
+            { input: "email"},
+            { input: "login"},
+            { input: "password"},
+            { input: "passwordr"}
         ];
-        for (let i = 0; i < inputs.length; i++)
-            setValidate(inputs[i].input, inputs[i].value, nameHiddenElement);
+
         setFocus(inputs, nameHiddenElement);
         setFormEvent(inputs, nameHiddenElement);
     };

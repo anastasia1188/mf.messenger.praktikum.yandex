@@ -11,85 +11,95 @@ var typeErrors;
     typeErrors[typeErrors["INEDITOR_ERROR"] = 7] = "INEDITOR_ERROR";
 })(typeErrors || (typeErrors = {}));
 ;
-function validateEMail() {
-    return function (idElement, nameHiddenError) {
-        const errors = [];
-        const result = { isValid: true, errors: [] };
-        const elemEmail = document.getElementById(idElement);
-        const email = elemEmail.value;
-        if (email.length < 5)
-            errors.push(typeErrors.LENGTH_ERROR);
-        if (!REXP_EMAIL.test(email))
-            errors.push(typeErrors.FORMAT_ERROR);
-        if (email.search(REXP_GAP) >= 0)
-            errors.push(typeErrors.GAP_ERROR);
-        if (errors.length > 0)
-            result.isValid = false;
-        result.errors = errors;
-        return validate(result, idElement, nameHiddenError);
-    };
+function isValidEmail(idElement) {
+    const result = { isValid: true, errors: [] };
+    const errors = [];
+    const elemEmail = document.getElementById(idElement);
+    const email = elemEmail.value;
+    if (email.length < 5)
+        errors.push(typeErrors.LENGTH_ERROR);
+    if (!REXP_EMAIL.test(email))
+        errors.push(typeErrors.FORMAT_ERROR);
+    if (email.search(REXP_GAP) >= 0)
+        errors.push(typeErrors.GAP_ERROR);
+    if (errors.length > 0)
+        result.isValid = false;
+    result.errors = errors;
+    return result;
 }
-function validateLogin() {
-    return function (idElement, nameHiddenError) {
-        const errors = [];
-        const result = { isValid: true, errors: [] };
-        const elemLogin = document.getElementById(idElement);
-        const login = elemLogin.value;
-        if (login.length < 5)
-            errors.push(typeErrors.LENGTH_ERROR);
-        if (!REXP_LOGIN.test(login))
-            errors.push(typeErrors.FORMAT_ERROR);
-        if (login.search(REXP_GAP) >= 0)
-            errors.push(typeErrors.GAP_ERROR);
-        if (errors.length > 0)
-            result.isValid = false;
-        result.errors = errors;
-        return validate(result, idElement, nameHiddenError);
-    };
+function isValidLogin(idElement) {
+    const result = { isValid: true, errors: [] };
+    const errors = [];
+    const elemLogin = document.getElementById(idElement);
+    const login = elemLogin.value;
+    if (login.length < 5)
+        errors.push(typeErrors.LENGTH_ERROR);
+    if (!REXP_LOGIN.test(login))
+        errors.push(typeErrors.FORMAT_ERROR);
+    if (login.search(REXP_GAP) >= 0)
+        errors.push(typeErrors.GAP_ERROR);
+    if (errors.length > 0)
+        result.isValid = false;
+    result.errors = errors;
+    return result;
 }
-function validatePassword() {
-    return function (idElement, nameHiddenError) {
-        const errors = [];
-        const result = { isValid: true, errors: [] };
-        const elementPassword = document.getElementById(idElement);
-        const password = elementPassword.value;
-        if (password.length < 8) {
-            errors.push(typeErrors.LENGTH_PWD_ERROR);
-        }
-        if (password.search(REXP_LITERAL) < 0) {
-            errors.push(typeErrors.LITERAL_ERROR);
-        }
-        if (password.search(REXP_NUMERAL) < 0) {
-            errors.push(typeErrors.NUMERAL_ERROR);
-        }
-        if (password.search(REXP_GAP) >= 0) {
-            errors.push(typeErrors.GAP_ERROR);
-        }
-        if (errors.length > 0)
-            result.isValid = false;
-        const elementPasswordRepeat = document.getElementById(idElement);
-        const passwordRepeat = elementPasswordRepeat.value;
-        if (!(password === passwordRepeat))
-            errors.push(typeErrors.PWDR_ERROR);
-        result.errors = errors;
-        return validate(result, idElement, nameHiddenError);
-    };
+;
+function isValidPassword(idElement) {
+    const result = { isValid: true, errors: [] };
+    const errors = [];
+    const elementPassword = document.getElementById(idElement);
+    const password = elementPassword.value;
+    if (password.length < 8) {
+        errors.push(typeErrors.LENGTH_PWD_ERROR);
+    }
+    if (password.search(REXP_LITERAL) < 0) {
+        errors.push(typeErrors.LITERAL_ERROR);
+    }
+    if (password.search(REXP_NUMERAL) < 0) {
+        errors.push(typeErrors.NUMERAL_ERROR);
+    }
+    if (password.search(REXP_GAP) >= 0) {
+        errors.push(typeErrors.GAP_ERROR);
+    }
+    if (errors.length > 0)
+        result.isValid = false;
+    const elementPasswordRepeat = document.getElementById(idElement);
+    const passwordRepeat = elementPasswordRepeat.value;
+    if (!(password === passwordRepeat))
+        errors.push(typeErrors.PWDR_ERROR);
+    result.errors = errors;
+    return result;
 }
-function validateMessage() {
-    return function (idElement, nameHiddenError) {
-        const errors = [];
-        const result = { isValid: true, errors: [] };
-        const valueHTMLElement = document.getElementById(idElement);
-        const valueElement = valueHTMLElement.value;
-        if (valueElement.length < 1)
-            errors.push(typeErrors.INEDITOR_ERROR);
-        if (errors.length > 0)
-            result.isValid = false;
-        result.errors = errors;
-        return validate(result, idElement, nameHiddenError);
-    };
+function isValidMessage(idElement) {
+    const result = { isValid: true, errors: [] };
+    const errors = [];
+    const valueHTMLElement = document.getElementById(idElement);
+    const valueElement = valueHTMLElement.value;
+    if (valueElement.length < 1)
+        errors.push(typeErrors.INEDITOR_ERROR);
+    if (errors.length > 0)
+        result.isValid = false;
+    result.errors = errors;
+    return result;
 }
-function validate(resultValidate, idElement, nameHiddenError) {
+function validateEMail(idElement, nameHiddenError) {
+    const resultValidate = isValidEmail(idElement);
+    showErrors(resultValidate, idElement, nameHiddenError);
+}
+;
+function validateLogin(idElement, nameHiddenError) {
+    const resultValidate = isValidLogin(idElement);
+    showErrors(resultValidate, idElement, nameHiddenError);
+}
+function validatePassword(idElement, nameHiddenError) {
+    const resultValidate = isValidPassword(idElement);
+    showErrors(resultValidate, idElement, nameHiddenError);
+}
+function validateMessage(idElement, nameHiddenError) {
+    const resultValidate = isValidPassword(idElement);
+    showErrors(resultValidate, idElement, nameHiddenError);
+}
+function showErrors(resultValidate, idElement, nameHiddenError) {
     let nameError = "err-" + idElement;
     if (resultValidate.errors.length > 0)
         nameError = nameError + String(resultValidate.errors[0]);
