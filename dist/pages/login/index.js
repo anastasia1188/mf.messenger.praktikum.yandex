@@ -61,8 +61,8 @@ export class Login extends Block {
             validatePassword("password", nameHiddenElement);
         });
         const inputs = [
-            { input: "login" },
-            { input: "password" }
+            { input: "login", value: isValidLogin },
+            { input: "password", value: isValidPassword }
         ];
         setFocus(inputs, nameHiddenElement);
         setFormEvent(inputs, nameHiddenElement);

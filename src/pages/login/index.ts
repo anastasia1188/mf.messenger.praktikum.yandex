@@ -74,8 +74,8 @@ export class Login extends Block {
         });
 
         const inputs = [
-            { input: "login"},
-            { input: "password"}
+            { input: "login", value: isValidLogin},
+            { input: "password", value: isValidPassword}
         ];
 
         setFocus(inputs, nameHiddenElement);
