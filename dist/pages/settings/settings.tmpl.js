@@ -1,16 +1,7 @@
-<<<<<<< HEAD:static/settings/settings.tmpl.js
-function getTemplateSettings() {
-=======
 export default function getTemplateSettings() {
-<<<<<<< HEAD:dist/components/settings/settings.tmpl.js
->>>>>>> deploy:dist/components/settings/settings.tmpl.js
-    return `<div class="basic-wrapper">
-    <div class="basic-wrapper__item">
-=======
     return `
     <div class="basic-wrapper">
     <form method="post" id="form" class="basic-wrapper__item">
->>>>>>> deploy:dist/pages/settings/settings.tmpl.js
         <div class="basic-wrapper__settings">
             
             <p>
@@ -111,15 +102,6 @@ export default function getTemplateSettings() {
             </p>
             <button class="my-button" type="submit" id="save">Сохранить</button>
         </div>
-<<<<<<< HEAD:dist/components/settings/settings.tmpl.js
-    </div>
-</div>`;
-<<<<<<< HEAD:static/settings/settings.tmpl.js
-=======
     </form>
     </div>`;
->>>>>>> deploy:dist/pages/settings/settings.tmpl.js
 }
-=======
-}
->>>>>>> deploy:dist/components/settings/settings.tmpl.js
