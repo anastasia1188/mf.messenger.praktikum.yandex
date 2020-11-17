@@ -1,11 +1,11 @@
 /// <reference path="../../../dist/modules/references.d.ts" />
-/// <reference path="../../../dist/modules/regexp.d.ts" />
+
 import Block from "../../../dist/modules/block.js";
 import getTemplateSettings from "./settings.tmpl.js";
 import { registration } from "../../../dist/modules/autorisation.js";
 
 export class Settings extends Block {
-    constructor(props) {
+    constructor(props: Object) {
         super("settings", props);
     }
 
@@ -98,7 +98,3 @@ function setFormEvent(arrInputs: { input: string}[], nameHiddenElement: string) 
     });
 }
 
-function render(query) {
-    const root = document.querySelector(query);
-    return root;
-};

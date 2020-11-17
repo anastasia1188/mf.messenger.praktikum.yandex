@@ -3,23 +3,41 @@ import Block from "../../../dist/modules/block.js";
 import getTemplateChat from "./chat.tmpl.js";
 import HTTPTransport from "../../../dist/modules/httpTransport.js";
 
+interface Message{
+     contact: string,
+     history: any[] 
+    }
+
+interface Contact{ 
+    contact: string,
+    pressed: string,
+    pianokey: string 
+} 
+
+interface Target{
+    messages: Message[],
+    chat: Chat
+};
+
+type strElement = string | null | undefined;
+
 export class Chat extends Block {
-    messages: [{ contact: string, history: any[] }];
-    contacts: [{ contact: string, pressed: string, pianokey: string }];
+    messages: Message[];
+    contacts: Contact[];
     fileImage: string;
     fileImageSound: string;
     name: string;
     errorMessage: string;
     proxyData: any;
 
-    constructor(props) {
+    constructor(props: Object) {
         super("chat", props);
         this.fileImage = "";
         this.name = "";
         this.errorMessage = "";
         this.getFileData();
 
-        const data = {
+        const data: Target = {
             messages: this.messages,
             chat: this
         };
@@ -42,7 +60,7 @@ export class Chat extends Block {
     }
 
     getAllData() {
-        let messages = [];
+        let messages: Message[] | undefined = [];
         const pianoKeys = this.contacts;
         const fileImage = this.getImage();
         const fileAdd  = "../../../data/img/add.jpg";
@@ -89,15 +107,15 @@ export class Chat extends Block {
         return result;
     }
 
-    render(context = undefined) {
+    render(context:Object | undefined = undefined) {
         if (context === undefined)
             context = this.getAllData();
         const result = compileTemplate('.app', getTemplateChat(), context);
         return result;
     }
 
-    showChatHistory(elementContact) {
-        const idContact = this.getIdContact(elementContact);
+    showChatHistory(elementContact: HTMLElement) {
+        const idContact: strElement = this.getIdContact(elementContact);
         if (idContact !== undefined) {
             const history = this.getHistoryChat(idContact);
             this.updateContacts(idContact);
@@ -108,7 +126,7 @@ export class Chat extends Block {
         }
     }
 
-    private updateContacts(idContact) {
+    private updateContacts(idContact: strElement) {
         for (let i = 0; i < this.contacts.length; i++) {
             if (this.contacts[i].contact.trim() == idContact.trim()) {
                 this.contacts[i].pressed = "chat-wrapper__white-pianokey-pressed";
@@ -122,7 +140,7 @@ export class Chat extends Block {
         }
     }
 
-    getIdContact(elementContact) {
+    getIdContact(elementContact: HTMLElement):strElement {
         let element = undefined;
         let result = undefined;
 
@@ -140,7 +158,7 @@ export class Chat extends Block {
         return result;
     }
 
-    getHistoryChat(idContact) {
+    getHistoryChat(idContact: strElement): Message[]| undefined  {
         for (let i = 0; i < this.messages.length; i++) {
             let elem = this.messages[i];
             if ((elem.contact != null) && (elem.contact != undefined) && (elem.contact.trim() == idContact.trim()))
@@ -153,7 +171,7 @@ export class Chat extends Block {
     setEvents() {
         const nameHiddenError = "chat-wrapper";
         const inputs = [{ input: "ineditor", value: validateMessage("ineditor", nameHiddenError) }];
-        const button = document.getElementById("ineditor");
+        const button = <HTMLElement>document.getElementById("ineditor");
         button.addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 if (isValidValues(inputs, nameHiddenError)) {
@@ -216,7 +234,7 @@ function deleteChat() {
     curChat.setEvents();
 }
 
-function getCurrentContact(contacts) {
+function getCurrentContact(contacts: Contact[]) {
 
     for (let i = 0; i < contacts.length; i++) {
         if (contacts[i].pressed)
@@ -226,9 +244,3 @@ function getCurrentContact(contacts) {
     return -1;
 }
 
-
-function render(query, block) {
-    const root = document.querySelector(query);
-    root.appendChild(block.getContent());
-    return root;
-}

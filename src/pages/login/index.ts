@@ -1,5 +1,4 @@
 /// <reference path="../../../dist/modules/references.d.ts" />
-/// <reference path="../../../dist/modules/regexp.d.ts" />
 /// <reference path="../../../dist/modules/common.d.ts" />
 import Block from "../../../dist/modules/block.js";
 import getTemplateLogin from "./login.tmpl.js";
@@ -11,7 +10,7 @@ interface ObjectInterface {
 }
 export class Login extends Block {
     users: [];
-    constructor(props) {
+    constructor(props: Object) {
         super("login", props);
         this.users = [];
         this.setEvents();
@@ -102,12 +101,3 @@ function setFormEvent(arrInputs: { input: string }[], nameHiddenElement: string)
         }, 1000);
     });
 }
-
-function render(query, block) {
-    const root = document.querySelector(query);
-    return root;
-};
-
-const alogin = new Login({});
-
-render(".app", alogin);

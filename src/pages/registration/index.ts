@@ -1,11 +1,14 @@
 /// <reference path="../../../dist/modules/references.d.ts" />
-/// <reference path="../../../dist/modules/regexp.d.ts" />
 import Block from "../../../dist/modules/block.js";
 import getTemplateRegistration from "./registration.tmpl.js";
 import { registration } from "../../../dist/modules/autorisation.js";
 
+interface Input {
+    input: string,
+    value: any
+}
 export class Registration extends Block {
-    constructor(props) {
+    constructor(props: Object) {
         super("registration", props);
     }
 
@@ -68,7 +71,7 @@ export class Registration extends Block {
     };
 }
 
-function setFormEvent(arrInputs, nameHiddenElement) {
+function setFormEvent(arrInputs: Input[], nameHiddenElement: string) {
     const frmAutorisation = document.querySelector("#form");
     frmAutorisation.addEventListener("submit", function(e) {
         e.preventDefault();
@@ -87,7 +90,3 @@ function setFormEvent(arrInputs, nameHiddenElement) {
     });
 }
 
-function render(query) {
-    const root = document.querySelector(query);
-    return root;
-};

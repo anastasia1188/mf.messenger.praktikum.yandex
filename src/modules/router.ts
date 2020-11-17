@@ -1,10 +1,13 @@
-function isEqual(lhs, rhs) {
+declare class Block {
+   public render(): string; 
+}
+function isEqual(lhs: string, rhs: string) {
     return lhs === rhs;
 }
 
-function render(query, block) {
+function render(query: string, block: Block) {
     const root = document.querySelector(query);
-    root.innerHtml = block.render();
+    root.innerHTML = block.render();
     return root;
 }
 
@@ -13,14 +16,14 @@ export class Route {
     #blockClass: any;
     #block: any;
     #props: any;
-    constructor(pathName, view, props) {
+    constructor(pathName: string, view: any, props: Object) {
         this.#pathName = pathName;
         this.#blockClass = view;
         this.#block = null;
         this.#props = props;
     }
 
-    navigate(pathName) {
+    navigate(pathName: string) {
         if (this.match(pathName)) {
             this.#pathName = pathName;
             this.render();
@@ -59,7 +62,7 @@ export default class Router {
     #currentRoute: any;
     #rootQuery: any;
     #currentBlock: any;
-    constructor(rootQuery) {
+    constructor(rootQuery: string) {
         if (Router.__instance) {
             return Router.__instance;
         }
@@ -73,7 +76,7 @@ export default class Router {
         Router.__instance = this;
     }
 
-    use(pathName: string, block) {
+    use(pathName: string, block: Block) {
         const route = new Route(pathName, block, { rootQuery: this.#rootQuery });
         this.routes.push(route);
         return this;
