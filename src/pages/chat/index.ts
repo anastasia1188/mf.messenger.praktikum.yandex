@@ -2,6 +2,7 @@
 import Block from "../../../dist/modules/block.js";
 import getTemplateChat from "./chat.tmpl.js";
 import HTTPTransport from "../../../dist/modules/httpTransport.js";
+import {validateMessage} from "../../../dist/modules/validation.js";
 
 interface Message{
      contact: string,

@@ -35,12 +35,10 @@ function setButtonEvents(idButton: string, arrInputs: { input: string, value: an
 }
 
 function goNextPage(arrInputs: { input: string, value: any }[], nameHiddenErr: string) {
-    if (isValidValues(arrInputs, nameHiddenErr)) {
         const data: any = getData(arrInputs);
         console.log(data);
         window.location.hash = '#chat';
     }
-}
 
 function setFormEvents(arrInputs: { input: string, value: any }[], nameHiddenErr: string) {
     const frmAutorisation = document.querySelector("#form");

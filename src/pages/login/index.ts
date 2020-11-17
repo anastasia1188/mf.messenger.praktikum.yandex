@@ -3,7 +3,8 @@
 import Block from "../../../dist/modules/block.js";
 import getTemplateLogin from "./login.tmpl.js";
 import HTTPTransport from "../../../dist/modules/httpTransport.js";
-import { autorisation } from "../../../dist/modules/autorisation.js";
+import { isAutorizied } from "../../../dist/modules/autorisation.js";
+import { isValidLogin, isValidPassword, validateLogin, validatePassword, setFocus, isValidValues } from "../../../dist/modules/validation.js";
 
 interface ObjectInterface {
     [key: string]: string;
@@ -73,8 +74,8 @@ export class Login extends Block {
         });
 
         const inputs = [
-            { input: "login", value: isValidLogin},
-            { input: "password", value: isValidPassword}
+            { input: "login", value: isValidLogin },
+            { input: "password", value: isValidPassword }
         ];
 
         setFocus(inputs, nameHiddenElement);
@@ -84,20 +85,20 @@ export class Login extends Block {
 
 function setFormEvent(arrInputs: { input: string }[], nameHiddenElement: string) {
     const frmAutorisation = document.querySelector("#form");
-    
-    frmAutorisation.addEventListener("submit", function (e) {
+
+    frmAutorisation.addEventListener("submit", async function (e) {
         e.preventDefault();
         const user: ObjectInterface = getData(arrInputs);
-        autorisation(user);
-        setTimeout(function () {
-            if (user.result)
+        const res = await isAutorizied(user);
+
+        if (res) {
+            if (isValidValues(arrInputs, nameHiddenElement))
                 goNextPage(arrInputs, nameHiddenElement);
-            else {
-                const elementError = document.querySelector("#err-password6");
-                if ((elementError != null) && (elementError.classList.contains(nameHiddenElement))) {
-                    elementError.classList.remove(nameHiddenElement);
-                }
+        } else {
+            const elementError = document.querySelector("#err-password6");
+            if ((elementError != null) && (elementError.classList.contains(nameHiddenElement))) {
+                elementError.classList.remove(nameHiddenElement);
             }
-        }, 1000);
+        }
     });
 }

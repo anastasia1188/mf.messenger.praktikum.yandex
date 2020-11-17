@@ -28,7 +28,7 @@ function getValueElement(idElement: string) {
     return result
 }
 
-function isValidEmail(email: string) {
+export function isValidEmail(email: string) {
     const result: resultValidation = {
         isValid: true,
         errors: []
@@ -49,7 +49,7 @@ function isValidEmail(email: string) {
     return result;
 }
 
-function isValidLogin(login: string) {
+export function isValidLogin(login: string) {
     const result: resultValidation = {
         isValid: true,
         errors: []
@@ -69,7 +69,7 @@ function isValidLogin(login: string) {
     return result;
 };
 
-function isValidPassword(password: string) {
+export function isValidPassword(password: string) {
 
     const result: resultValidation = {
         isValid: true,
@@ -94,14 +94,14 @@ function isValidPassword(password: string) {
 
     const passwordRepeat = getValueElement("passwordr");
 
-    if (!(password === passwordRepeat))
+    if ((passwordRepeat!== undefined) && (!(password === passwordRepeat)))
         errors.push(typeErrors.PWDR_ERROR);
 
     result.errors = errors;
     return result;
 }
 
-function isValidMessage(message: string) {
+export function isValidMessage(message: string) {
     const result: resultValidation = {
         isValid: true,
         errors: []
@@ -117,27 +117,27 @@ function isValidMessage(message: string) {
     return result;
 }
 
-function validateEMail(idElement: string, nameHiddenError: string) {
+export function validateEMail(idElement: string, nameHiddenError: string) {
     const value = getValueElement(idElement);
     const resultValidate = isValidEmail(value);
     showErrors(resultValidate, idElement, nameHiddenError);
 };
 
-function validateLogin(idElement: string, nameHiddenError: string) {
+export function validateLogin(idElement: string, nameHiddenError: string) {
     const value = getValueElement(idElement);
     const resultValidate = isValidLogin(value);
     showErrors(resultValidate, idElement, nameHiddenError);
 }
 
-function validatePassword(idElement: string, nameHiddenError: string) {
+export function validatePassword(idElement: string, nameHiddenError: string) {
     const value = getValueElement(idElement);
     const resultValidate = isValidPassword(value);
     showErrors(resultValidate, idElement, nameHiddenError);
 }
 
-function validateMessage(idElement: string, nameHiddenError: string) {
+export function validateMessage(idElement: string, nameHiddenError: string) {
     const value = getValueElement(idElement);
-    const resultValidate = isValidPassword(value);
+    const resultValidate = isValidMessage(value);
     showErrors(resultValidate, idElement, nameHiddenError);
 }
 
@@ -169,14 +169,14 @@ function hideHiddenElement(elementError: any, nameHiddenError: string) {
         elementError.classList.add(nameHiddenError);
 }
 
-function setValidate(idInput: string, funcValidate: Function, nameHiddenError: string) {
+export function setValidate(idInput: string, funcValidate: Function, nameHiddenError: string) {
     const finput = document.getElementById(idInput);
     finput.addEventListener('blur', function (e) {
         funcValidate(idInput, nameHiddenError);
     });
 }
 
-function setFocus(arrInputs: Input[], nameHiddenError: string) {
+export function setFocus(arrInputs: Input[], nameHiddenError: string) {
     for (let i = 0; i < arrInputs.length; i++) {
         const id = arrInputs[i].input;
         const finput = document.getElementById(id);
@@ -186,7 +186,7 @@ function setFocus(arrInputs: Input[], nameHiddenError: string) {
     }
 }
 
-function elemFocus(id: string, nameHiddenError: string) {
+export function elemFocus(id: string, nameHiddenError: string) {
     const arrMesPwd = [0, 1, 2, 3, 4, 5, 6, 7];
     const nameError = "err-" + id;
     const arrFields = [];
@@ -199,11 +199,12 @@ function elemFocus(id: string, nameHiddenError: string) {
     }
 }
 
-function isValidValues(arrInputs: Input[], nameHiddenError: string) {
+export function isValidValues(arrInputs: Input[], nameHiddenError: string) {
     for (let i = 0; i < arrInputs.length; i++) {
         const funcValidate = arrInputs[i].value;
         const idElement = arrInputs[i].input;
-        const result = funcValidate(idElement);
+        const value = getValueElement(idElement);
+        const result = funcValidate(value);
         if (!result.isValid) {
             showErrors(result, idElement, nameHiddenError);
             return false;

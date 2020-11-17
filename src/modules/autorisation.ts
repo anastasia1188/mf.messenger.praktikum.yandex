@@ -1,46 +1,60 @@
-import {HTTPTransport} from "../../dist/modules/httpTransport.js";
+import HTTPTransport from "../../dist/modules/httpTransport.js";
 
 interface User {
     login: string;
     password: string;
 }
 
-export async function autorisation(user: User) {
-    const host = 'http://mf.messenger.praktikum.yandex';
-    //const host =  'https://amazing-turing-810a80.netlify.app/'
-
-    const httpTransport = new HTTPTransport;
-    const res = await httpTransport.get(`${host}/data/users.json`);
-    const data = JSON.parse(res.responseText);
-    for (let i = 0; i < data.length; i++) {
-        if ((data[i].login === user.login) && (data[i].password === user.password)) {
-            //user.result = true;
-        }
-    }
+interface User{
+    login: string,
+    password: string
 }
 
-export async function registration(user: User) {
+export async function isAutorizied(user: User) {
+    const data = await getUsers();
+    const users = JSON.parse(data.responseText);
+
+    for (let i = 0; i < users.length; i++) {
+        if ((users[i].login === user.login) && (users[i].password === user.password)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+async function getUsers()
+{
+    const host = 'http://mf.messenger.praktikum.yandex';
+    //const host =  'https://amazing-turing-810a80.netlify.app/'
+    const httpTransport = new HTTPTransport;
+    const res = await httpTransport.get(`${host}/data/users.json`);
+    return res;
+}
+
+export async function isRegistrationSuccess(user: User) {
+    const httpTransport = new HTTPTransport;
     const host = 'http://mf.messenger.praktikum.yandex';
     //const host = 'https://amazing-turing-810a80.netlify.app/';
 
-    const httpTransport = new HTTPTransport;
+    const data = await getUsers();
+    const users = data.responseText;
 
-    const res = await httpTransport.post(`${host}/data/users.json`);
-    const resJSON = res.responseText;
-    if (resJSON.indexOf(user.login) === -1) {
-        //user.result = true;
-        resJSON.push(JSON.stringify(user));
-        const body = JSON.stringify(resJSON);
+    if (users.indexOf(user.login) === -1) {
+        const arrUsers = JSON.parse(users);
+        arrUsers.push(JSON.stringify(user));
+        const body = JSON.stringify(arrUsers);
         const options = {
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: body,
         };
-        httpTransport.post('user.json', options);
+        httpTransport.post('${host}user.json', options);
+        return true;
     } 
-    /*else
-        user.result = false;*/
+    else
+        return false;
 }
 
 function postFile(form:HTMLFormElement) {

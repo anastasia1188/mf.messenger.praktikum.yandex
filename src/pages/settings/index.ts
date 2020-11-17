@@ -2,7 +2,8 @@
 
 import Block from "../../../dist/modules/block.js";
 import getTemplateSettings from "./settings.tmpl.js";
-import { registration } from "../../../dist/modules/autorisation.js";
+import { isRegistrationSuccess } from "../../../dist/modules/autorisation.js";
+import { isValidLogin, isValidEmail, isValidPassword, validateEMail, validateLogin, validatePassword, setFocus, isValidValues } from "../../../dist/modules/validation.js";
 
 export class Settings extends Block {
     constructor(props: Object) {
@@ -35,7 +36,7 @@ export class Settings extends Block {
 
     setEvents() {
         const nameHiddenElement = "wrapper__errmes-hiddenerr";
-        
+
         const elementEmail = document.getElementById("email");
         elementEmail.addEventListener('blur', function (e) {
             validateEMail("email", nameHiddenElement);
@@ -54,8 +55,8 @@ export class Settings extends Block {
         const elementRepeatPassword = document.getElementById("passwordr");
         elementRepeatPassword.addEventListener('blur', function (e) {
             validatePassword("passwordr", nameHiddenElement);
-        });        
-        
+        });
+
         const inputs = [
             { input: "email", value: isValidEmail },
             { input: "login", value: isValidLogin },
@@ -69,15 +70,15 @@ export class Settings extends Block {
     }
 }
 
-function setFormEvent(arrInputs: { input: string}[], nameHiddenElement: string) {
+function setFormEvent(arrInputs: { input: string }[], nameHiddenElement: string) {
     const frmAutorisation = document.querySelector("#form");
-    
+
     frmAutorisation.addEventListener("submit", function (e) {
         e.preventDefault();
         const user: ObjectInterface = getData(arrInputs);
-        registration(user);
-        setTimeout(function () {
-            if (user.result)
+        const res = isRegistrationSuccess(user);
+        if (res) {
+            if (isValidValues(arrInputs, nameHiddenElement))
                 goNextPage(arrInputs, nameHiddenElement);
             else {
                 const elementError = document.querySelector("#err-password6");
@@ -85,12 +86,12 @@ function setFormEvent(arrInputs: { input: string}[], nameHiddenElement: string) 
                     elementError.classList.remove(nameHiddenElement);
                 }
             }
-        }, 1000);
+        };
     });
 
     const inpFile = <HTMLInputElement>document.querySelector("#newPhoto");
 
-    inpFile.addEventListener("change", function(e){
+    inpFile.addEventListener("change", function (e) {
         const value = inpFile.files[0];
         const imgAvatar = <HTMLImageElement>document.querySelector("#avatar");
         imgAvatar.src = window.URL.createObjectURL(value);

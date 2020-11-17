@@ -1,7 +1,8 @@
 /// <reference path="../../../dist/modules/references.d.ts" />
 import Block from "../../../dist/modules/block.js";
 import getTemplateRegistration from "./registration.tmpl.js";
-import { registration } from "../../../dist/modules/autorisation.js";
+import { isRegistrationSuccess } from "../../../dist/modules/autorisation.js";
+import { isValidLogin, isValidEmail, isValidPassword, validateEMail, validateLogin, validatePassword, setFocus, isValidValues } from "../../../dist/modules/validation.js";
 
 interface Input {
     input: string,
@@ -37,8 +38,8 @@ export class Registration extends Block {
     };
 
     setEvents() {
-        const nameHiddenElement = "wrapper__errmes-hiddenerr"; 
-        
+        const nameHiddenElement = "wrapper__errmes-hiddenerr";
+
         const elementEmail = document.getElementById("email");
         elementEmail.addEventListener('blur', function (e) {
             validateEMail("email", nameHiddenElement);
@@ -73,12 +74,12 @@ export class Registration extends Block {
 
 function setFormEvent(arrInputs: Input[], nameHiddenElement: string) {
     const frmAutorisation = document.querySelector("#form");
-    frmAutorisation.addEventListener("submit", function(e) {
+    frmAutorisation.addEventListener("submit", function (e) {
         e.preventDefault();
         const user = getData(arrInputs);
-        registration(user);
-        setTimeout(function() {
-            if (user.result)
+        const res = isRegistrationSuccess(user);
+        if (res){
+            if (isValidValues(arrInputs, nameHiddenElement))
                 goNextPage(arrInputs, nameHiddenElement);
             else {
                 const elementError = document.querySelector("#err-password6");
@@ -86,7 +87,7 @@ function setFormEvent(arrInputs: Input[], nameHiddenElement: string) {
                     elementError.classList.remove(nameHiddenElement);
                 }
             }
-        }, 1000);
+        }
     });
 }
 
