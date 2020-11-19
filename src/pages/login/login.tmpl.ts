@@ -44,7 +44,8 @@ export default function getTemplateLogin() {
     </p>
     </div>
     <div class="wrapper__row">
-        <p><button id="autorisation" type="submit" class="my-button"> {{mesAutorisation}} </button></p>
+    <div class="myButton"></div>
+       
     </div>
     <div class="wrapper__row wrapper__no-accaunt">
         <p id="noAccount"><a href="/#registration" onclick = " window.location.hash = '#registration'"> {{mesAccount}} </a></p>

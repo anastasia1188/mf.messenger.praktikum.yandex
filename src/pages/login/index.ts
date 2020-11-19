@@ -2,9 +2,16 @@
 /// <reference path="../../../dist/modules/common.d.ts" />
 import Block from "../../../dist/modules/block.js";
 import getTemplateLogin from "./login.tmpl.js";
-import HTTPTransport from "../../../dist/modules/httpTransport.js";
-import { isAutorizied } from "../../../dist/modules/autorisation.js";
+import myButton from "../../dist/components/myButton/index.js";
+import { isAutorizied } from "../../../dist/modules/autorization.js";
 import { isValidLogin, isValidPassword, validateLogin, validatePassword, setFocus, isValidValues } from "../../../dist/modules/validation.js";
+import Button from "../../../dist/components/myButton/index.js";
+
+const button = new Button({
+    id: 'autorisation',
+    className: 'my-button',
+    mesButton: 'Авторизация',
+});
 
 interface ObjectInterface {
     [key: string]: string;
@@ -34,26 +41,14 @@ export class Login extends Block {
         }
         return result;
     };
-
-    private async getUsers() {
-        const httpTransport = new HTTPTransport;
-        const res = await httpTransport.get('../../data/users.json');
-        const resHTTP = await JSON.parse(res.response);
-        this.users = resHTTP;
-    }
-
-    isPassAutorisation(login: string, password: string) {
-        this.getUsers();
-        for (let i = 0; i < this.users.length; i++) {
-            if ((this.users[i] === login) && (this.users[i] === login))
-                return true;
-        }
-        return false;
-    }
-
+   
     render() {
         const context = this.getData();
-        return compileTemplate('.app', getTemplateLogin(), context);
+        compileTemplate('.app', getTemplateLogin(), context);
+        const mainElem = document.querySelector('.app');
+        button.render(mainElem);
+        
+        return mainElem.innerHTML;
     };
 
     show() {

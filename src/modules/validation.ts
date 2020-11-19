@@ -23,6 +23,7 @@ interface Input {
 function getValueElement(idElement: string) {
     let result = undefined;
     const element = <HTMLInputElement>document.getElementById(idElement);
+    
     if (element !== null)
         result = element.value;
     return result
@@ -62,6 +63,25 @@ export function isValidLogin(login: string) {
         errors.push(typeErrors.FORMAT_ERROR);
     if (login.search(REXP_GAP) >= 0)
         errors.push(typeErrors.GAP_ERROR);
+    if (errors.length > 0)
+        result.isValid = false;
+    result.errors = errors;
+
+    return result;
+};
+
+export function isValidName(login: string) {
+    const result: resultValidation = {
+        isValid: true,
+        errors: []
+    };
+    const errors = [];
+
+    if (login.length < 5)
+        errors.push(typeErrors.LENGTH_ERROR);
+    if (login.search(REXP_GAP) >= 0)
+        errors.push(typeErrors.GAP_ERROR);
+
     if (errors.length > 0)
         result.isValid = false;
     result.errors = errors;
@@ -126,6 +146,12 @@ export function validateEMail(idElement: string, nameHiddenError: string) {
 export function validateLogin(idElement: string, nameHiddenError: string) {
     const value = getValueElement(idElement);
     const resultValidate = isValidLogin(value);
+    showErrors(resultValidate, idElement, nameHiddenError);
+}
+
+export function validateName(idElement: string, nameHiddenError: string) {
+    const value = getValueElement(idElement);
+    const resultValidate = isValidName(value);
     showErrors(resultValidate, idElement, nameHiddenError);
 }
 

@@ -52,6 +52,7 @@ export default function getTemplateRegistration() {
         </p>
         <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-password6">
         Пароли не совпадают
+        </p>
     </p>
     </div>
     <div class="wrapper__row">
@@ -74,9 +75,12 @@ export default function getTemplateRegistration() {
         <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-passwordr6">
             Пароли не совпадают
         </p>
+        <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-password7">
+        Такой пользователь уже существует
+        </p>
     </div>
 
-    <div>
+    <div class="myButton">
         <p><button id="reg" type="submit" class="my-button"> Зарегистрироваться </button></p>
     </div>
 </form>

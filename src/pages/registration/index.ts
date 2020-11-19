@@ -1,8 +1,15 @@
 /// <reference path="../../../dist/modules/references.d.ts" />
 import Block from "../../../dist/modules/block.js";
 import getTemplateRegistration from "./registration.tmpl.js";
-import { isRegistrationSuccess } from "../../../dist/modules/autorisation.js";
+import { isRegistrationSuccess } from "../../../dist/modules/autorization.js";
 import { isValidLogin, isValidEmail, isValidPassword, validateEMail, validateLogin, validatePassword, setFocus, isValidValues } from "../../../dist/modules/validation.js";
+import Button from "../../../dist/components/myButton/index.js";
+
+const button = new Button({
+    id: 'reg',
+    className: 'my-button',
+    mesButton: 'Зарегистрироваться',
+});
 
 interface Input {
     input: string,
@@ -34,7 +41,11 @@ export class Registration extends Block {
 
     render() {
         const context = this.getData();
-        return compileTemplate('.app', getTemplateRegistration(), context);
+        compileTemplate('.app', getTemplateRegistration(), context);
+        const mainElem = document.querySelector('.app');
+        button.render(mainElem);
+
+        return mainElem.innerHTML;
     };
 
     setEvents() {
@@ -74,20 +85,21 @@ export class Registration extends Block {
 
 function setFormEvent(arrInputs: Input[], nameHiddenElement: string) {
     const frmAutorisation = document.querySelector("#form");
-    frmAutorisation.addEventListener("submit", function (e) {
+    frmAutorisation.addEventListener("submit", async function (e) {
         e.preventDefault();
         const user = getData(arrInputs);
-        const res = isRegistrationSuccess(user);
+        const res = await isRegistrationSuccess(user);
+        console.log(res);
         if (res){
             if (isValidValues(arrInputs, nameHiddenElement))
                 goNextPage(arrInputs, nameHiddenElement);
-            else {
-                const elementError = document.querySelector("#err-password6");
-                if ((elementError != null) && (elementError.classList.contains(nameHiddenElement))) {
-                    elementError.classList.remove(nameHiddenElement);
-                }
+        }    
+        else {
+            const elementError = document.querySelector("#err-password7");
+            if ((elementError != null) && (elementError.classList.contains(nameHiddenElement))) {
+                elementError.classList.remove(nameHiddenElement);
             }
-        }
+        }        
     });
 }
 

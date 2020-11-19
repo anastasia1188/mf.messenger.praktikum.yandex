@@ -53,10 +53,11 @@ export default class HTTPTransport {
             xhr.onerror = reject;
             xhr.ontimeout = reject;
 
+            console.log('data', data);
             if (method === METHODS.GET || !data) {
                 xhr.send();
             } else {
-                xhr.send(data);
+                xhr.send(JSON.stringify(data));
             }
         });
     };

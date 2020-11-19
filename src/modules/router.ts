@@ -1,13 +1,15 @@
 declare class Block {
    public render(): string; 
+   public setEvents(); 
 }
 function isEqual(lhs: string, rhs: string) {
     return lhs === rhs;
 }
 
-function render(query: string, block: Block) {
+async function render(query: string, block: Block) {
     const root = document.querySelector(query);
-    root.innerHTML = block.render();
+    root.innerHTML = await block.render();
+    block.setEvents();
     return root;
 }
 
@@ -45,13 +47,11 @@ export class Route {
             this.#block = new this.#blockClass();
             render(this.#props.rootQuery, this.#block);
             this.#block.show();
-            this.#block.setEvents();
             (<any>window).currentBlock = this.#block;
             return;
         }
         (<any>window).currentBlock = this.#block;
         render(this.#props.rootQuery, this.#block);
-        this.#block.setEvents();
     }
 }
 
