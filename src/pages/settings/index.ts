@@ -37,7 +37,7 @@ export class Settings extends Block {
     };
 
      async render() {
-        const context = this.getData();
+        const context = await this.getData();
         compileTemplate('.app', getTemplateSettings(), context);
         const mainElem = document.querySelector('.app');
         button.render(mainElem);
