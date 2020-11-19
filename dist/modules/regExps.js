@@ -1,5 +1,6 @@
-const REXP_EMAIL = new RegExp('^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$');
-const REXP_LOGIN = new RegExp('^([a-z0-9_-]+\.)*[a-z0-9_-]$');
-const REXP_LITERAL = /[a-z]/i;
-const REXP_NUMERAL = /[0-9]/;
-const REXP_GAP = /\s/g;
+export const REXP_EMAIL = new RegExp('^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$');
+export const REXP_LOGIN = new RegExp('^([a-z0-9_-]+\.)*[a-z0-9_-]$');
+export const REXP_LITERAL = /[a-z]/i;
+export const REXP_NUMERAL = /[0-9]/;
+export const REXP_GAP = /\s/g;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVnRXhwcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9tb2R1bGVzL3JlZ0V4cHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsTUFBTSxDQUFDLE1BQU0sVUFBVSxHQUFHLElBQUksTUFBTSxDQUFDLHVFQUF1RSxDQUFDLENBQUM7QUFDOUcsTUFBTSxDQUFDLE1BQU0sVUFBVSxHQUFHLElBQUksTUFBTSxDQUFDLDhCQUE4QixDQUFDLENBQUM7QUFDckUsTUFBTSxDQUFDLE1BQU0sWUFBWSxHQUFHLFFBQVEsQ0FBQztBQUNyQyxNQUFNLENBQUMsTUFBTSxZQUFZLEdBQUcsT0FBTyxDQUFDO0FBQ3BDLE1BQU0sQ0FBQyxNQUFNLFFBQVEsR0FBRyxLQUFLLENBQUMifQ==

@@ -1,29 +1,33 @@
 {
-  "name": "mf.messenger.praktikum.yandex",
-  "version": "1.0.0",
-  "description": "Мессенджер в музыкальном стиле позволяет отправлять и принимать сообщения.",
-  "main": "server.js",
-  "dependencies": {
-    "express": "^4.17.1",
-    "gulp-postcss": "^9.0.0",
-    "handlebars": "^4.7.6"
-  },
-  "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^8.2.1"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/anastasia1188/mf.messenger.praktikum.yandex.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/anastasia1188/mf.messenger.praktikum.yandex/issues"
-  },
-  "homepage": "https://github.com/anastasia1188/mf.messenger.praktikum.yandex#readme"
+    "name": "mf.messenger.praktikum.yandex",
+    "version": "1.0.0",
+    "description": "Мессенджер в музыкальном стиле позволяет отправлять и принимать сообщения.",
+    "main": "server.js",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "express": "^4.17.1",
+        "gulp-postcss": "^9.0.0",
+        "handlebars": "^4.7.6",
+        "uuid": "^8.3.1"
+    },
+    "devDependencies": {
+        "chai": "^4.2.0",
+        "mocha": "^8.2.1",
+        "nodemon": "^2.0.6"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node server.js",
+        "compileProject": "cd C:/OSPanel/domains/mf.messenger.praktikum.yandex/src & tsc -t es2018 --module es2020 --outDir ../dist/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/anastasia1188/mf.messenger.praktikum.yandex.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/anastasia1188/mf.messenger.praktikum.yandex/issues"
+    },
+    "homepage": "https://github.com/anastasia1188/mf.messenger.praktikum.yandex#readme"
 }

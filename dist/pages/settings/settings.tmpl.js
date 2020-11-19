@@ -33,17 +33,17 @@ export default function getTemplateSettings() {
             </p>
             <p>
                 <div class="basic-wrapper__itemrow">
-                    <label for="login"class="basic-wrapper__leftitem">Логин</label>
-                    <input id="login" class="basic-wrapper__setting" value={{flogin}}>
+                    <label for="name"class="basic-wrapper__leftitem">Имя</label>
+                    <input id="name" class="basic-wrapper__setting" value={{fname}}>
                 </div>
                 <div class="basic-wrapper__line"></div>
-                <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-login0">
+                <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-name0">
                     {{errorMes0}}
                 </p>
-                <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-login4">
+                <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-name4">
                     {{errorMes4}}
                 </p>
-                <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-login5">
+                <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-name5">
                     {{errorMes5}}
                 </p>
             </p>
@@ -100,8 +100,10 @@ export default function getTemplateSettings() {
                     {{errorMes6}}
                 </p>
             </p>
-            <button class="my-button" type="submit" id="save">Сохранить</button>
+            <div class="myButton">
+            </div>
         </div>
     </form>
     </div>`;
 }
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2V0dGluZ3MudG1wbC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3NyYy9wYWdlcy9zZXR0aW5ncy9zZXR0aW5ncy50bXBsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBQyxPQUFPLFVBQVUsbUJBQW1CO0lBQ3ZDLE9BQU87Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztXQXlHQSxDQUFDO0FBQ1osQ0FBQyJ9

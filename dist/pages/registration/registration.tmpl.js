@@ -51,6 +51,7 @@ export default function getTemplateRegistration() {
         </p>
         <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-password6">
         Пароли не совпадают
+        </p>
     </p>
     </div>
     <div class="wrapper__row">
@@ -73,12 +74,16 @@ export default function getTemplateRegistration() {
         <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-passwordr6">
             Пароли не совпадают
         </p>
+        <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-password7">
+        Такой пользователь уже существует
+        </p>
     </div>
 
-    <div>
+    <div class="myButton">
         <p><button id="reg" type="submit" class="my-button"> Зарегистрироваться </button></p>
     </div>
 </form>
 </div>`;
 }
 ;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVnaXN0cmF0aW9uLnRtcGwuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi9zcmMvcGFnZXMvcmVnaXN0cmF0aW9uL3JlZ2lzdHJhdGlvbi50bXBsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE1BQU0sQ0FBQyxPQUFPLFVBQVUsdUJBQXVCO0lBQzNDLE9BQU87Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQW9GSixDQUFBO0FBQUEsQ0FBQztBQUFBLENBQUMifQ==
