@@ -89,7 +89,7 @@ function setFormEvent(arrInputs: Input[], nameHiddenElement: string) {
         e.preventDefault();
         const user = getData(arrInputs);
         const res = await isRegistrationSuccess(user);
-        console.log(res);
+ 
         if (res){
             if (isValidValues(arrInputs, nameHiddenElement))
                 goNextPage(arrInputs, nameHiddenElement);

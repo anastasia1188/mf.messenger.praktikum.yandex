@@ -26,7 +26,6 @@ function compileTemplate(idTemplate: string, source: string, context: object, el
     else
         elemTemplate = elemDocument.querySelector(idTemplate);
 
-    //console.log(idTemplate, elemTemplate, elemDocument);
     const template: any = Handlebars.compile(source);
     const html = template(context);
     if (elemTemplate !== null)
@@ -49,7 +48,6 @@ function setButtonEvents(idButton: string, arrInputs: { input: string, value: an
 
 function goNextPage(arrInputs: { input: string, value: any }[], nameHiddenErr: string) {
         const data: any = getData(arrInputs);
-        console.log(data);
         window.location.hash = '#chat';
     }
 

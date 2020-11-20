@@ -5,17 +5,6 @@ const METHODS = {
     DELETE: 'DELETE'
 };
 
-function queryStringify(data: { key: string }) {
-    let result = "?";
-    for (let key in data) {
-        result = result + key + "=" + data[key].toString() + "&";
-    }
-
-    result = result.substring(0, result.length - 1);
-
-    return result;
-}
-
 export default class HTTPTransport {
     get = (url: string, options: { timeout: number, headers: { key: string, value: string }[], data: any }) => {
         return this.request(url, { ...options, method: METHODS.GET });
@@ -53,7 +42,6 @@ export default class HTTPTransport {
             xhr.onerror = reject;
             xhr.ontimeout = reject;
 
-            console.log('data', data);
             if (method === METHODS.GET || !data) {
                 xhr.send();
             } else {
