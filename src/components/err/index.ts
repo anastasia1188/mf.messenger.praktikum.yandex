@@ -1,4 +1,4 @@
-/// <reference path="../../../dist/modules/references.d.ts" />
+/// <reference path="../../../src/modules/references.d.ts" />
 /// <reference path="./err.d.ts" />
 import Block from "../../../dist/modules/block.js";
 import { getTemplateErr } from "./err.tmpl.js";

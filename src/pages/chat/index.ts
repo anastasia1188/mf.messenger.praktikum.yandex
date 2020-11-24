@@ -1,4 +1,4 @@
-/// <reference path="../../../dist/modules/references.d.ts" />
+/// <reference path="../../../src/modules/references.d.ts" />
 import Block from "../../../dist/modules/block.js";
 import getTemplateChat from "./chat.tmpl.js";
 import { isValidMessage } from "../../../dist/modules/validation.js";
@@ -60,7 +60,8 @@ export class Chat extends Block {
         this.messages = await getMessages();
         this.contacts = await getChats();
         const userData = await getUserData();
-        this.name = userData.name;
+        (<any>window).login = userData.login;
+        this.name = userData.first_name;
         this.fileImage = userData.avatar;
     }
 

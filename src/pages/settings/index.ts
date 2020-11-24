@@ -1,4 +1,4 @@
-/// <reference path="../../../dist/modules/references.d.ts" />
+/// <reference path="../../../src/modules/references.d.ts" />
 
 import Block from "../../../dist/modules/block.js";
 import getTemplateSettings from "./settings.tmpl.js";
@@ -12,6 +12,9 @@ const button = new Button({
     mesButton: 'Сохранить',
 });
 
+interface ObjectInterface {
+    [key: string]: string;
+}
 export class Settings extends Block {
     constructor(props: Object) {
         super("settings", props);
@@ -21,10 +24,10 @@ export class Settings extends Block {
         const dataUser = await getUserData();
         const result = {
             fimg: dataUser.avatar,
-            fname: dataUser.name,
+            fname: dataUser.first_name,
             femail: dataUser.email,
-            fpassword: dataUser.password,
-            fpasswordRepeat: dataUser.password,
+            fpassword: 'password8',//dataUser.password,
+            fpasswordRepeat: 'password8',//dataUser.password,
             errorMes0: "Не верно введены данные",
             errorMes1: "Ваш пароль должен быть не менее 8 символов",
             errorMes2: "Ваш пароль должен содержать хотя бы один литерал",
@@ -85,19 +88,28 @@ export class Settings extends Block {
     }
 }
 
-function setFormEvent(arrInputs: { input: string }[], nameHiddenElement: string) {
+function setFormEvent(arrInputs: { input: string, value: Function }[], nameHiddenElement: string) {
     const frmAutorisation = document.querySelector("#form");
 
     frmAutorisation.addEventListener("submit", async function (e) {
         e.preventDefault();
-        const user: Object = getData(arrInputs);
+        const user: ObjectInterface = getData(arrInputs);
+        const formatUser = 
+            {
+                "first_name": user.name,
+                "second_name": user.name,
+                "display_name": user.name,
+                "login":window.login,
+                "email": user.email,
+                "phone": "+79188888888"
+            };
 
         if (isValidValues(arrInputs, nameHiddenElement)) {
-            const imgAvatar = <HTMLImageElement>document.querySelector("#avatar").src;
-            user.avatar = imgAvatar;
-            const res = await saveUserData(user);
+            const imgAvatar = <HTMLImageElement>document.querySelector("#avatar");
+            user.avatar = imgAvatar.src;
+            const res = saveUserData(formatUser);
             if (res)
-                goNextPage(arrInputs, nameHiddenElement);
+                goNextPage(arrInputs);
             else {
                 const elementError = document.querySelector("#err-password6");
                 if ((elementError != null) && (elementError.classList.contains(nameHiddenElement))) {
