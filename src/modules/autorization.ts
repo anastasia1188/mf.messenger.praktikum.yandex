@@ -52,7 +52,7 @@ export function isRegistrationSuccess(user: User) {
 }
 
 export function saveUserData(user: Object) {
-    console.log(user);
+
     return fetch(`${host}/user/profile`,
         {
             method: 'PUT',
@@ -140,4 +140,57 @@ export async function deleteChatFromList(chat: Object) {
     };
 }
 
+// TODO 
+export function addUsertoChat(user: Object) {
+    return fetch(`${host}/chat/users`,
+        {
+            method: 'PUT',
+            credentials: 'include', 
+            mode: 'cors', 
+            headers: {
+               'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(user)
+        }
+    ).then(response => response.text()) 
+    .then(data => {
+      console.log(data);
+      return data;
+    });
+}
 
+export function deleteUserFromChat(user: Object) {
+    console.log(user);
+    return fetch(`${host}/chats/users`,
+        {
+            method: 'DELETE',
+            credentials: 'include', 
+            mode: 'cors', 
+            headers: {
+               'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(user)
+        }
+    ).then(response => response.text()) 
+    .then(data => {
+      console.log(data);
+      return data;
+    });
+}
+
+export function logout() {
+    return fetch(`${host}/auth/logout`,
+        {
+            method: 'POST',
+            credentials: 'include',
+            mode: 'cors', 
+            headers: {
+               'Content-Type': 'application/json;charset=utf-8'
+            }
+        }
+    ).then(response => response.text()) 
+    .then(data => {
+      console.log(data);
+      return data;
+    });
+}
