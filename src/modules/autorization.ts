@@ -1,99 +1,106 @@
 import HTTPTransport from "../../dist/modules/httpTransport.js";
 
 interface User {
+    email: string;
+    name: string;
     login: string;
     password: string;
 }
 
-interface User {
-    login: string,
-    password: string
-}
+const host = 'https://ya-praktikum.tech/api/v2';
 
-export async function isAutorizied(user: User) {
-
-    let result = false;
-
-    let response = await fetch('/auth/signin',
+export function isAutorizied(user: User) {
+    return fetch(`${host}/auth/signin`,
         {
             method: 'POST',
+            credentials: 'include',
+            mode: 'cors', 
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify(user)
         }
-    );
-
-    if (response.status === 200)
-        result = true;
-
-    return result;
+    ).then(response => response.text()) // Можно вытащить через .json()
+    .then(data => {
+      console.log(data);
+      return data;
+    });
 }
 
-export async function isRegistrationSuccess(user: User) {
-    try {
-        let response = await fetch('/auth/signup',
-            {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
-                body: JSON.stringify(user)
-            }
-        )
-        if (response.status === 200)
-            return true
-        else
-            return false;
-    }
-    catch (err) {
-        return false;
-    };
+export function isRegistrationSuccess(user: User) {
+    return fetch(`${host}/auth/signup`, {
+        method: 'POST',
+        credentials: 'include', 
+        mode: 'cors', 
+        headers: {
+            'content-type': 'application/json', 
+        },
+        body: JSON.stringify({
+            first_name: user.name,
+            second_name: user.name,
+            login: (<any>window).login,
+            email: user.email,
+            phone: "+79194234578",
+            password: user.password
+        }),
+    })
+      .then(response => response.text()) // Можно вытащить через .json()
+      .then(data => {
+        console.log(data);
+        return data;
+      });
 }
 
-export async function saveUserData(user: User) {
-    try {
-        let response = await fetch('/user/profile',
-            {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
-                body: JSON.stringify(user)
-            }
-        )
-        if (response.status === 200)
-            return true
-        else
-            return false;
-    }
-    catch (err) {
-        return false;
-    };
+export function saveUserData(user: Object) {
+    console.log(user);
+    return fetch(`${host}/user/profile`,
+        {
+            method: 'PUT',
+            credentials: 'include', // Нужно подставлять куки
+            mode: 'cors', // Работаем с CORS
+            headers: {
+               'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(user)
+        }
+    ).then(response => response.text()) // Можно вытащить через .json()
+    .then(data => {
+      console.log(data);
+      return data;
+    });
 }
 
 export async function getUserData() {
-    const response = await fetch('/auth/user');
+
+    const response = await fetch(`${host}/auth/user`,
+     {
+        method: 'GET',
+        credentials: 'include', // Нужно подставлять куки
+        mode: 'cors', // Работаем с CORS
+        headers: {
+        'Content-Type': 'application/json;charset=utf-8'}
+        });
+
     const result = response.json();
+    console.log('result', result);
     return result;
 }
 
 export async function getChats() {
-    const response = await fetch('/chats');
+    const response = await fetch(`/chats`);
     const result = response.json();
     return result;
 }
 
 export async function getMessages() {
-    const response = await fetch('/messages');
+    const response = await fetch(`/messages`);
     const result = response.json();
     return result;
 }
 
-export async function addChatToList(chat: Object)
-{
+export async function addChatToList(chat: Object) {
     try {
-        let response = await fetch('/chats',
+        let response = await fetch(`${host}/chats`,
             {
                 method: 'POST',
                 headers: {
@@ -112,10 +119,9 @@ export async function addChatToList(chat: Object)
     };
 }
 
-export async function deleteChatFromList(chat: Object)
-{
+export async function deleteChatFromList(chat: Object) {
     try {
-        let response = await fetch('/chats',
+        let response = await fetch(`/chats`,
             {
                 method: 'DELETE',
                 headers: {
@@ -135,18 +141,3 @@ export async function deleteChatFromList(chat: Object)
 }
 
 
-function postFile(form: HTMLFormElement) {
-    const host = 'http://mf.messenger.praktikum.yandex';
-    const formData = new FormData(form);
-
-    fetch(`${host}/data/image`, {
-        method: 'PUT',
-        credentials: 'include',
-        mode: 'cors',
-        body: formData,
-    })
-        .then(response => response.json())
-        .then(data => {
-            return data;
-        });
-}

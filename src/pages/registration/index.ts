@@ -1,8 +1,8 @@
-/// <reference path="../../../dist/modules/references.d.ts" />
+/// <reference path="../../../src/modules/references.d.ts" />
 import Block from "../../../dist/modules/block.js";
 import getTemplateRegistration from "./registration.tmpl.js";
 import { isRegistrationSuccess } from "../../../dist/modules/autorization.js";
-import { isValidLogin, isValidEmail, isValidPassword, validateEMail, validateLogin, validatePassword, setFocus, isValidValues } from "../../../dist/modules/validation.js";
+import {isValidName, validateName, isValidLogin, isValidEmail, isValidPassword, validateEMail, validateLogin, validatePassword, setFocus, isValidValues } from "../../../dist/modules/validation.js";
 import Button from "../../../dist/components/myButton/index.js";
 
 const button = new Button({
@@ -13,7 +13,7 @@ const button = new Button({
 
 interface Input {
     input: string,
-    value: any
+    value: Function
 }
 export class Registration extends Block {
     constructor(props: Object) {
@@ -61,6 +61,11 @@ export class Registration extends Block {
             validateLogin("login", nameHiddenElement);
         });
 
+        const elementName = document.getElementById("name");
+        elementName.addEventListener('blur', function (e) {
+            validateName("name", nameHiddenElement);
+        });
+
         const elementPassword = document.getElementById("password");
         elementPassword.addEventListener('blur', function (e) {
             validatePassword("password", nameHiddenElement);
@@ -74,6 +79,7 @@ export class Registration extends Block {
         const inputs = [
             { input: "email", value: isValidEmail },
             { input: "login", value: isValidLogin },
+            { input: "name", value: isValidName },
             { input: "password", value: isValidPassword },
             { input: "passwordr", value: isValidPassword }
         ];
@@ -90,9 +96,14 @@ function setFormEvent(arrInputs: Input[], nameHiddenElement: string) {
         const user = getData(arrInputs);
         const res = await isRegistrationSuccess(user);
  
-        if (res){
+        if (res !== undefined){
             if (isValidValues(arrInputs, nameHiddenElement))
-                goNextPage(arrInputs, nameHiddenElement);
+            {   
+                const resObj    = JSON.parse(res);
+                (<any>window).idUser = resObj.id;
+                if (!resObj.id !== undefined)
+                    goNextPage(arrInputs);
+            }
         }    
         else {
             const elementError = document.querySelector("#err-password7");

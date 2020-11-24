@@ -8,7 +8,12 @@ interface Template {
         context: Object
 }
 
-function getData(arrFields: { input: string, value: string }[] = []): Object {
+interface Input {
+    input: string,
+    value?: Function | string
+}
+
+function getData(arrFields: { input: string, value: string }[] = []): ObjectInterface {
     const result: ObjectInterface = {};
 
     for (let i = 0; i < arrFields.length; i++) {
@@ -37,17 +42,16 @@ function setButtonEvents(idButton: string, arrInputs: { input: string, value: an
     const elemButton: HTMLElement = document.getElementById(idButton);
     elemButton.addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
-            goNextPage(arrInputs, nameHiddenErr);
+            goNextPage(arrInputs);
         }
     });
 
     elemButton.addEventListener('click', function (e) {
-        goNextPage(arrInputs, nameHiddenErr);
+        goNextPage(arrInputs);
     })
 }
 
-function goNextPage(arrInputs: { input: string, value: any }[], nameHiddenErr: string) {
-        const data: any = getData(arrInputs);
+function goNextPage(arrInputs: Input[]) {
         window.location.hash = '#chat';
     }
 
@@ -55,7 +59,7 @@ function setFormEvents(arrInputs: { input: string, value: any }[], nameHiddenErr
     const frmAutorisation = document.querySelector("#form");
     frmAutorisation.addEventListener("submit", function (e) {
         e.preventDefault();
-        goNextPage(arrInputs, nameHiddenErr);
+        goNextPage(arrInputs);
     });
 }
 

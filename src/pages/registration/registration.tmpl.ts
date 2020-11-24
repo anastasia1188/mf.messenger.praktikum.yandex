@@ -33,6 +33,20 @@ export default function getTemplateRegistration() {
             Длина должна быть не менее 5 символов
         </p>
     </div>
+
+    <div class="wrapper__row">
+    <input class="wrapper__row" id="name" name="name" type="text" placeholder="Имя">
+    <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-name0">
+        Не верно введены данные
+    </p>
+    <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-name4">
+        Не допускаются пробелы
+    </p>
+    <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-name5">
+        Длина должна быть не менее 5 символов
+    </p>
+    </div>
+
     <div class="wrapper__row">
         <input class="wrapper__row" id="password" name="password" type="password" placeholder="Пароль">
         <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-password1">

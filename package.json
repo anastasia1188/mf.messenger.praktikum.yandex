@@ -8,6 +8,7 @@
         "express": "^4.17.1",
         "gulp-postcss": "^9.0.0",
         "handlebars": "^4.7.6",
+        "typescript": "^4.1.2",
         "uuid": "^8.3.1"
     },
     "devDependencies": {
@@ -18,7 +19,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node server.js",
-        "compileProject": "cd C:/OSPanel/domains/mf.messenger.praktikum.yandex/src & tsc -t es2018 --module es2020 --outDir ../dist/"
+        "compileProject": "tsc -t es2018 --module es2020 --outDir ./dist"
     },
     "repository": {
         "type": "git",

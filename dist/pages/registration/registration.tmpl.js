@@ -32,6 +32,20 @@ export default function getTemplateRegistration() {
             Длина должна быть не менее 5 символов
         </p>
     </div>
+
+    <div class="wrapper__row">
+    <input class="wrapper__row" id="name" name="name" type="text" placeholder="Имя">
+    <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-name0">
+        Не верно введены данные
+    </p>
+    <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-name4">
+        Не допускаются пробелы
+    </p>
+    <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-name5">
+        Длина должна быть не менее 5 символов
+    </p>
+    </div>
+
     <div class="wrapper__row">
         <input class="wrapper__row" id="password" name="password" type="password" placeholder="Пароль">
         <p class="wrapper__errmes wrapper__errmes-hiddenerr" id="err-password1">
@@ -86,4 +100,3 @@ export default function getTemplateRegistration() {
 </div>`;
 }
 ;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVnaXN0cmF0aW9uLnRtcGwuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi9zcmMvcGFnZXMvcmVnaXN0cmF0aW9uL3JlZ2lzdHJhdGlvbi50bXBsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE1BQU0sQ0FBQyxPQUFPLFVBQVUsdUJBQXVCO0lBQzNDLE9BQU87Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQW9GSixDQUFBO0FBQUEsQ0FBQztBQUFBLENBQUMifQ==

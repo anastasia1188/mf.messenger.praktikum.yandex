@@ -1,13 +1,12 @@
-/// <reference path="../../../dist/modules/references.d.ts" />
-/// <reference path="../../../dist/modules/common.d.ts" />
+/// <reference path="../../../src/modules/references.d.ts" />
+/// <reference path="../../../src/modules/common.d.ts" />
 import Block from "../../../dist/modules/block.js";
 import getTemplateLogin from "./login.tmpl.js";
-import myButton from "../../dist/components/myButton/index.js";
+import myButton from "../../../dist/components/myButton/index.js";
 import { isAutorizied } from "../../../dist/modules/autorization.js";
 import { isValidLogin, isValidPassword, validateLogin, validatePassword, setFocus, isValidValues } from "../../../dist/modules/validation.js";
-import Button from "../../../dist/components/myButton/index.js";
 
-const button = new Button({
+const button = new myButton({
     id: 'autorisation',
     className: 'my-button',
     mesButton: 'Авторизация',
@@ -88,7 +87,7 @@ function setFormEvent(arrInputs: { input: string }[], nameHiddenElement: string)
 
         if (res) {
             if (isValidValues(arrInputs, nameHiddenElement))
-                goNextPage(arrInputs, nameHiddenElement);
+                goNextPage(arrInputs);
         } else {
             const elementError = document.querySelector("#err-password6");
             if ((elementError != null) && (elementError.classList.contains(nameHiddenElement))) {
