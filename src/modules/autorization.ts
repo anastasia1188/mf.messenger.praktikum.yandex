@@ -1,4 +1,4 @@
-import HTTPTransport from "../../dist/modules/httpTransport.js";
+import HTTPTransport from "../../dist/modules/httpTransport";
 
 interface User {
     email: string;
@@ -9,7 +9,7 @@ interface User {
 
 const host = 'https://ya-praktikum.tech/api/v2';
 
-export function isAutorizied(user: User) {
+export function isAutorizied(user: User|ObjectInterface) {
     return fetch(`${host}/auth/signin`,
         {
             method: 'POST',
@@ -27,7 +27,7 @@ export function isAutorizied(user: User) {
     });
 }
 
-export function isRegistrationSuccess(user: User) {
+export function isRegistrationSuccess(user: User|ObjectInterface) {
     return fetch(`${host}/auth/signup`, {
         method: 'POST',
         credentials: 'include', 

@@ -1,4 +1,4 @@
-import { REXP_EMAIL, REXP_LOGIN, REXP_LITERAL, REXP_NUMERAL, REXP_GAP } from "./regExps.js";
+import { REXP_EMAIL, REXP_LOGIN, REXP_LITERAL, REXP_NUMERAL, REXP_GAP } from "./regExps";
 
 enum typeErrors {
     FORMAT_ERROR = 0,

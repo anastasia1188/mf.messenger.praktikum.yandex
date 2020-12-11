@@ -1,5 +1,5 @@
 /// <reference path="references.d.ts" />
-import { EventBus } from "./eventBus.js";
+import { EventBus } from "./eventBus";
 
 export default class Block {
     static EVENTS = {
@@ -75,7 +75,7 @@ export default class Block {
         return this.#element;
     }
 
-    private render() {
+    render(mainElem?: HTMLElement) {
         const block = this.render();
         this.#element.innerHTML = block;
     }

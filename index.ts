@@ -1,9 +1,9 @@
-import './sass/main.sass';
-import { Login } from './dist/pages/login/index.js';
-import { Registration } from './dist/pages/registration/index.js';
-import { Chat } from './dist/pages/chat/index.js';
-import { Settings } from './dist/pages/settings/index.js';
-import router from './dist/modules/router.js';
+import './sass/main.sass'
+import { Login } from './src/pages/login/index';
+import { Registration } from './src/pages/registration/index';
+import { Chat } from './src/pages/chat/index';
+import { Settings } from './src/pages/settings/index';
+import router from './src/modules/router';
 
 let mainRouter = new router(".app");
 
@@ -26,4 +26,4 @@ setTimeout(() => {
 }, 1000);
 
 window.addEventListener("hashchange", changeRoute);
-window.Chat = Chat;
+(<any>window).Chat = Chat;

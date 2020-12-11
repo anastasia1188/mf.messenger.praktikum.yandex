@@ -1,9 +1,9 @@
 /// <reference path="../../../src/modules/references.d.ts" />
-import Block from "../../../dist/modules/block.js";
-import getTemplateRegistration from "./registration.tmpl.js";
-import { isRegistrationSuccess } from "../../../dist/modules/autorization.js";
-import {isValidName, validateName, isValidLogin, isValidEmail, isValidPassword, validateEMail, validateLogin, validatePassword, setFocus, isValidValues } from "../../../dist/modules/validation.js";
-import Button from "../../../dist/components/myButton/index.js";
+import Block from "../../modules/block";
+import getTemplateRegistration from "./registration.tmpl";
+import { isRegistrationSuccess } from "../../modules/autorization";
+import {isValidName, validateName, isValidLogin, isValidEmail, isValidPassword, validateEMail, validateLogin, validatePassword, setFocus, isValidValues } from "../../modules/validation";
+import Button from "../../components/myButton/index";
 
 const button = new Button({
     id: 'reg',
@@ -42,7 +42,7 @@ export class Registration extends Block {
     render() {
         const context = this.getData();
         compileTemplate('.app', getTemplateRegistration(), context);
-        const mainElem = document.querySelector('.app');
+        const mainElem:HTMLElement = <HTMLElement>document.querySelector('.app');
         button.render(mainElem);
 
         return mainElem.innerHTML;

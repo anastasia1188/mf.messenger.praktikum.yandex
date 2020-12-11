@@ -298,4 +298,11 @@ app.use(function(req, res) {
     res.sendFile(__dirname + '/dist/pages/500/500.html');
 });*/
 
-app.listen(3000);
+app.set('port', (process.env.PORT || 4000));
+
+//Start Server
+app.listen(app.get('port'), function() {
+    console.log('Node app is running on port', app.get('port'));
+});
+
+console.log('hi');

@@ -76,7 +76,7 @@ export default class Router {
         Router.__instance = this;
     }
 
-    use(pathName: string, block: Block) {
+    use(pathName: string, block: any) {
         const route = new Route(pathName, block, { rootQuery: this.#rootQuery });
         this.routes.push(route);
         return this;

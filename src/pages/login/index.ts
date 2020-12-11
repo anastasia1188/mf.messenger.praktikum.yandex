@@ -1,10 +1,10 @@
 /// <reference path="../../../src/modules/references.d.ts" />
 /// <reference path="../../../src/modules/common.d.ts" />
-import Block from "../../../dist/modules/block.js";
-import getTemplateLogin from "./login.tmpl.js";
-import myButton from "../../../dist/components/myButton/index.js";
-import { isAutorizied } from "../../../dist/modules/autorization.js";
-import { isValidLogin, isValidPassword, validateLogin, validatePassword, setFocus, isValidValues } from "../../../dist/modules/validation.js";
+import Block from "../../modules/block";
+import getTemplateLogin from "./login.tmpl";
+import myButton from "../../components/myButton/index";
+import { isAutorizied } from "../../modules/autorization";
+import { isValidLogin, isValidPassword, validateLogin, validatePassword, setFocus, isValidValues } from "../../modules/validation";
 
 const button = new myButton({
     id: 'autorisation',
@@ -14,6 +14,11 @@ const button = new myButton({
 
 interface ObjectInterface {
     [key: string]: string;
+}
+
+interface Input {
+    input: string,
+    value: any
 }
 export class Login extends Block {
     users: [];
@@ -44,7 +49,7 @@ export class Login extends Block {
     render() {
         const context = this.getData();
         compileTemplate('.app', getTemplateLogin(), context);
-        const mainElem = document.querySelector('.app');
+        const mainElem: HTMLElement = document.querySelector('.app');
         button.render(mainElem);
         
         return mainElem.innerHTML;
@@ -77,7 +82,7 @@ export class Login extends Block {
     };
 }
 
-function setFormEvent(arrInputs: { input: string }[], nameHiddenElement: string) {
+function setFormEvent(arrInputs: Input[], nameHiddenElement: string) {
     const frmAutorisation = document.querySelector("#form");
 
     frmAutorisation.addEventListener("submit", async function (e) {

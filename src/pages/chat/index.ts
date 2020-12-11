@@ -1,9 +1,9 @@
 /// <reference path="../../../src/modules/references.d.ts" />
-import Block from "../../../dist/modules/block.js";
-import getTemplateChat from "./chat.tmpl.js";
-import { isValidMessage } from "../../../dist/modules/validation.js";
-import { getChats, getMessages } from "../../../dist/modules/autorization.js";
-import { getUserData, addChatToList, deleteChatFromList } from "../../modules/autorization.js";
+import Block from "../../modules/block";
+import getTemplateChat from "./chat.tmpl";
+import { isValidMessage } from "../../modules/validation";
+import { getChats, getMessages } from "../../modules/autorization";
+import { getUserData, addChatToList, deleteChatFromList } from "../../modules/autorization";
 
 interface Message {
     contact: string,
@@ -48,9 +48,9 @@ export class Chat extends Block {
                 const value = target[prop];
                 return typeof value === "function" ? value.bind(target) : value;
             },
-            async set(target, prop, value) {
+            set(target, prop, value) {
                 target[prop] = value;
-                await target.chat.render();
+                target.chat.render();
                 //target.chat.setEvents();
                 return true;
             },

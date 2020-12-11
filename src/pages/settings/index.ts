@@ -1,10 +1,10 @@
 /// <reference path="../../../src/modules/references.d.ts" />
 
-import Block from "../../../dist/modules/block.js";
-import getTemplateSettings from "./settings.tmpl.js";
-import { saveUserData, getUserData } from "../../../dist/modules/autorization.js";
-import { isValidName, isValidEmail, isValidPassword, validateEMail, validateName, validatePassword, setFocus, isValidValues } from "../../../dist/modules/validation.js";
-import Button from "../../../dist/components/myButton/index.js";
+import Block from "../../modules/block";
+import getTemplateSettings from "../../pages/settings/settings.tmpl";
+import { saveUserData, getUserData } from "../../modules/autorization";
+import { isValidName, isValidEmail, isValidPassword, validateEMail, validateName, validatePassword, setFocus, isValidValues } from "../../modules/validation";
+import Button from "../../components/myButton/index";
 
 const button = new Button({
     id: 'save',
@@ -42,7 +42,7 @@ export class Settings extends Block {
      async render() {
         const context = await this.getData();
         compileTemplate('.app', getTemplateSettings(), context);
-        const mainElem = document.querySelector('.app');
+        const mainElem: HTMLElement = document.querySelector('.app');
         button.render(mainElem);
 
         return mainElem.innerHTML;
@@ -99,7 +99,7 @@ function setFormEvent(arrInputs: { input: string, value: Function }[], nameHidde
                 "first_name": user.name,
                 "second_name": user.name,
                 "display_name": user.name,
-                "login":window.login,
+                "login":(<any>window).login,
                 "email": user.email,
                 "phone": "+79188888888"
             };

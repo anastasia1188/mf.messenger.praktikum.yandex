@@ -1,7 +1,8 @@
-import Block from "../../../dist/modules/block.js";
-import getTemplateMyButton from "./myButton.tmpl.js";
+import Block from "../../modules/block";
+import getTemplateMyButton from "./myButton.tmpl";
 
 export default class myButton extends Block {
+    props: object;
     constructor(props: Object) {
       super("button", props);
     }
