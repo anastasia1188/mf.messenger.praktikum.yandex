@@ -1,5 +1,5 @@
 export default function getTemplateChat() {
-    return `<div class="chat-wrapper">
+  return `<div class="chat-wrapper">
     <div class="chat-wrapper__left-part">
         <div class="chat-wrapper__search">
             <div class="chat-wrapper__logo">

@@ -1,37 +1,41 @@
-interface Listener {
-    [key: string]: Function[];
+interface FuncEvent {
+  (idInput: string, nameHiddenError: string): void;
 }
-export class EventBus {
+interface Listener {
+    [key: string]: FuncEvent[];
+}
+export default class EventBus {
     listeners: Listener;
+
     constructor() {
-        this.listeners = {};
+      this.listeners = {};
     }
 
-    on(event: string, callback: Function ) {
-        if (!this.listeners[event]) {
-            this.listeners[event] = [];
-        }
+    on(event: string, callback: FuncEvent) {
+      if (!this.listeners[event]) {
+        this.listeners[event] = [];
+      }
 
-        this.listeners[event].push(callback);
+      this.listeners[event].push(callback);
     }
 
-    off(event: string, callback: Function) {
-        if (!this.listeners[event]) {
-            throw new Error(`Нет события: ${event}`);
-        }
+    off(event: string, callback: FuncEvent) {
+      if (!this.listeners[event]) {
+        throw new Error(`Нет события: ${event}`);
+      }
 
-        this.listeners[event] = this.listeners[event].filter(
-            listener => listener !== callback
-        );
+      this.listeners[event] = this.listeners[event].filter(
+        (listener) => listener !== callback,
+      );
     }
 
     emit(event: string, ...args) {
-        if (!this.listeners[event]) {
-            throw new Error(`Нет события: ${event}`);
-        }
+      if (!this.listeners[event]) {
+        throw new Error(`Нет события: ${event}`);
+      }
 
-        this.listeners[event].forEach(function(listener) {
-            listener(...args);
-        });
+      this.listeners[event].forEach((listener) => {
+        listener(...args);
+      });
     }
 }

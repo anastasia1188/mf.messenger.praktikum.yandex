@@ -1,1 +1,1 @@
-declare var errorCode: string;
+declare let errorCode: string;

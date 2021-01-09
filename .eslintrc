@@ -1,9 +1,44 @@
 {
-    "extends": ["airbnb/base"],
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+    "extends": [
+      "airbnb/base",
+      "eslint:recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
     "rules": {
+      "no-shadow": "off",
+      "no-use-before-define": "off",
+      "max-classes-per-file": "off",
+      "no-param-reassign": "off",
+      "class-methods-use-this": "off",
+      "no-this-alias": "off",
+      "no-underscore-dangle": 0,
+      "no-plusplus": [2, { "allowForLoopAfterthoughts": true }],
     "jsx-quotes": [
       1,
       "prefer-double"
-    ]
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+   ]
   }
 }

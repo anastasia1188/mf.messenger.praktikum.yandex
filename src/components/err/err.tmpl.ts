@@ -1,5 +1,5 @@
-export function getTemplateErr() {
-    return `<div class="basic-wrapper">
+export default function getTemplateErr() {
+  return `<div class="basic-wrapper">
     <div class="basic-wrapper__item">
         <div class="basic-wrapper__line">
             <p> {{errcode}} </p>
