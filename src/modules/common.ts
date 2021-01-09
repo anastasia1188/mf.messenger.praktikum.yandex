@@ -1,5 +1,5 @@
 /// <reference path="common.d.ts" />
-jj = 0;
+
 interface ObjectInterface {
   [key: string]: string;
 }
