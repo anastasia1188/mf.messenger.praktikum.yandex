@@ -48,7 +48,15 @@
         "startWP": "webpack --watch",
         "startWPS": "webpack-dev-server",
         "lint": "eslint ./src --ext .ts",
-        "lintfix": "eslint ./src --ext .ts --fix"
+        "lintfix": "eslint ./src --ext .ts --fix",
+        "precommit": "lint-staged"
+    },
+    "lint-staged": {
+        "*.{js, jsx}": [
+            "node_modules/.bin/eslint --max-warnings=0",
+            "prettier --write",
+            "git add"
+        ]
     },
     "repository": {
         "type": "git",
