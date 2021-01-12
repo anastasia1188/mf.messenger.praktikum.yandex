@@ -1,5 +1,6 @@
 import Block from '../../modules/block';
 import getTemplateMyButton from './myButton.tmpl';
+import { compileTemplate } from '../../modules/common';
 
 export default class MyButton extends Block {
     props: Record<string, any>;

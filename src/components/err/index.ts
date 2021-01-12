@@ -1,5 +1,5 @@
 import Block from '../../../dist/modules/block';
-import { getTemplateErr } from './err.tmpl';
+import getTemplateErr from './err.tmpl';
 import { compileTemplate } from '../../modules/common';
 
 export default class Err extends Block {

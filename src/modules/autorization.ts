@@ -1,10 +1,14 @@
-import HTTPTransport from '../../dist/modules/httpTransport';
+import HTTPTransport from './httpTransport';
 
 interface User {
     email: string;
     name: string;
     login: string;
     password: string;
+}
+
+interface ObjectInterface {
+  [key: string]: string;
 }
 
 const host = 'https://ya-praktikum.tech/api/v2';

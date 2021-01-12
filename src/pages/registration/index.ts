@@ -7,6 +7,7 @@ import {
   validateEMail, validateLogin, validatePassword, setFocus, isValidValues,
 } from '../../modules/validation';
 import Button from '../../components/myButton/index';
+import { compileTemplate } from '../../modules/common';
 
 const button = new Button({
   id: 'reg',
@@ -19,7 +20,7 @@ interface FuncEvent {
 }
 interface Input {
     input: string,
-    value: FuncEvent
+    value: any
 }
 
 function setFormEvent(arrInputs: Input[], nameHiddenElement: string) {
@@ -48,7 +49,7 @@ export default class Registration extends Block {
     super('registration', props);
   }
 
-  static private getData() {
+  private static getData() {
     const result = {
       mesReg: 'Регистрация',
       mesEmail: 'Почта',
@@ -68,7 +69,7 @@ export default class Registration extends Block {
   }
 
   render() {
-    const context = this.getData();
+    const context = Registration.getData();
     compileTemplate('.app', getTemplateRegistration(), context);
     const mainElem:HTMLElement = <HTMLElement>document.querySelector('.app');
     button.render(mainElem);
@@ -76,7 +77,7 @@ export default class Registration extends Block {
     return mainElem.innerHTML;
   }
 
-  static setEvents() {
+  setEvents() {
     const nameHiddenElement = 'wrapper__errmes-hiddenerr';
 
     const elementEmail = document.getElementById('email');

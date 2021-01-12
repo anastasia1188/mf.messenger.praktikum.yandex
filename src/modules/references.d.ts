@@ -1,5 +1,3 @@
-declare function compileTemplate(nameTemplate: string, template: string,
-     context: Record<string, any>);
 declare function getTemplate404(): string;
 declare function getTemplate500(): string;
 declare function getTemplateChat(): string;

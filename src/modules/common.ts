@@ -1,5 +1,5 @@
 /// <reference path="common.d.ts" />
-fffjj111 = 0;
+
 interface ObjectInterface {
   [key: string]: string;
 }
@@ -18,7 +18,7 @@ interface Input {
   value?: FuncEvent | string
 }
 
-function getData(arrFields: { input: string, value: string }[] = []): ObjectInterface {
+export function getData(arrFields: { input: string, value: string }[] = []): ObjectInterface {
   const result: ObjectInterface = {};
 
   for (let i = 0; i < arrFields.length; i++) {
@@ -29,8 +29,8 @@ function getData(arrFields: { input: string, value: string }[] = []): ObjectInte
   return result;
 }
 
-function compileTemplate(idTemplate: string, source: string, context:
-  Record<string, any>, elemDocument: HTMLDocument | HTMLElement) {
+export function compileTemplate(idTemplate: string, source: string, context: Record<string, any>, 
+  elemDocument?: HTMLDocument | HTMLElement) {
   let elemTemplate: HTMLElement;
   if (elemDocument === undefined) {
     elemTemplate = document.querySelector(idTemplate);
@@ -44,11 +44,11 @@ function compileTemplate(idTemplate: string, source: string, context:
   return html;
 }
 
-function goNextPage(arrInputs: Input[]) {
+export function goNextPage(arrInputs: Input[]) {
   window.location.hash = '#chat';
 }
 
-function setButtonEvents(idButton: string, arrInputs:
+export function setButtonEvents(idButton: string, arrInputs:
    { input: string, value: any }[], nameHiddenErr: string) {
   const elemButton: HTMLElement = document.getElementById(idButton);
   elemButton.addEventListener('keypress', (e) => {
@@ -62,7 +62,7 @@ function setButtonEvents(idButton: string, arrInputs:
   });
 }
 
-function setFormEvents(arrInputs: { input: string, value: any }[], nameHiddenErr: string) {
+export function setFormEvents(arrInputs: { input: string, value: any }[], nameHiddenErr: string) {
   const frmAutorisation = document.querySelector('#form');
   frmAutorisation.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -70,6 +70,6 @@ function setFormEvents(arrInputs: { input: string, value: any }[], nameHiddenErr
   });
 }
 
-function deepEqual(obj1: Record<string, any>, obj2: Record<string, any>) {
+export default function deepEqual(obj1: Record<string, any>, obj2: Record<string, any>) {
   return JSON.stringify(obj1) === JSON.stringify(obj2);
 }

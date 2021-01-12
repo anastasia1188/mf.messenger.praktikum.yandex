@@ -4,6 +4,10 @@ import { isValidMessage } from '../../modules/validation';
 import {
   getChats, getMessages, getUserData, addChatToList, deleteChatFromList,
 } from '../../modules/autorization';
+import { compileTemplate } from '../../modules/common';
+
+let socket = new WebSocket("wss://javascript.info/article/websocket/chat/ws");
+
 
 interface Message {
     contact: string,
@@ -148,14 +152,14 @@ export default class Chat extends Block {
     }
 
     async showChatHistory(elementContact: HTMLElement) {
-      const idContact: strElement = this.getIdContact(elementContact);
+      const idContact: strElement = Chat.getIdContact(elementContact);
       if (idContact !== undefined) {
         const history = this.getHistoryChat(idContact);
         this.updateContacts(idContact);
         const context = this.getAllData();
         context.messages = history;
         await this.render(context);
-        this.setEvents();
+        Chat.setEvents();
       }
     }
 
@@ -194,6 +198,8 @@ export default class Chat extends Block {
             if (isValidValues(inputs, nameHiddenError)) {
               const data = getData(inputs);
               console.log(data);
+              let message = data;
+              socket.send(message.ineditor);
             }
           } else {
             const elementError = document.getElementById('err-ineditor7');
@@ -229,6 +235,11 @@ export default class Chat extends Block {
       const elementDeleteChat = <HTMLElement>document.querySelector('#delete');
       if (elementDeleteChat != null) { elementDeleteChat.addEventListener('click', () => { deleteChat(); }); }
     }
+}
+
+socket.onmessage = function(event) {
+  let message = event.data;
+  console.log(message);
 }
 
 interface Target {

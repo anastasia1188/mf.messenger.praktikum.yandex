@@ -1,8 +1,18 @@
 interface FuncEvent {
-  (idInput: string, nameHiddenError: string): void;
+  (): void;
 }
+
+interface FuncListener {
+  (arg?): void;
+}
+
+interface FuncListenerDidMount {
+  (oldProps?: Record<string, any>, newProps?: Record<string, any>): void;
+}
+
+type Func = FuncListener | FuncListenerDidMount;
 interface Listener {
-    [key: string]: FuncEvent[];
+    [key: string]: Func[];
 }
 export default class EventBus {
     listeners: Listener;
@@ -11,7 +21,7 @@ export default class EventBus {
       this.listeners = {};
     }
 
-    on(event: string, callback: FuncEvent) {
+    on(event: string, callback: Func) {
       if (!this.listeners[event]) {
         this.listeners[event] = [];
       }

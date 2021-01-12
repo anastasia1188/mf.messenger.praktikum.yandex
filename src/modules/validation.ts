@@ -73,6 +73,8 @@ export function isValidEmail(email: string) {
 
   result.errors = errors;
 
+  console.log(email, REXP_EMAIL, errors);
+
   return result;
 }
 
@@ -156,6 +158,7 @@ export function isValidMessage(message: string) {
 export function validateEMail(idElement: string, nameHiddenError: string) {
   const value = getValueElement(idElement);
   const resultValidate = isValidEmail(value);
+  console.log('resulteValudate', resultValidate);
   showErrors(resultValidate, idElement, nameHiddenError);
 }
 

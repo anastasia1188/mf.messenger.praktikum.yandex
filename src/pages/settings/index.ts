@@ -7,6 +7,7 @@ import {
   validateName, validatePassword, setFocus, isValidValues,
 } from '../../modules/validation';
 import Button from '../../components/myButton/index';
+import { compileTemplate } from '../../modules/common';
 
 const button = new Button({
   id: 'save',
@@ -18,10 +19,11 @@ interface ObjectInterface {
     [key: string]: string;
 }
 interface FuncEvent {
-  (): void;
+  (arg: string): boolean;
 }
 
-function setFormEvent(arrInputs: { input: string, value: FuncEvent }[], nameHiddenElement: string) {
+
+function setFormEvent(arrInputs: { input: string, value: any}[], nameHiddenElement: string) {
   const frmAutorisation = document.querySelector('#form');
 
   frmAutorisation.addEventListener('submit', async (e) => {
@@ -62,7 +64,7 @@ export default class Settings extends Block {
     super('settings', props);
   }
 
-  static private async getData() {
+  private static async getData() {
     const dataUser = await getUserData();
     const result = {
       fimg: dataUser.avatar,
@@ -82,7 +84,7 @@ export default class Settings extends Block {
   }
 
   async render() {
-    const context = await this.getData();
+    const context = await Settings.getData();
     compileTemplate('.app', getTemplateSettings(), context);
     const mainElem: HTMLElement = document.querySelector('.app');
     button.render(mainElem);
@@ -90,7 +92,7 @@ export default class Settings extends Block {
     return mainElem.innerHTML;
   }
 
-  static setEvents() {
+  setEvents() {
     const nameHiddenElement = 'wrapper__errmes-hiddenerr';
 
     const elementEmail = document.getElementById('email');

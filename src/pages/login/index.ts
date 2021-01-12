@@ -2,7 +2,7 @@ import Block from '../../modules/block';
 import getTemplateLogin from './login.tmpl';
 import MyButton from '../../components/myButton/index';
 import { isAutorizied } from '../../modules/autorization';
-import { goNextPage } from '../../modules/common';
+import { goNextPage, compileTemplate } from '../../modules/common';
 
 import {
   isValidLogin, isValidPassword, validateLogin, validatePassword, setFocus, isValidValues,
@@ -50,7 +50,7 @@ export default class Login extends Block {
       this.setEvents();
     }
 
-    static private getData() {
+    private static getData() {
       const result = {
         mesEnter: 'Вход',
         mesMail: 'Введите логин',
@@ -69,7 +69,7 @@ export default class Login extends Block {
     }
 
     render() {
-      const context = this.getData();
+      const context = Login.getData();
       compileTemplate('.app', getTemplateLogin(), context);
       const mainElem: HTMLElement = document.querySelector('.app');
       button.render(mainElem);
@@ -77,7 +77,7 @@ export default class Login extends Block {
       return mainElem.innerHTML;
     }
 
-    static setEvents() {
+    setEvents() {
       const nameHiddenElement = 'wrapper__errmes-hiddenerr';
 
       const elementLogin = document.getElementById('login');
