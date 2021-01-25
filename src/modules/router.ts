@@ -23,7 +23,7 @@ export class Route {
 
     #props: any;
 
-    constructor(pathName: string, view: any, props: Record<string, any>) {
+    constructor(pathName: string, view: any, props: Object) {
       this.#pathName = pathName;
       this.#blockClass = view;
       this.#block = null;

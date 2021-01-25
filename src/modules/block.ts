@@ -1,5 +1,5 @@
-import deepEqual from './common';
-import EventBus from './eventBus';
+/// <reference path="references.d.ts" />
+import { EventBus } from './eventBus';
 
 export default class Block {
     static EVENTS = {
@@ -9,7 +9,7 @@ export default class Block {
       FLOW_RENDER: 'flow:render',
     };
 
-    props: Record<string, any>;
+    props: Object;
 
     eventBus: any;
 
@@ -42,7 +42,7 @@ export default class Block {
 
     private createResources() {
       const { tagName } = this.#meta;
-      this.#element = Block.createDocumentElement(tagName);
+      this.#element = this.createDocumentElement(tagName);
     }
 
     init() {
@@ -54,7 +54,7 @@ export default class Block {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
 
-    private componentDidUpdateLocal(oldProps: Record<string, any>, newProps: Record<string, any>) {
+    private componentDidUpdateLocal(oldProps: Object, newProps: Object) {
       const response = this.componentDidUpdate(oldProps, newProps);
       if (!response) {
         return;
@@ -62,7 +62,7 @@ export default class Block {
       this.render();
     }
 
-    componentDidUpdate(oldProps: Record<string, any>, newProps: Record<string, any>) {
+    componentDidUpdate(oldProps: Object, newProps: Object) {
       return deepEqual(oldProps, newProps);
     }
 
@@ -91,23 +91,23 @@ export default class Block {
       const self = this;
 
       return new Proxy(props, {
-          get(target, prop) {
-              const value = target[prop];
-              return typeof value === "function" ? value.bind(target) : value;
-          },
-          set(target, prop, value) {
-              target[prop] = value;
+        get(target, prop) {
+          const value = target[prop];
+          return typeof value === 'function' ? value.bind(target) : value;
+        },
+        set(target, prop, value) {
+          target[prop] = value;
 
-              self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
-              return true;
-          },
-          deleteProperty() {
-              throw new Error("Нет доступа");
-          }
+          self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
+          return true;
+        },
+        deleteProperty() {
+          throw new Error('Нет доступа');
+        },
       });
     }
 
-    private static createDocumentElement(tagName: string) {
+    private createDocumentElement(tagName: string) {
       return document.createElement(tagName);
     }
 

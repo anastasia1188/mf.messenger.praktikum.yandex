@@ -59,6 +59,11 @@
             "git add"
         ]
     },
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm run lint"
+        }
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/anastasia1188/mf.messenger.praktikum.yandex.git"

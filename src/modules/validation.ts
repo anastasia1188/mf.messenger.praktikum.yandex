@@ -22,35 +22,6 @@ interface Input {
     value: any
 }
 
-interface FuncEvent {
-  (idInput: string, nameHiddenError: string): void;
-}
-
-function showHiddenElement(elementError: any, nameHiddenError: string) {
-  if ((elementError !== undefined) && (elementError !== null)) {
-    elementError.classList.remove(nameHiddenError);
-  }
-}
-
-function hideHiddenElement(elementError: any, nameHiddenError: string) {
-  if ((elementError !== undefined) && (elementError !== null)
-   && (!elementError.classList.contains(nameHiddenError))) {
-    elementError.classList.add(nameHiddenError);
-  }
-}
-
-function showErrors(resultValidate: resultValidation, idElement: string, nameHiddenError: string) {
-  let nameError = `err-${idElement}`;
-  if (resultValidate.errors.length > 0) nameError += String(resultValidate.errors[0]);
-  const elementError = document.getElementById(nameError);
-  if (!resultValidate.isValid) {
-    showHiddenElement(elementError, nameHiddenError);
-    return false;
-  }
-  hideHiddenElement(elementError, nameHiddenError);
-  return true;
-}
-
 function getValueElement(idElement: string) {
   let result;
   const element = <HTMLInputElement>document.getElementById(idElement);
@@ -72,8 +43,6 @@ export function isValidEmail(email: string) {
   if (errors.length > 0) { result.isValid = false; }
 
   result.errors = errors;
-
-  console.log(email, REXP_EMAIL, errors);
 
   return result;
 }
@@ -133,9 +102,7 @@ export function isValidPassword(password: string) {
 
   const passwordRepeat = getValueElement('passwordr');
 
-  if ((passwordRepeat !== undefined) && (!(password === passwordRepeat))) {
-    errors.push(typeErrors.PWDR_ERROR);
-  }
+  if ((passwordRepeat !== undefined) && (!(password === passwordRepeat))) { errors.push(typeErrors.PWDR_ERROR); }
 
   result.errors = errors;
   return result;
@@ -158,7 +125,6 @@ export function isValidMessage(message: string) {
 export function validateEMail(idElement: string, nameHiddenError: string) {
   const value = getValueElement(idElement);
   const resultValidate = isValidEmail(value);
-  console.log('resulteValudate', resultValidate);
   showErrors(resultValidate, idElement, nameHiddenError);
 }
 
@@ -186,24 +152,35 @@ export function validateMessage(idElement: string, nameHiddenError: string) {
   showErrors(resultValidate, idElement, nameHiddenError);
 }
 
-export function setValidate(idInput: string, funcValidate: FuncEvent, nameHiddenError: string) {
+function showErrors(resultValidate: resultValidation, idElement: string, nameHiddenError: string) {
+  let nameError = `err-${idElement}`;
+  if (resultValidate.errors.length > 0) nameError += String(resultValidate.errors[0]);
+  const elementError = document.getElementById(nameError);
+  if (!resultValidate.isValid) {
+    showHiddenElement(elementError, nameHiddenError);
+    return false;
+  }
+  hideHiddenElement(elementError, nameHiddenError);
+  return true;
+}
+
+function showHiddenElement(elementError: any, nameHiddenError: string) {
+  if (elementError === void 0) { elementError = null; }
+  if (nameHiddenError === void 0) { nameHiddenError = ''; }
+  if (elementError != null) { elementError.classList.remove(nameHiddenError); }
+}
+
+function hideHiddenElement(elementError: any, nameHiddenError: string) {
+  if (elementError === void 0) { elementError = null; }
+  if (nameHiddenError === void 0) { nameHiddenError = ''; }
+  if (elementError != null && (!elementError.classList.contains(nameHiddenError))) { elementError.classList.add(nameHiddenError); }
+}
+
+export function setValidate(idInput: string, funcValidate: Function, nameHiddenError: string) {
   const finput = document.getElementById(idInput);
   finput.addEventListener('blur', (e) => {
     funcValidate(idInput, nameHiddenError);
   });
-}
-
-export function elemFocus(id: string, nameHiddenError: string) {
-  const arrMesPwd = [0, 1, 2, 3, 4, 5, 6, 7];
-  const nameError = `err-${id}`;
-  const arrFields = [];
-  for (let i = 0; i < arrMesPwd.length; i++) { arrFields.push(`${nameError}${arrMesPwd[i]}`); }
-  for (let i = 0; i < arrFields.length; i++) {
-    const elementError = document.getElementById(arrFields[i]);
-    if ((elementError != null) && (!elementError.classList.contains(nameHiddenError))) {
-      elementError.classList.add(nameHiddenError);
-    }
-  }
 }
 
 export function setFocus(arrInputs: Input[], nameHiddenError: string) {
@@ -213,6 +190,17 @@ export function setFocus(arrInputs: Input[], nameHiddenError: string) {
     finput.addEventListener('focus', (e) => {
       elemFocus(id, nameHiddenError);
     });
+  }
+}
+
+export function elemFocus(id: string, nameHiddenError: string) {
+  const arrMesPwd = [0, 1, 2, 3, 4, 5, 6, 7];
+  const nameError = `err-${id}`;
+  const arrFields = [];
+  for (let i = 0; i < arrMesPwd.length; i++) { arrFields.push(`${nameError}${arrMesPwd[i]}`); }
+  for (let i = 0; i < arrFields.length; i++) {
+    const elementError = document.getElementById(arrFields[i]);
+    if ((elementError != null) && (!elementError.classList.contains(nameHiddenError))) { elementError.classList.add(nameHiddenError); }
   }
 }
 

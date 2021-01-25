@@ -1,36 +1,36 @@
-import HTTPTransport from './httpTransport';
+import HTTPTransport from '../../dist/modules/httpTransport';
 
 interface User {
-    email: string;
-    name: string;
-    login: string;
-    password: string;
-}
-
-interface ObjectInterface {
-  [key: string]: string;
+  email: string;
+  name: string;
+  login: string;
+  password: string;
+  avatar: string;
 }
 
 const host = 'https://ya-praktikum.tech/api/v2';
 
-export function isAutorizied(user: User|ObjectInterface) {
-  return fetch(`${host}/auth/signin`,
-    {
-      method: 'POST',
-      credentials: 'include',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-      body: JSON.stringify(user),
-    }).then((response) => response.text()) // Можно вытащить через .json()
-    .then((data) => {
-      console.log(data);
-      return data;
-    });
+export async function isAutorizied(user: User | ObjectInterface) {
+  try {
+    const response = await fetch(`${host}/auth/signin`,
+      {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify(user),
+      });
+    console.log('user', user);
+    if (response.status === 200) { return true; }
+    return false;
+  } catch (err) {
+    return false;
+  }
 }
 
-export function isRegistrationSuccess(user: User|ObjectInterface) {
+export function isRegistrationSuccess(user: User | ObjectInterface) {
   return fetch(`${host}/auth/signup`, {
     method: 'POST',
     credentials: 'include',
@@ -41,7 +41,7 @@ export function isRegistrationSuccess(user: User|ObjectInterface) {
     body: JSON.stringify({
       first_name: user.name,
       second_name: user.name,
-      login: (<any>window).login,
+      login: user.login,
       email: user.email,
       phone: '+79194234578',
       password: user.password,
@@ -54,7 +54,7 @@ export function isRegistrationSuccess(user: User|ObjectInterface) {
     });
 }
 
-export function saveUserData(user: Record<string, any>) {
+export function saveUserData(user: Object) {
   return fetch(`${host}/user/profile`,
     {
       method: 'PUT',
@@ -71,23 +71,46 @@ export function saveUserData(user: Record<string, any>) {
     });
 }
 
+export function saveAvatar(avatar: FormData) {
+  console.log(avatar);
+  return fetch(`${host}/user/profile/avatar`,
+    {
+      method: 'PUT',
+      credentials: 'include', // Нужно подставлять куки
+      mode: 'cors', // Работаем с CORS
+      body: avatar,
+    }).then((response) => response.text()) // Можно вытащить через .json()
+    .then((data) => {
+      console.log(data);
+      return data;
+    });
+}
+
 export async function getUserData() {
   const response = await fetch(`${host}/auth/user`,
     {
       method: 'GET',
       credentials: 'include', // Нужно подставлять куки
       mode: 'cors', // Работаем с CORS
-      headers: { 'Content-Type': 'application/json;charset=utf-8' },
     });
 
   const result = response.json();
   console.log('result', result);
+
   return result;
 }
 
 export async function getChats() {
-  const response = await fetch('/chats');
+  const response = await fetch(`${host}/chats`,
+    {
+      method: 'GET',
+      credentials: 'include', // Нужно подставлять куки
+      mode: 'cors', // Работаем с CORS
+    });
+
   const result = response.json();
+  console.log('result', result);
+
   return result;
 }
 
@@ -97,11 +120,13 @@ export async function getMessages() {
   return result;
 }
 
-export async function addChatToList(chat: Record<string, any>) {
+export async function addChatToList(chat: Object) {
   try {
     const response = await fetch(`${host}/chats`,
       {
         method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
         },
@@ -114,16 +139,21 @@ export async function addChatToList(chat: Record<string, any>) {
   }
 }
 
-export async function deleteChatFromList(chat: Record<string, any>) {
+export async function deleteChatFromList(chat: Object) {
+  console.log('chat', chat);
   try {
     const response = await fetch('/chats',
       {
         method: 'DELETE',
+        credentials: 'include',
+        mode: 'cors',
         headers: {
+          accept: 'application/json',
           'Content-Type': 'application/json;charset=utf-8',
         },
         body: JSON.stringify(chat),
       });
+    console.log('response', response.json());
     if (response.status === 200) { return true; }
     return false;
   } catch (err) {
@@ -132,7 +162,7 @@ export async function deleteChatFromList(chat: Record<string, any>) {
 }
 
 // TODO
-export function addUsertoChat(user: Record<string, any>) {
+export function addUsertoChat(user: Object) {
   return fetch(`${host}/chat/users`,
     {
       method: 'PUT',
@@ -149,7 +179,7 @@ export function addUsertoChat(user: Record<string, any>) {
     });
 }
 
-export function deleteUserFromChat(user: Record<string, any>) {
+export function deleteUserFromChat(user: Object) {
   console.log(user);
   return fetch(`${host}/chats/users`,
     {

@@ -1,4 +1,4 @@
-export default function getTemplateSettings(): string {
+export default function getTemplateSettings() {
   return `
     <div class="basic-wrapper">
     <form method="post" id="form" class="basic-wrapper__item">

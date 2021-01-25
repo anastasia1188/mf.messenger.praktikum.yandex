@@ -1,11 +1,10 @@
 import Block from '../../modules/block';
 import getTemplateMyButton from './myButton.tmpl';
-import { compileTemplate } from '../../modules/common';
 
-export default class MyButton extends Block {
-    props: Record<string, any>;
+export default class myButton extends Block {
+    props: object;
 
-    constructor(props: Record<string, any>) {
+    constructor(props: Object) {
       super('button', props);
     }
 

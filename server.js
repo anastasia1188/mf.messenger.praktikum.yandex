@@ -1,11 +1,43 @@
 const express = require("express");
 const { v4 } = require("uuid");
-var http = require('http');
+
+const app = express();
+var bodyParser = require('body-parser');
 
 const ws = new require('ws');
-const wss = new ws.Server({ noServer: true });
-
+const wss = new ws.Server({ port: 3000 });
+var http = require('http');
 const clients = new Set();
+let id = Math.random();
+
+var messages = [];
+
+wss.on('connection', ws => {
+    //ws.send('welcomeclient');
+    console.log('welcomeserver');
+
+    let idConnection = Math.random();
+    ws.idConnection = idConnection;
+    clients[id] = ws;
+    clients.add(ws);
+
+    ws.on('message', message => {
+        let mes = JSON.parse(message);
+
+        messages.push(mes);
+        console.log('mes', messages);
+
+        ws.send(JSON.stringify(mes));
+        //console.log(mes);
+    });
+});
+
+wss.on('message', ws => {
+    ws.send(ws);
+    ws.console.log(ws);
+});
+
+console.log('wss', wss);
 
 http.createServer((req, res) => {
     // в реальном проекте здесь может также быть код для обработки отличных от websoсket-запросов
@@ -14,10 +46,12 @@ http.createServer((req, res) => {
 });
 
 function onSocketConnect(ws) {
-    clients.add(ws);
+    console.log(ws);
+    clients.add('hello', ws);
 
     ws.on('message', function(message) {
         message = message.slice(0, 50); // максимальный размер сообщения 50
+        console.log('message', message);
 
         for (let client of clients) {
             client.send(message);
@@ -26,11 +60,10 @@ function onSocketConnect(ws) {
 
     ws.on('close', function() {
         clients.delete(ws);
+        console.log('close');
     });
 }
 
-const app = express();
-var bodyParser = require('body-parser');
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
@@ -53,62 +86,7 @@ let users = [{
     }
 ];
 
-let chats = [
-    { id: 0, "contact": "Арина", "countmes": "♪", "hidden": false, "pressed": false, "pianokey": "7si.mp3", users: ["Арина"] },
-    { id: 1, "contact": "Папа ", "countmes": "♫", "hidden": false, "pressed": false, "pianokey": "6lya.mp3", users: ["Папа"] },
-    { id: 2, "contact": "Мама", "countmes": "♪", "hidden": false, "pressed": false, "pianokey": "5sol.mp3", users: ["Мама"] },
-    { id: 3, "contact": "Аня", "countmes": "", "hidden": "hidden=true", "pressed": false, "pianokey": "4fa.mp3", users: ["Аня"] },
-    { id: 4, "contact": "Саша", "countmes": "", "hidden": "", "pressed": false, "pianokey": "3mi.mp3", users: ["Саша"] },
-    { id: 5, "contact": "Коля", "countmes": "", "hidden": "", "pressed": false, "pianokey": "2re.mp3", users: ["Коля"] },
-    { id: 6, "contact": "Таня", "countmes": "", "hidden": "hidden=true", "pressed": false, "pianokey": "1do.mp3", users: ["Таня"] },
-    { id: 7, "contact": "Света", "countmes": "", "hidden": "", "pressed": false, "pianokey": "7si.mp3", users: ["Света"] },
-    { id: 8, "contact": "Андрей", "countmes": "", "hidden": "", "pressed": false, "pianokey": "6lya.mp3", users: ["Андрей"] },
-    { id: 9, "contact": "Миша", "countmes": "", "hidden": "", "pressed": false, "pianokey": "5sol.mp3", users: ["Миша"] },
-    { id: 10, "contact": "Оля", "countmes": "", "hidden": "hidden=true", "pressed": false, "pianokey": "4fa.mp3", users: ["Оля"] },
-    { id: 11, "contact": "Юля", "countmes": "", "hidden": "", "pressed": false, "pianokey": "3mi.mp3", users: ["Юля"] }
-];
-
-let messages = [{
-        "contact": "Арина",
-        "history": [{
-                "date": "1 июля",
-                "message": [
-                    { "text": "Привет, ай-да на фильм?", "classmes": "chat-wrapper__message-in", "time": "14:39" },
-                    { "text": "Какой?", "classmes": "chat-wrapper__message-from", "time": "15:12" },
-                    { "text": "Крутой, про пиратов", "classmes": "chat-wrapper__message-in", "time": "15:38" },
-                    { "text": "Отличный фильм, когда следующий сеанс", "classmes": "chat-wrapper__message-from", "time": "15:42" }
-                ]
-            },
-            {
-                "date": "2 июля",
-                "message": [
-                    { "text": "Привет, как дела?", "classmes": "chat-wrapper__message-in", "time": "17:38" },
-                    { "text": "хорошо:)", "classmes": "chat-wrapper__message-from", "time": "17:38" }
-                ]
-            }
-        ]
-    },
-    {
-        "contact": "Папа",
-        "history": [{
-            "date": "7 июля",
-            "message": [
-                { "text": "Привет", "classmes": "chat-wrapper__message-in", "time": "14:39" },
-                { "text": "Привет", "classmes": "chat-wrapper__message-from", "time": "15:12" }
-            ]
-        }]
-    },
-    {
-        "contact": "Мама",
-        "history": [{
-            "date": "9 июля",
-            "message": [
-                { "text": "Привет, как дела", "classmes": "chat-wrapper__message-in", "time": "14:39" },
-                { "text": "Привет, как дела", "classmes": "chat-wrapper__message-from", "time": "15:12" }
-            ]
-        }]
-    }
-]
+let chats = [];
 
 let currentUser = undefined;
 
@@ -176,7 +154,13 @@ app.delete('/chats', (req, res) => {
 });
 
 app.get('/messages', (req, res) => {
-    res.status(200).json(messages);
+    let result = [];
+    for (let i = 0; i < messages.length; i++) {
+        //if ((messages[i].to === login) || (messages[i].from === login))
+        result.push(messages[i]);
+    }
+    console.log('result', messages);
+    res.status(200).json(JSON.stringify(messages));
 });
 
 app.get('/chats/:id/users', (req, res) => {
@@ -332,5 +316,12 @@ app.set('port', (process.env.PORT || 4000));
 app.listen(app.get('port'), function() {
     console.log('Node app is running on port', app.get('port'));
 });
+
+const httphost = 'localhost';
+const httpport = 3000;
+
+/*wss.listen(httpport, httphost, () =>
+    console.log(`Server listens http://${host}:${port}`)
+)*/
 
 console.log('hi');

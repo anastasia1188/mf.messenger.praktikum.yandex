@@ -1,13 +1,12 @@
-import { goNextPage } from '../../modules/common';
+/// <reference path="../../../src/modules/references.d.ts" />
+
 import Block from '../../modules/block';
 import getTemplateSettings from './settings.tmpl';
-import { saveUserData, getUserData } from '../../modules/autorization';
+import { saveUserData, saveAvatar, getUserData } from '../../modules/autorization';
 import {
-  isValidName, isValidEmail, isValidPassword, validateEMail,
-  validateName, validatePassword, setFocus, isValidValues,
+  isValidName, isValidEmail, isValidPassword, validateEMail, validateName, validatePassword, setFocus, isValidValues,
 } from '../../modules/validation';
 import Button from '../../components/myButton/index';
-import { compileTemplate } from '../../modules/common';
 
 const button = new Button({
   id: 'save',
@@ -16,56 +15,18 @@ const button = new Button({
 });
 
 interface ObjectInterface {
-    [key: string]: string;
+  [key: string]: string;
 }
-interface FuncEvent {
-  (arg: string): boolean;
-}
-
-
-function setFormEvent(arrInputs: { input: string, value: any}[], nameHiddenElement: string) {
-  const frmAutorisation = document.querySelector('#form');
-
-  frmAutorisation.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const user: ObjectInterface = getData(arrInputs);
-    const formatUser = {
-      first_name: user.name,
-      second_name: user.name,
-      display_name: user.name,
-      login: (<any>window).login,
-      email: user.email,
-      phone: '+79188888888',
-    };
-
-    if (isValidValues(arrInputs, nameHiddenElement)) {
-      const imgAvatar = <HTMLImageElement>document.querySelector('#avatar');
-      user.avatar = imgAvatar.src;
-      const res = saveUserData(formatUser);
-      if (res) { goNextPage(arrInputs); } else {
-        const elementError = document.querySelector('#err-password6');
-        if ((elementError != null) && (elementError.classList.contains(nameHiddenElement))) {
-          elementError.classList.remove(nameHiddenElement);
-        }
-      }
-    }
-  });
-
-  const inpFile = <HTMLInputElement>document.querySelector('#newPhoto');
-
-  inpFile.addEventListener('change', () => {
-    const value = inpFile.files[0];
-    const imgAvatar = <HTMLImageElement>document.querySelector('#avatar');
-    imgAvatar.src = window.URL.createObjectURL(value);
-  });
-}
-export default class Settings extends Block {
-  constructor(props: Record<string, any>) {
+export class Settings extends Block {
+  constructor(props: Object) {
     super('settings', props);
   }
 
-  private static async getData() {
+  private async getData() {
     const dataUser = await getUserData();
+    if (dataUser.avatar === null) dataUser.avatar = '../../../data/img/noava.png';
+    else dataUser.avatar = `https://ya-praktikum.tech${dataUser.avatar}`;
+
     const result = {
       fimg: dataUser.avatar,
       fname: dataUser.first_name,
@@ -84,7 +45,7 @@ export default class Settings extends Block {
   }
 
   async render() {
-    const context = await Settings.getData();
+    const context = await this.getData();
     compileTemplate('.app', getTemplateSettings(), context);
     const mainElem: HTMLElement = document.querySelector('.app');
     button.render(mainElem);
@@ -97,28 +58,28 @@ export default class Settings extends Block {
 
     const elementEmail = document.getElementById('email');
     if (elementEmail !== null) {
-      elementEmail.addEventListener('blur', () => {
+      elementEmail.addEventListener('blur', (e) => {
         validateEMail('email', nameHiddenElement);
       });
     }
 
     const elementName = document.getElementById('name');
     if (elementName !== null) {
-      elementName.addEventListener('blur', () => {
+      elementName.addEventListener('blur', (e) => {
         validateName('name', nameHiddenElement);
       });
     }
 
     const elementPassword = document.getElementById('password');
     if (elementPassword !== null) {
-      elementPassword.addEventListener('blur', () => {
+      elementPassword.addEventListener('blur', (e) => {
         validatePassword('password', nameHiddenElement);
       });
     }
 
     const elementRepeatPassword = document.getElementById('passwordr');
     if (elementRepeatPassword !== null) {
-      elementRepeatPassword.addEventListener('blur', () => {
+      elementRepeatPassword.addEventListener('blur', (e) => {
         validatePassword('passwordr', nameHiddenElement);
       });
     }
@@ -134,4 +95,52 @@ export default class Settings extends Block {
     // setButtonEvents("save", inputs, nameHiddenElement);
     setFormEvent(inputs, nameHiddenElement);
   }
+}
+
+function setFormEvent(arrInputs: { input: string, value: Function }[], nameHiddenElement: string) {
+  const frmAutorisation = <HTMLFormElement>document.getElementById('form');
+
+  frmAutorisation.addEventListener('submit', async (e) => {
+    const imgAvatar = <HTMLImageElement>document.querySelector('#avatar');
+    // console.log('imgAvatar', imgAvatar);
+    e.preventDefault();
+    const user: ObjectInterface = getData(arrInputs);
+    const formatUser = {
+      first_name: user.name,
+      second_name: user.name,
+      display_name: user.name,
+      login: (<any>window).login,
+      email: user.email,
+      phone: '+79188888888',
+      avatar: imgAvatar.src,
+    };
+
+    if (isValidValues(arrInputs, nameHiddenElement)) {
+      user.avatar = imgAvatar.src;
+      const res = saveUserData(formatUser);
+      if (res) { goNextPage(arrInputs); } else {
+        const elementError = document.querySelector('#err-password6');
+        if ((elementError != null) && (elementError.classList.contains(nameHiddenElement))) {
+          elementError.classList.remove(nameHiddenElement);
+        }
+      }
+
+      const blob = await fetch(imgAvatar.src).then((r) => r.blob());
+      console.log(typeof blob, blob);
+
+      const formData = new FormData();
+      formData.append('avatar', blob, imgAvatar.src);
+
+      const resAvatar = saveAvatar(formData);
+      console.log(resAvatar);
+    }
+  });
+
+  const inpFile = <HTMLInputElement>document.querySelector('#newPhoto');
+
+  inpFile.addEventListener('change', (e) => {
+    const value = inpFile.files[0];
+    const imgAvatar = <HTMLImageElement>document.querySelector('#avatar');
+    imgAvatar.src = window.URL.createObjectURL(value);
+  });
 }

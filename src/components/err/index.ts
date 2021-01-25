@@ -1,8 +1,9 @@
-import Block from '../../../dist/modules/block';
-import getTemplateErr from './err.tmpl';
-import { compileTemplate } from '../../modules/common';
+/// <reference path="../../../src/modules/references.d.ts" />
+/// <reference path="./err.d.ts" />
+import Block from '../../../dist/modules/block.js';
+import { getTemplateErr } from './err.tmpl.js';
 
-export default class Err extends Block {
+export class Err extends Block {
     props: {
         errcode: string
     }

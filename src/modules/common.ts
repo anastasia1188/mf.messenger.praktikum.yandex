@@ -1,24 +1,19 @@
 /// <reference path="common.d.ts" />
-
 interface ObjectInterface {
-  [key: string]: string;
-}
-
-interface FuncEvent {
-  (idInput: string, nameHiddenError: string): void;
+    [key: string]: string;
 }
 interface Template {
-  idTemplate: string,
-  source: string,
-  context: Record<string, any>
+    idTemplate: string,
+        source: string,
+        context: Object
 }
 
 interface Input {
-  input: string,
-  value?: FuncEvent | string
+    input: string,
+    value?: Function | string
 }
 
-export function getData(arrFields: { input: string, value: string }[] = []): ObjectInterface {
+function getData(arrFields: { input: string, value: string }[] = []): ObjectInterface {
   const result: ObjectInterface = {};
 
   for (let i = 0; i < arrFields.length; i++) {
@@ -29,14 +24,9 @@ export function getData(arrFields: { input: string, value: string }[] = []): Obj
   return result;
 }
 
-export function compileTemplate(idTemplate: string, source: string, context: Record<string, any>, 
-  elemDocument?: HTMLDocument | HTMLElement) {
-  let elemTemplate: HTMLElement;
-  if (elemDocument === undefined) {
-    elemTemplate = document.querySelector(idTemplate);
-  } else {
-    elemTemplate = elemDocument.querySelector(idTemplate);
-  }
+function compileTemplate(idTemplate: string, source: string, context: object, elemDocument: HTMLDocument | HTMLElement) {
+  let elemTemplate:HTMLElement;
+  if (elemDocument === undefined) { elemTemplate = document.querySelector(idTemplate); } else { elemTemplate = elemDocument.querySelector(idTemplate); }
 
   const template: any = Handlebars.compile(source);
   const html = template(context);
@@ -44,12 +34,7 @@ export function compileTemplate(idTemplate: string, source: string, context: Rec
   return html;
 }
 
-export function goNextPage(arrInputs: Input[]) {
-  window.location.hash = '#chat';
-}
-
-export function setButtonEvents(idButton: string, arrInputs:
-   { input: string, value: any }[], nameHiddenErr: string) {
+function setButtonEvents(idButton: string, arrInputs: { input: string, value: any }[], nameHiddenErr: string) {
   const elemButton: HTMLElement = document.getElementById(idButton);
   elemButton.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
@@ -62,7 +47,11 @@ export function setButtonEvents(idButton: string, arrInputs:
   });
 }
 
-export function setFormEvents(arrInputs: { input: string, value: any }[], nameHiddenErr: string) {
+function goNextPage(arrInputs: Input[]) {
+  window.location.hash = '#chat';
+}
+
+function setFormEvents(arrInputs: { input: string, value: any }[], nameHiddenErr: string) {
   const frmAutorisation = document.querySelector('#form');
   frmAutorisation.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -70,6 +59,6 @@ export function setFormEvents(arrInputs: { input: string, value: any }[], nameHi
   });
 }
 
-export default function deepEqual(obj1: Record<string, any>, obj2: Record<string, any>) {
+function deepEqual(obj1: object, obj2: object) {
   return JSON.stringify(obj1) === JSON.stringify(obj2);
 }

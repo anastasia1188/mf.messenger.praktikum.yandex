@@ -3,13 +3,14 @@ export default function getTemplateChat() {
     <div class="chat-wrapper__left-part">
         <div class="chat-wrapper__search">
             <div class="chat-wrapper__logo">
-                <img id="avatar" src="{{fileImage}}" alt="" class="round" width="80px" height="80px">
-                <div><a href="/#settings" onclick = "window.location.hash = '#settings'"> {{name}} </a></div>
+                <img id="avatar" src="{{fileImage}}" alt="" class="round" width="60px" height="60px">
+                <div><a href="/#settings" onclick = "window.location.hash = '#settings'" height="10px"> {{name}} </a></div>
             </div>
-            <img id="sound" src="{{fileImageSound}}" alt="" class="round" width="20px" height="20px">
+            <div><a href="/#login" onclick = "Chat.exit()"> Выход </a></div>
+            <img id="sound" src="{{fileImageSound}}" alt="" class="round" width="15px" height="15px">
+            <img id="add" src="{{fileAdd}}" alt="" class="round" width="15px" height="15px">
+            <img id="delete" src="{{fileDelete}}" alt="" class="round" width="15px" height="15px">
             <div> <input id="search" class="chat-wrapper__search-field" type="search" placeholder="Поиск">
-            <img id="add" src="{{fileAdd}}" alt="" class="round" width="20x" height="20px">
-            <img id="delete" src="{{fileDelete}}" alt="" class="round" width="20px" height="20px">
             </div>
         </div>
         <div class="chat-wrapper__contacts">

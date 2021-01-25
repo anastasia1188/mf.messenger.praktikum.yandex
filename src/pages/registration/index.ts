@@ -1,13 +1,11 @@
-import { goNextPage } from '../../modules/common';
+/// <reference path="../../../src/modules/references.d.ts" />
 import Block from '../../modules/block';
 import getTemplateRegistration from './registration.tmpl';
 import { isRegistrationSuccess } from '../../modules/autorization';
 import {
-  isValidName, validateName, isValidLogin, isValidEmail, isValidPassword,
-  validateEMail, validateLogin, validatePassword, setFocus, isValidValues,
+  isValidName, validateName, isValidLogin, isValidEmail, isValidPassword, validateEMail, validateLogin, validatePassword, setFocus, isValidValues,
 } from '../../modules/validation';
 import Button from '../../components/myButton/index';
-import { compileTemplate } from '../../modules/common';
 
 const button = new Button({
   id: 'reg',
@@ -15,41 +13,16 @@ const button = new Button({
   mesButton: 'Зарегистрироваться',
 });
 
-interface FuncEvent {
-  (): void;
-}
 interface Input {
     input: string,
-    value: any
+    value: Function
 }
-
-function setFormEvent(arrInputs: Input[], nameHiddenElement: string) {
-  const frmAutorisation = document.querySelector('#form');
-  frmAutorisation.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const user = getData(arrInputs);
-    const res = await isRegistrationSuccess(user);
-
-    if (res !== undefined) {
-      if (isValidValues(arrInputs, nameHiddenElement)) {
-        const resObj = JSON.parse(res);
-        (<any>window).idUser = resObj.id;
-        if (!resObj.id !== undefined) { goNextPage(arrInputs); }
-      }
-    } else {
-      const elementError = document.querySelector('#err-password7');
-      if ((elementError != null) && (elementError.classList.contains(nameHiddenElement))) {
-        elementError.classList.remove(nameHiddenElement);
-      }
-    }
-  });
-}
-export default class Registration extends Block {
-  constructor(props: Record<string, any>) {
+export class Registration extends Block {
+  constructor(props: Object) {
     super('registration', props);
   }
 
-  private static getData() {
+  private getData() {
     const result = {
       mesReg: 'Регистрация',
       mesEmail: 'Почта',
@@ -69,7 +42,7 @@ export default class Registration extends Block {
   }
 
   render() {
-    const context = Registration.getData();
+    const context = this.getData();
     compileTemplate('.app', getTemplateRegistration(), context);
     const mainElem:HTMLElement = <HTMLElement>document.querySelector('.app');
     button.render(mainElem);
@@ -81,27 +54,27 @@ export default class Registration extends Block {
     const nameHiddenElement = 'wrapper__errmes-hiddenerr';
 
     const elementEmail = document.getElementById('email');
-    elementEmail.addEventListener('blur', () => {
+    elementEmail.addEventListener('blur', (e) => {
       validateEMail('email', nameHiddenElement);
     });
 
     const elementLogin = document.getElementById('login');
-    elementLogin.addEventListener('blur', () => {
+    elementLogin.addEventListener('blur', (e) => {
       validateLogin('login', nameHiddenElement);
     });
 
     const elementName = document.getElementById('name');
-    elementName.addEventListener('blur', () => {
+    elementName.addEventListener('blur', (e) => {
       validateName('name', nameHiddenElement);
     });
 
     const elementPassword = document.getElementById('password');
-    elementPassword.addEventListener('blur', () => {
+    elementPassword.addEventListener('blur', (e) => {
       validatePassword('password', nameHiddenElement);
     });
 
     const elementRepeatPassword = document.getElementById('passwordr');
-    elementRepeatPassword.addEventListener('blur', () => {
+    elementRepeatPassword.addEventListener('blur', (e) => {
       validatePassword('passwordr', nameHiddenElement);
     });
 
@@ -116,4 +89,26 @@ export default class Registration extends Block {
     setFocus(inputs, nameHiddenElement);
     setFormEvent(inputs, nameHiddenElement);
   }
+}
+
+function setFormEvent(arrInputs: Input[], nameHiddenElement: string) {
+  const frmAutorisation = document.querySelector('#form');
+  frmAutorisation.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const user = getData(arrInputs);
+    const res = await isRegistrationSuccess(user);
+
+    if (res) {
+      if (isValidValues(arrInputs, nameHiddenElement)) {
+        const resObj = JSON.parse(res);
+        (<any>window).idUser = resObj.id;
+        if (!resObj.id !== undefined) { goNextPage(arrInputs); }
+      }
+    } else {
+      const elementError = document.querySelector('#err-password7');
+      if ((elementError != null) && (elementError.classList.contains(nameHiddenElement))) {
+        elementError.classList.remove(nameHiddenElement);
+      }
+    }
+  });
 }

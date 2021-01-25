@@ -1,3 +1,4 @@
+declare function compileTemplate(nameTemplate: string, template: string, context: object);
 declare function getTemplate404(): string;
 declare function getTemplate500(): string;
 declare function getTemplateChat(): string;
@@ -14,7 +15,7 @@ declare function setButtonEvents(idButton: string, arrInputs: unknown[], nameHid
 declare function getTemplateRegistration(): string;
 declare function validateEMail();
 declare function getTemplateSettings();
-declare function deepEqual(obj1: Record<string, any>, obj2: Record<string, any>);
+declare function deepEqual(obj1: object, obj2: object);
 declare function isValidEmail(email: string);
 declare function isValidLogin(login: string);
 declare function isValidPassword(password: string);
