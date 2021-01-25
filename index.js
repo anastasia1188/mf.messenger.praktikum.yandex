@@ -1,3 +1,4 @@
+import './sass/main.sass';
 import { Login } from './dist/pages/login/index.js';
 import { Registration } from './dist/pages/registration/index.js';
 import { Chat } from './dist/pages/chat/index.js';

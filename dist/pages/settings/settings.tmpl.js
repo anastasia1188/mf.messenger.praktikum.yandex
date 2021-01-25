@@ -1,5 +1,5 @@
 export default function getTemplateSettings() {
-    return `
+  return `
     <div class="basic-wrapper">
     <form method="post" id="form" class="basic-wrapper__item">
         <div class="basic-wrapper__settings">
