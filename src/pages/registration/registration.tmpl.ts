@@ -1,6 +1,5 @@
-
 export default function getTemplateRegistration() {
-    return `<div class="wrapper">
+  return `<div class="wrapper">
 
     <div class="wrapper__row">
         <p> Регистрация </p>
@@ -98,4 +97,5 @@ export default function getTemplateRegistration() {
         <p><button id="reg" type="submit" class="my-button"> Зарегистрироваться </button></p>
     </div>
 </form>
-</div>`};
+</div>`;
+}

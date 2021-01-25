@@ -4,6 +4,7 @@ import { Registration } from './src/pages/registration/index';
 import { Chat } from './src/pages/chat/index';
 import { Settings } from './src/pages/settings/index';
 import router from './src/modules/router';
+import { logout} from './src/modules/autorization';
 
 let mainRouter = new router(".app");
 

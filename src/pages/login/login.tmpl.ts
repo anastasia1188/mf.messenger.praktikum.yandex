@@ -1,5 +1,5 @@
 export default function getTemplateLogin() {
-    return ` <div class="wrapper">
+  return ` <div class="wrapper">
     <form method="post" id="form" action="#" enctype="multipart/form-data">
     <div class="wrapper__row">
         <p> {{mesEnter}} </p>
