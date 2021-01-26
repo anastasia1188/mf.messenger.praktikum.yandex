@@ -1,0 +1,23 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "no-unused-vars": "off",
+    "no-useless-escape": "off",
+    "no-plusplus": "off",
+    "max-len": "off",
+    "no-void": "off",
+    "@typescript-eslint/ban-types": "off",
+    "@typescript-eslint/triple-slash-reference": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-this-alias": "off"
+   }
+}
