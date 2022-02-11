@@ -28,7 +28,7 @@
         "lint-staged": "^10.5.3",
         "mini-css-extract-plugin": "^1.3.2",
         "mocha": "^8.2.1",
-        "node-sass": "^5.0.0",
+        "node-sass": "^7.0.0",
         "nodemon": "^2.0.6",
         "precommit": "^1.2.2",
         "prettier": "^2.2.1",
